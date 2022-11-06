@@ -8,7 +8,7 @@ export default function LandingBanner() {
       <div
         className="banner-item"
         style={{
-          "background-image": "url(assets/images/hero_area/banner_bg.jpg)",
+          backgroundImage: "url(assets/images/hero_area/banner_bg.jpg)",
         }}
       >
         <div className="container">
@@ -30,6 +30,36 @@ export default function LandingBanner() {
                   digital thinkers Meet up
                 </h1>
                 <div
+                  className="countdown wow fadeInUp"
+                  style={{
+                    'visibility': "visible",
+                    animationDuration: "1.5s",
+                    animationDelay: "800ms",
+                    animationName: "fadeInUp",
+                  }}
+                >
+                  <div className="counter-item">
+                    <i className="icon icon-ring-1Asset-1"></i>
+                    <span className="">00</span>
+                    <div className="smalltext">Days</div>
+                  </div>
+                  <div className="counter-item">
+                    <i className="icon icon-ring-4Asset-3"></i>
+                    <span className="">00</span>
+                    <div className="smalltext">Hours</div>
+                  </div>
+                  <div className="counter-item">
+                    <i className="icon icon-ring-3Asset-2"></i>
+                    <span className="">00</span>
+                    <div className="smalltext">Minutes</div>
+                  </div>
+                  <div className="counter-item">
+                    <i className="icon icon-ring-4Asset-3"></i>
+                    <span className="">00</span>
+                    <div className="smalltext">Seconds</div>
+                  </div>
+                </div>
+                <div
                   className="banner-btn wow fadeInUp"
                   data-wow-duration="1.5s"
                   data-wow-delay="800ms"
@@ -42,7 +72,6 @@ export default function LandingBanner() {
             </div>
             <div className="col-lg-4 align-self-end">
               <div className="banner-img">
-                asd
                 <Image src={img} alt="banner" />
               </div>
             </div>

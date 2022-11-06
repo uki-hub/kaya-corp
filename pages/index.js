@@ -30,6 +30,6 @@ export default function LandingPage(props) {
 
 export async function getStaticProps(context) {
   return {
-    props: {}
+    props: {},
   };
 }

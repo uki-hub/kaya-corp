@@ -15,7 +15,7 @@ export default function LandingSponsor(props) {
     <section
       className="ts-intro-sponsors"
       style={{
-        "background-image": "url(assets/images/sponsors/sponsor_img.jpg)",
+        backgroundImage: "url(assets/images/sponsors/sponsor_img.jpg)",
       }}
     >
       <div className="container">

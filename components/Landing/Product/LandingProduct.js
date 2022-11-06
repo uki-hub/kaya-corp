@@ -8,7 +8,7 @@ export default function LandingProduct() {
     <section
       className="ts-pricing gradient"
       style={{
-        "background-image": "url(images / pricing / pricing_img.jpg)",
+        backgroundImage: "url(images / pricing / pricing_img.jpg)",
       }}
     >
       <div className="container">
