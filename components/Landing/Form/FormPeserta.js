@@ -16,8 +16,14 @@ import { useContext, useRef } from "react";
 
 const FormPerserta = ({ persertaIndex }) => {
   const pesertaCtx = useContext(PesertaContext);
-  // const refs = pesertaCtx.listPeserta[persertaIndex]._refs;
-  // refs['email'] = useRef();
+  const refs = pesertaCtx.listPeserta[persertaIndex]._refs;
+  refs['email'] = useRef();
+  refs['namaKTP'] = useRef();
+  refs['asalKota'] = useRef();
+  refs['noTelepon'] = useRef();
+  refs['noTeleponDarurat'] = useRef();
+  refs['jerseySizeCode'] = useRef();
+  refs['kelaminCode'] = useRef();
 
   const emailRef = useRef();
 
@@ -29,9 +35,9 @@ const FormPerserta = ({ persertaIndex }) => {
       <div className="row">
         <h3 style={{ color: "darkslategrey" }}>Peserta {persertaIndex + 1}</h3>
       </div>
-      <FormTextField ref={emailRef} label="Email" icon={EmailIcon} />
-      <FormTextField label="Nama Sesuai KTP" icon={BadgeRoundedIcon} />
-      <FormTextField label="Asal Kota" icon={PlaceIcon} />
+      <FormTextField ref={refs['email']} label="Email" icon={EmailIcon} />
+      <FormTextField ref={refs['namaKTP']} label="Nama Sesuai KTP" icon={BadgeRoundedIcon} />
+      <FormTextField ref={refs['asalKota']} label="Asal Kota" icon={PlaceIcon} />
       <FormTextFieldDouble
         icon={CallIcon}
         label1="No Telepon"
@@ -46,7 +52,7 @@ const FormPerserta = ({ persertaIndex }) => {
           bottom: "-1.2rem",
         }}
         onClick={() => {
-          console.log(emailRef.current);
+          console.log(refs['email'].current.value);
         }}
       >ok</div>
     </div>

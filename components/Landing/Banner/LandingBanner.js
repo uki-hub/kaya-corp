@@ -83,7 +83,7 @@ export default function LandingBanner() {
         <div
           className="tile"
           data-scale="1.1"
-          data-image="assets/images/hero_area/banner_slices.png"
+          data-image="/assets/images/hero_area/banner_slices.png"
         ></div>
       </div>
     </section>
