@@ -25,12 +25,41 @@ export default function LandingForm(props) {
       <div className="container">
         <h1>Form Registration</h1>
         <br />
+        {/* <ButtonGro */}
         {pesertaCtx.listPeserta.map((_, i) => (
           <FormPerserta key={i} persertaIndex={i} />
         ))}
-        <button className="btn col" onClick={pesertaCtx.onPesanTiket}>
-          PESAN TIKET
+        {/* <button
+          className="btn mb-3"
+          onClick={pesertaCtx.onPesanTiket}
+          style={{ backgroundColor: "yellowgreen", float: "right" }}
+        >
+          TAMBAH PESERTA
         </button>
+        <br />
+        <button
+          className="btn col mb-3"
+          onClick={pesertaCtx.onPesanTiket}
+          style={{ backgroundColor: "indianred" }}
+        >
+          BAYAR
+        </button> */}
+        <div className="row col-12 ">
+          <button
+            className="btn col mb-3 mr-1"
+            onClick={pesertaCtx.onPesanTiket}
+            style={{ backgroundColor: "yellowgreen", float: "right" }}
+          >
+            TAMBAH PESERTA
+          </button>
+          <button
+            className="btn col"
+            onClick={pesertaCtx.onPesanTiket}
+            style={{ backgroundColor: "indianred" }}
+          >
+            BAYAR
+          </button>
+        </div>
       </div>
 
       <div className="speaker-shap">

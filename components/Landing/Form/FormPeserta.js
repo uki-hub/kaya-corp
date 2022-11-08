@@ -10,6 +10,7 @@ import {
   Call as CallIcon,
   SquareFoot as SquareFootIcon,
   Person as PersonIcon,
+  DeleteForever as DeleteForeverIcon
 } from "@mui/icons-material";
 import PesertaContext from "../../../contexts/PesertaContext";
 import { useContext, useRef } from "react";
@@ -45,16 +46,22 @@ const FormPerserta = ({ persertaIndex }) => {
       />
       <DropdownMenuField icon={SquareFootIcon} label="Size Jersey" />
       <RadioGroupField icon={PersonIcon} label="Kelamin" />
+      <DropdownMenuField icon={SquareFootIcon} label="Category" />
+      <DropdownMenuField icon={SquareFootIcon} label="BRR" />
       <div
         style={{
+          
           position: "absolute",
           right: "0.5rem",
-          bottom: "-1.2rem",
+          bottom: "-1.4rem",
         }}
         onClick={() => {
           console.log(refs['email'].current.value);
         }}
-      >ok</div>
+      ><DeleteForeverIcon style={{
+        color: 'red',
+        fontSize: '35px',
+      }}/></div>
     </div>
   );
 };

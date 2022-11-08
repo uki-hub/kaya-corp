@@ -1,7 +1,7 @@
 import { TextField, Container } from "@mui/material";
 import React from "react";
 
-const FormTextField = React.forwardRef(({ type, icon, label, style }, ref) => {
+const FormTextField = React.forwardRef(function _({ type, icon, label, style }, ref) {
   return (
     <div className="row mb-3" style={style}>
       <div className="col-1-sm" style={{ alignSelf: "center" }}>

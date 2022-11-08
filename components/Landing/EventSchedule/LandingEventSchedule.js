@@ -5,16 +5,11 @@ const _dataEvent = [
   {
     value: "2022-11-19",
     label: "Nov 19",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    desc: "Se.",
   },
   {
     value: "2022-11-20",
     label: "Nov 20",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    value: "2022-11-21",
-    label: "Nov 21",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
 ];

@@ -58,11 +58,13 @@ export const PesertaContextProvider = (props) => {
     const updatedList = [...listPeserta];
     const removedPeserta = updatedList.at(-1);
 
-    if (removedPeserta && _isDataPesertaNotEmpty(removedPeserta)) {
-      //not empty pls confirm
-    } else {
-      updatedList.pop();
-    }
+    // if (removedPeserta && _isDataPesertaNotEmpty(removedPeserta)) {
+    //   //not empty pls confirm
+    // } else {
+    //   updatedList.pop();
+    // }
+
+    updatedList.pop();
 
     setListPeserta(updatedList);
   };
