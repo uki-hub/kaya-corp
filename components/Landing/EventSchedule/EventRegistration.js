@@ -4,8 +4,12 @@ import {
   Add as AddIcon,
   Remove as RemoveIcon,
 } from "@mui/icons-material";
+import { useContext } from "react";
+import PesertaContext from "../../../contexts/PesertaContext";
 
 const EventRegistration = () => {
+  const pesertaCtx = useContext(PesertaContext);
+
   return (
     <div className="col-sm-4">
       <h2 className="column-title">
@@ -30,10 +34,11 @@ const EventRegistration = () => {
             padding: 0,
             fontSize: "20px",
           }}
+          onClick={pesertaCtx.onKurangPeserta}
         >
           -
         </Button>
-        <Button style={{ pointerEvents: "none" }}>0</Button>
+        <Button style={{ pointerEvents: "none" }}>{pesertaCtx.listPeserta.length}</Button>
         <Button
           style={{
             color: "white",
@@ -41,6 +46,7 @@ const EventRegistration = () => {
             padding: 0,
             fontSize: "20px",
           }}
+          onClick={pesertaCtx.onTambahPeserta}
         >
           +
         </Button>

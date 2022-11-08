@@ -4,8 +4,16 @@ import img1 from "/public/assets/images/shap/home_speaker_memphis1.png";
 import img2 from "/public/assets/images/shap/home_speaker_memphis2.png";
 import img3 from "/public/assets/images/shap/home_speaker_memphis3.png";
 import FormPerserta from "./FormPeserta";
+import { useContext } from "react";
+import PesertaContext from "../../../contexts/PesertaContext";
 
-export default function LandingForm({ pesertaCount }) {
+export default function LandingForm(props) {
+  const pesertaCtx = useContext(PesertaContext);
+
+  if (pesertaCtx.listPeserta.length == 0) {
+    return null;
+  }
+
   return (
     <section
       id="ts-speakers"
@@ -17,9 +25,12 @@ export default function LandingForm({ pesertaCount }) {
       <div className="container">
         <h1>Form Registration</h1>
         <br />
-        {[...Array(pesertaCount)].map((_, i) => (
+        {pesertaCtx.listPeserta.map((_, i) => (
           <FormPerserta key={i} persertaIndex={i} />
         ))}
+        <button className="btn col" onClick={pesertaCtx.onPesanTiket}>
+          PESAN TIKET
+        </button>
       </div>
 
       <div className="speaker-shap">

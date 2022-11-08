@@ -11,8 +11,16 @@ import {
   SquareFoot as SquareFootIcon,
   Person as PersonIcon,
 } from "@mui/icons-material";
+import PesertaContext from "../../../contexts/PesertaContext";
+import { useContext, useRef } from "react";
 
 const FormPerserta = ({ persertaIndex }) => {
+  const pesertaCtx = useContext(PesertaContext);
+  // const refs = pesertaCtx.listPeserta[persertaIndex]._refs;
+  // refs['email'] = useRef();
+
+  const emailRef = useRef();
+
   return (
     <div
       className="form-control mb-5"
@@ -21,7 +29,7 @@ const FormPerserta = ({ persertaIndex }) => {
       <div className="row">
         <h3 style={{ color: "darkslategrey" }}>Peserta {persertaIndex + 1}</h3>
       </div>
-      <FormTextField label="Email" icon={EmailIcon} />
+      <FormTextField ref={emailRef} label="Email" icon={EmailIcon} />
       <FormTextField label="Nama Sesuai KTP" icon={BadgeRoundedIcon} />
       <FormTextField label="Asal Kota" icon={PlaceIcon} />
       <FormTextFieldDouble
@@ -37,7 +45,10 @@ const FormPerserta = ({ persertaIndex }) => {
           right: "0.5rem",
           bottom: "-1.2rem",
         }}
-      ></div>
+        onClick={() => {
+          console.log(emailRef.current);
+        }}
+      >ok</div>
     </div>
   );
 };

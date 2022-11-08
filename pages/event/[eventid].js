@@ -11,16 +11,17 @@ import LandingSponsor from "../../components/Landing/Sponsor/LandingSponsor";
 import LandingMap from "../../components/Landing/Map/LandingMap";
 import LandingFooter from "../../components/Landing/Footer/LandingFooter";
 import BundleScript from "../../components/Landing/BundleScript";
+import { PesertaContextProvider } from "../../contexts/PesertaContext";
 
 export default function EventPage(props) {
   return (
-    <>
+    <PesertaContextProvider>
       <BundleScript />
       <div className="body-inner">
         <LandingHeader />
         <LandingBanner />
         <LandingEventSchedule />
-        <LandingForm pesertaCount={3} />
+        <LandingForm />
         {/* <LandingSchedule /> */}
         <LandingProduct />
         <LandingNews />
@@ -28,7 +29,7 @@ export default function EventPage(props) {
         <LandingMap />
         <LandingFooter />
       </div>
-    </>
+    </PesertaContextProvider>
   );
 }
 
