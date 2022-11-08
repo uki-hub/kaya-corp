@@ -13,8 +13,6 @@ import LandingFooter from "../../components/Landing/Footer/LandingFooter";
 import BundleScript from "../../components/Landing/BundleScript";
 
 export default function EventPage(props) {
-    
-
   return (
     <>
       <BundleScript />
