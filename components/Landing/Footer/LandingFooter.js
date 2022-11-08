@@ -5,7 +5,7 @@ export default function LandingFooter(props) {
     <div className="footer-area">
       <section
         className="ts-book-seat"
-        style={{ backgroundImage: "url(assets/images/book_seat_img.jpg)" }}
+        style={{ backgroundImage: "url(/assets/images/book_seat_img.jpg)" }}
       >
         <div className="container">
           <div className="row">
@@ -27,7 +27,7 @@ export default function LandingFooter(props) {
               className="ts-newsletter"
               style={{
                 backgroundImage:
-                  "url(assets/images/shap/subscribe_pattern.png)",
+                  "url(/assets/images/shap/subscribe_pattern.png)",
               }}
             >
               <div className="row">

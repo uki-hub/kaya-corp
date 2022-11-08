@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import React from "react";
 
-const DropdownMenu = ({ ref, icon, label }) => {
+const DropdownMenuField = ({ ref, icon, label }) => {
   return (
     <div className="row mb-3">
       <div className="col-1-sm">
@@ -26,4 +26,4 @@ const DropdownMenu = ({ ref, icon, label }) => {
   );
 };
 
-export default DropdownMenu;
+export default DropdownMenuField;

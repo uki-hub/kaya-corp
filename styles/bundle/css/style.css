@@ -913,6 +913,7 @@ img.pull-right {
   background-position: center; }
 
 .single-intro-text {
+  cursor: pointer;
   padding: 40px 45px 40px 40px;
   -webkit-box-shadow: 0px 20px 25px 0px rgba(0, 0, 0, 0.08);
   box-shadow: 0px 20px 25px 0px rgba(0, 0, 0, 0.08);

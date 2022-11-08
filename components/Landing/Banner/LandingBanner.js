@@ -8,7 +8,7 @@ export default function LandingBanner() {
       <div
         className="banner-item"
         style={{
-          backgroundImage: "url(assets/images/hero_area/banner_bg.jpg)",
+          backgroundImage: "url(/assets/images/hero_area/banner_bg.jpg)",
         }}
       >
         <div className="container">
