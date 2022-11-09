@@ -595,7 +595,8 @@ img.pull-right {
     .banner-item .banner-content-wrap .banner-btn .btn {
       height: 55px;
       line-height: 55px;
-      padding: 0 55px; }
+      padding: 0 55px;
+      margin-top: 350px; }
       .banner-item .banner-content-wrap .banner-btn .btn.fill {
         padding: 0 25px; }
 
@@ -1820,7 +1821,9 @@ img.pull-right {
   .post .post-media.post-image img {
     -webkit-box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.25);
     box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.25);
-    border-radius: 5px; }
+    border-radius: 5px;
+  background-color: white;
+padding: 20px; }
 
 .post .post-body {
   padding: 150px 20px 25px 30px;
@@ -2117,7 +2120,8 @@ img.pull-right {
  ==================================*/
 .ts-footer {
   background: #1a1831;
-  padding: 250px 0 50px; }
+  padding: 250px 0 50px;
+padding-top: 50px; }
 
 .ts-footer-social ul {
   padding: 0; }

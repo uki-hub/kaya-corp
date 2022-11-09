@@ -6,17 +6,13 @@ import img3 from "/public/assets/images/shap/home_speaker_memphis3.png";
 import FormPerserta from "./FormPeserta";
 import { useContext } from "react";
 import PesertaContext from "../../../contexts/PesertaContext";
-import EventContext from "../../../contexts/EventContext";
 
 export default function LandingForm(props) {
-  const eventCtx = useContext(EventContext);
   const pesertaCtx = useContext(PesertaContext);
 
-  // const elementsRef = useRef(pesertaCtx.listPeserta.map(() => createRef())); 
-
-  const tambahPesertaHandler = () => {
-    pesertaCtx.onTambahPeserta();
-  };
+  if (pesertaCtx.listPeserta.length == 0) {
+    return null;
+  }
 
   return (
     <section
@@ -51,14 +47,14 @@ export default function LandingForm(props) {
         <div className="row col-12 ">
           <button
             className="btn col mb-3 mr-1"
-            onClick={tambahPesertaHandler}
+            onClick={pesertaCtx.onPesanTiket}
             style={{ backgroundColor: "yellowgreen", float: "right" }}
           >
             TAMBAH PESERTA
           </button>
           <button
             className="btn col"
-            onClick={eventCtx.onBayar}
+            onClick={pesertaCtx.onPesanTiket}
             style={{ backgroundColor: "indianred" }}
           >
             BAYAR

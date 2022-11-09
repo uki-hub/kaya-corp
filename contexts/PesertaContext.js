@@ -1,4 +1,4 @@
-import React, { createRef, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 const _persertaObject = {
   eventCode: "",
@@ -8,9 +8,7 @@ const _persertaObject = {
   noTelepon: "",
   noTeleponDarurat: "",
   jerseySizeCode: "",
-  genderCode: "",
-  category: "",
-  brr: "",
+  kelaminCode: "",
   _refs: {
     email: null,
     namaKTP: null,
@@ -18,10 +16,8 @@ const _persertaObject = {
     noTelepon: null,
     noTeleponDarurat: null,
     jerseySizeCode: null,
-    genderCode: null,
-    category: null,
-    brr: null,
-  },
+    kelaminCode: null,
+  }
 };
 
 const _isDataPesertaNotEmpty = (peserta) => {
@@ -45,10 +41,11 @@ const PesertaContext = React.createContext({
   onTambahPeserta: () => {},
   onKurangPeserta: () => {},
   onHapusPeserta: (indexPeserta) => {},
+  onPesanTiket: () => {},
 });
 
 export const PesertaContextProvider = (props) => {
-  const [listPeserta, setListPeserta] = useState([_persertaObject]);
+  const [listPeserta, setListPeserta] = useState([]);
 
   const tambahPesertaHandler = () => {
     const updatedList = [...listPeserta];
@@ -79,6 +76,10 @@ export const PesertaContextProvider = (props) => {
     setListPeserta(updatedList);
   };
 
+  const pesanTiketHandler = () => {
+
+  };
+
   return (
     <PesertaContext.Provider
       value={{
@@ -86,6 +87,7 @@ export const PesertaContextProvider = (props) => {
         onTambahPeserta: tambahPesertaHandler,
         onKurangPeserta: kurangPesertaHandlelr,
         onHapusPeserta: hapusPesertaHandler,
+        onPesanTiket: pesanTiketHandler,
       }}
     >
       {props.children}
