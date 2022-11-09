@@ -29,10 +29,10 @@ export default function LandingMap(props) {
                     role="tab"
                     data-toggle="tab"
                   >
-                    Venue
+                    Lokasi
                   </a>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a
                     className="nav-link"
                     href="#buzz"
@@ -51,19 +51,17 @@ export default function LandingMap(props) {
                   >
                     How to get there
                   </a>
-                </li>
+                </li> */}
               </ul>
 
               <div className="tab-content direction-tabs">
                 <div role="tabpanel" className="tab-pane active" id="profile">
                   <div className="direction-tabs-content">
-                    <h3>Brighton Waterfront Hotel, Brighton, London</h3>
+                    <h3>Simpang Lima Gumul, Kediri</h3>
                     <p className="derecttion-vanue">
-                      1Hd- 50, 010 Avenue, NY 90001
-                      <br />
-                      United States
+                      Jawa Timur, Indonesia
                     </p>
-                    <div className="row">
+                    {/* <div className="row">
                       <div className="col-md-6">
                         <div className="contact-info-box">
                           <h3>Tickets info</h3>
@@ -173,7 +171,7 @@ export default function LandingMap(props) {
                           </p>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -184,8 +182,7 @@ export default function LandingMap(props) {
             <div className="ts-map">
               <div className="mapouter">
                 <div className="gmap_canvas">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9028133968723!2d-73.99208268505396!3d40.74216397932861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a4119ce269%3A0x9dec0c979b575972!2sEataly+NYC+Flatiron!5e0!3m2!1sen!2sbd!4v1541577288827"></iframe>
-                </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.7534261215624!2d112.0600749148633!3d-7.815904394367881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7857175f9cda31%3A0x3123610563e44ab3!2sSimpang%20Lima%20Gumul!5e0!3m2!1sen!2sid!4v1667961864629!5m2!1sen!2sid" width="400" height="300" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
               </div>
             </div>
           </div>

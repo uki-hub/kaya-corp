@@ -22,23 +22,23 @@ export default function LandingFooter(props) {
             </div>
           </div>
 
-          <div className="ts-footer-newsletter">
+          {/* <div className="ts-footer-newsletter">
             <div
               className="ts-newsletter"
               style={{
                 backgroundImage:
                   "url(/assets/images/shap/subscribe_pattern.png)",
               }}
-            >
-              <div className="row">
+            > */}
+              {/* <div className="row">
                 <div className="col-lg-6 mx-auto">
                   <div className="ts-newsletter-content">
                     <h2 className="section-title">
                       <span>sUBSCRIBE TO nEWSLETTER</span>
                       Want something extra?
                     </h2>
-                  </div>
-                  <div className="newsletter-form">
+                  </div> */}
+                  {/* <div className="newsletter-form">
                     <form
                       action="#"
                       method="post"
@@ -59,11 +59,12 @@ export default function LandingFooter(props) {
                       </div>
                     </form>
                   </div>
-                </div>
-              </div>
+                </div> */}
+                {/* </div>
+              </div> */}
             </div>
-          </div>
-        </div>
+          {/* </div>
+        </div> */}
       </section>
 
       <footer className="ts-footer">
@@ -73,34 +74,34 @@ export default function LandingFooter(props) {
               <div className="ts-footer-social text-center mb-30">
                 <ul>
                   <li>
-                    <a href="#">
+                    <a href="https://www.facebook.com/bantengriderun">
                       <i className="fa fa-facebook"></i>
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href="#">
                       <i className="fa fa-twitter"></i>
                     </a>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <a href="#">
                       <i className="fa fa-google-plus"></i>
                     </a>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <a href="#">
                       <i className="fa fa-linkedin"></i>
                     </a>
-                  </li>
+                  </li> */}
                   <li>
-                    <a href="#">
+                    <a href="https://www.instagram.com/bantengriderun/">
                       <i className="fa fa-instagram"></i>
                     </a>
                   </li>
                 </ul>
               </div>
 
-              <div className="footer-menu text-center mb-25">
+              {/* <div className="footer-menu text-center mb-25">
                 <ul>
                   <li>
                     <a href="#">About Eventime</a>
@@ -118,11 +119,13 @@ export default function LandingFooter(props) {
                     <a href="#">Venue</a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
 
               <div className="copyright-text text-center">
                 <p>
-                  <a href="https://www.templateshub.net">Templates Hub</a>
+                  <a href="https://www.kayacorp.co.id">Copyright © 2022 kayacorp.co.id . All rights reserved.
+
+</a>
                 </p>
               </div>
             </div>

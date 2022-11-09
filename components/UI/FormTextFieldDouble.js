@@ -1,32 +1,15 @@
 import { TextField, Container } from "@mui/material";
-import React, { useImperativeHandle, useRef } from "react";
+import React from "react";
 
-const FormTextFieldDouble = React.forwardRef(function _(
-  { icon, label1, label2 },
-  ref
-) {
-  const textFieldRef1 = useRef();
-  const textFieldRef2 = useRef();
-
-  useImperativeHandle(ref, () => {
-    return {
-      value1: textFieldRef1.current.value,
-      value2: textFieldRef2.current.value,
-      focus1: textFieldRef1.current.focus,
-      focus2: textFieldRef2.current.focus,
-    };
-  });
-
+const FormTextFieldDouble = ({ icon, ref1, ref2, label1, label2 }) => {
   return (
     <div className="row mb-3">
       <div className="col-1-sm" style={{ alignSelf: "center" }}>
-        {React.createElement(icon, {
-          style: { color: "grey", fontSize: "35px" },
-        })}
+        {React.createElement(icon, {style: { color: "grey", fontSize: "35px" }})}
       </div>
       <div className="col">
         <TextField
-          ref={textFieldRef1}
+          ref={ref1}
           id="outlined-basic"
           label={label1}
           variant="outlined"
@@ -35,7 +18,7 @@ const FormTextFieldDouble = React.forwardRef(function _(
       </div>
       <div className="col">
         <TextField
-          ref={textFieldRef2}
+          ref={ref2}
           id="outlined-basic"
           label={label2}
           variant="outlined"
@@ -44,6 +27,6 @@ const FormTextFieldDouble = React.forwardRef(function _(
       </div>
     </div>
   );
-});
+};
 
 export default FormTextFieldDouble;

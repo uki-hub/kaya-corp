@@ -7,9 +7,9 @@ export default function LandingHeader(props) {
     <header id="header" className="header header-transparent">
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light">
-          <a className="navbar-brand" href="index-2.html">
+          {/* <a className="navbar-brand" href="index-2.html">
             <Image src={img} alt="logo" />
-          </a>
+          </a> */}
         </nav>
       </div>
     </header>

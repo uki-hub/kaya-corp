@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import img from "/public/assets/images/hero_area/banner_img.png";
+// import img from "/public/assets/images/hero_area/banner_img.png";
 
 export default function LandingBanner() {
   return (
@@ -15,7 +15,7 @@ export default function LandingBanner() {
           <div className="row">
             <div className="col-lg-8">
               <div className="banner-content-wrap">
-                <p
+                {/* <p
                   className="banner-info wow fadeInUp"
                   data-wow-duration="1.5s"
                   data-wow-delay="500ms"
@@ -58,7 +58,7 @@ export default function LandingBanner() {
                     <span className="">00</span>
                     <div className="smalltext">Seconds</div>
                   </div>
-                </div>
+                </div> */}
                 <div
                   className="banner-btn wow fadeInUp"
                   data-wow-duration="1.5s"
@@ -70,11 +70,11 @@ export default function LandingBanner() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 align-self-end">
+            {/* <div className="col-lg-4 align-self-end">
               <div className="banner-img">
                 <Image src={img} alt="banner" />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
