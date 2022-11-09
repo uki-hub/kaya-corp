@@ -4,7 +4,7 @@ import img1 from "/public/assets/images/shap/home_speaker_memphis1.png";
 import img2 from "/public/assets/images/shap/home_speaker_memphis2.png";
 import img3 from "/public/assets/images/shap/home_speaker_memphis3.png";
 import FormPerserta from "./FormPeserta";
-import { useContext } from "react";
+import { useContext, useRef, useState } from "react";
 import PesertaContext from "../../../contexts/PesertaContext";
 import EventContext from "../../../contexts/EventContext";
 
@@ -12,7 +12,10 @@ export default function LandingForm(props) {
   const eventCtx = useContext(EventContext);
   const pesertaCtx = useContext(PesertaContext);
 
-  // const elementsRef = useRef(pesertaCtx.listPeserta.map(() => createRef())); 
+  const formsRef = useRef([]);
+
+  const [_s, __s] = useState(0);
+  const _f = () => __s(_s + 1);
 
   const tambahPesertaHandler = () => {
     pesertaCtx.onTambahPeserta();
@@ -29,9 +32,12 @@ export default function LandingForm(props) {
       <div className="container">
         <h1>Form Registration</h1>
         <br />
-        {/* <ButtonGro */}
         {pesertaCtx.listPeserta.map((_, i) => (
-          <FormPerserta key={i} persertaIndex={i} />
+          <FormPerserta
+            ref={(e) => (formsRef.current[i] = e)}
+            key={i}
+            persertaIndex={i}
+          />
         ))}
         {/* <button
           className="btn mb-3"
@@ -51,15 +57,19 @@ export default function LandingForm(props) {
         <div className="row col-12 ">
           <button
             className="btn col mb-3 mr-1"
-            onClick={tambahPesertaHandler}
             style={{ backgroundColor: "yellowgreen", float: "right" }}
+            onClick={tambahPesertaHandler}
           >
             TAMBAH PESERTA
           </button>
           <button
             className="btn col"
-            onClick={eventCtx.onBayar}
             style={{ backgroundColor: "indianred" }}
+            // onClick={eventCtx.onBayar}
+            onClick={() => {
+              _f();
+              console.log(formsRef.current);
+            }}
           >
             BAYAR
           </button>

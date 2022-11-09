@@ -12,29 +12,42 @@ import {
   Person as PersonIcon,
   DeleteForever as DeleteForeverIcon,
 } from "@mui/icons-material";
-import PesertaContext from "../../../contexts/PesertaContext";
-import { useContext, useEffect, useRef } from "react";
+import React, {
+  useContext,
+  useRef,
+  useImperativeHandle,
+  useState,
+} from "react";
 import EventContext from "../../../contexts/EventContext";
 
-const FormPerserta = ({ persertaIndex }) => {
+const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
   const eventData = useContext(EventContext).eventData;
-  const pesertaCtx = useContext(PesertaContext);
 
-  console.log(pesertaCtx.listPeserta[persertaIndex]._refs);
-
-  const refs = pesertaCtx.listPeserta[persertaIndex]._refs;
-  // refs["email"] = createRef();
-  // refs["namaKTP"] = createRef();
-  // refs["asalKota"] = createRef();
-  // refs["noTelepon"] = createRef();
-  // refs["noTeleponDarurat"] = createRef();
-  // refs["jerseySizeCode"] = createRef();
-  // refs["genderCode"] = createRef();
-  // refs["category"] = createRef();
-  // refs["brr"] = createRef();
+  const emailRef = useRef();
+  const namaKTPRef = useRef();
+  const asalKotaRef = useRef();
+  const noTeleponRef = useRef();
+  const jerseySizeRef = useRef();
+  const genderRef = useRef();
+  const categoryRef = useRef();
+  const brrRef = useRef();
 
   const categories = eventData.brrCategory.map((d) => {
     return { id: d.idBrrCategory, value: d.nmCategory, brr: d.brr };
+  });
+
+  useImperativeHandle(ref, () => {
+    return {
+      email: emailRef.current.value,
+      namaKTP: namaKTPRef.current.value,
+      asalKota: asalKotaRef.current.value,
+      noTelepon: noTeleponRef.current.value1,
+      noTeleponDarurat: noTeleponRef.current.value2,
+      jerseySizeCode: jerseySizeRef.current.value,
+      genderCode: genderRef.current.value,
+      categoryCode: categoryRef.current.value,
+      brryCode: brrRef.current.value,
+    };
   });
 
   return (
@@ -45,39 +58,40 @@ const FormPerserta = ({ persertaIndex }) => {
       <div className="row">
         <h3 style={{ color: "darkslategrey" }}>Peserta {persertaIndex + 1}</h3>
       </div>
-      <FormTextField ref={refs["email"]} label="Email" icon={EmailIcon} />
+      <FormTextField ref={emailRef} label="Email" icon={EmailIcon} />
       <FormTextField
-        ref={refs["namaKTP"]}
-        label="Nama Sesuai KTP"
+        ref={namaKTPRef}
+        label="Nama Sesuai KTPs"
         icon={BadgeRoundedIcon}
       />
-      <FormTextField
-        ref={refs["asalKota"]}
-        label="Asal Kota"
-        icon={PlaceIcon}
-      />
+      <FormTextField ref={asalKotaRef} label="Asal Kota" icon={PlaceIcon} />
       <FormTextFieldDouble
+        ref={noTeleponRef}
         icon={CallIcon}
         label1="No Telepon"
         label2="No Telepon Darurat"
       />
       <DropdownMenuField
-        ref={refs["jerseySizeCode"]}
+        ref={jerseySizeRef}
         data={eventData.jerseySize}
         icon={SquareFootIcon}
         label="Size Jersey"
+        defaultSelectedValue={eventData.jerseySize[0].id}
       />
       <RadioGroupField
+        ref={genderRef}
         data={eventData.gender}
         icon={PersonIcon}
         label="Kelamin"
       />
       <DropdownMenuField
+        ref={categoryRef}
         data={categories}
         icon={SquareFootIcon}
         label="Category"
       />
-      <DropdownMenuField icon={SquareFootIcon} label="BRR" />
+      <DropdownMenuField ref={brrRef} icon={SquareFootIcon} label="BRR" />
+
       <div
         style={{
           position: "absolute",
@@ -85,7 +99,7 @@ const FormPerserta = ({ persertaIndex }) => {
           bottom: "-1.4rem",
         }}
         onClick={() => {
-           console.log(refs["jerseySizeCode"].current?.value);
+          console.log(emailRef.current?.value);
         }}
       >
         <DeleteForeverIcon
@@ -97,6 +111,6 @@ const FormPerserta = ({ persertaIndex }) => {
       </div>
     </div>
   );
-};
+});
 
 export default FormPerserta;

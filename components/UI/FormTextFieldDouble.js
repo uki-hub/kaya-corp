@@ -1,10 +1,13 @@
 import { TextField, Container } from "@mui/material";
-import React, { useImperativeHandle, useRef } from "react";
+import React, { useImperativeHandle, useRef, useState } from "react";
 
 const FormTextFieldDouble = React.forwardRef(function _(
   { icon, label1, label2 },
   ref
 ) {
+  const [_s, __s] = useState(0);
+  const _f = () => __s(_s + 1);
+
   const textFieldRef1 = useRef();
   const textFieldRef2 = useRef();
 
@@ -26,20 +29,22 @@ const FormTextFieldDouble = React.forwardRef(function _(
       </div>
       <div className="col">
         <TextField
-          ref={textFieldRef1}
+          inputRef={textFieldRef1}
           id="outlined-basic"
           label={label1}
           variant="outlined"
           fullWidth
+          onBlur={_f}
         />
       </div>
       <div className="col">
         <TextField
-          ref={textFieldRef2}
+          inputRef={textFieldRef2}
           id="outlined-basic"
           label={label2}
           variant="outlined"
           fullWidth
+          onBlur={_f}
         />
       </div>
     </div>
