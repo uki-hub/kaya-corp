@@ -12,29 +12,35 @@ import LandingMap from "../../components/Landing/Map/LandingMap";
 import LandingFooter from "../../components/Landing/Footer/LandingFooter";
 import BundleScript from "../../components/Landing/BundleScript";
 import { PesertaContextProvider } from "../../contexts/PesertaContext";
+import axios from "axios";
+import { EventContextProvider } from "../../contexts/EventContext";
 
-export default function EventPage(props) {
+export default function EventPage({ eventID, initData }) {
   return (
-    <PesertaContextProvider>
-      <BundleScript />
-      <div className="body-inner">
-        <LandingHeader />
-        <LandingBanner />
-        <LandingEventSchedule />
-        <LandingForm />
-        {/* <LandingSchedule /> */}
-        <LandingProduct />
-        <LandingNews />
-        <LandingSponsor />
-        <LandingMap />
-        <LandingFooter />
-      </div>
-    </PesertaContextProvider>
+    <EventContextProvider eventID={eventID} eventData={initData}>
+      <PesertaContextProvider>
+        <BundleScript />
+        <div className="body-inner">
+          <LandingHeader />
+          <LandingBanner />
+          {/* <LandingEventSchedule /> */}
+          <LandingForm />
+          {/* <LandingSchedule /> */}
+          <LandingProduct />
+          <LandingNews />
+          <LandingSponsor />
+          <LandingMap />
+          <LandingFooter />
+        </div>
+      </PesertaContextProvider>
+    </EventContextProvider>
   );
 }
 
-// export async function getStaticProps(context) {
-//   return {
-//     props: {},
-//   };
-// }
+export async function getServerSideProps(context) {
+  const response = await axios.get("http://localhost:3000/api/hello");
+
+  return {
+    props: { eventID: context.query["eventid"], initData: response.data },
+  };
+}

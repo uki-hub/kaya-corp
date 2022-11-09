@@ -5,9 +5,24 @@ import {
   RadioGroup,
   Radio,
 } from "@mui/material";
-import React from "react";
+import React, { useImperativeHandle, useState } from "react";
 
-const RadioGroupField = ({ ref, icon, label }) => {
+// data: [{
+//     value: 'p',
+//     label: 'Pria'
+// }]
+const RadioGroupField = React.forwardRef(function _(
+  { data, icon, label, defaultValue },
+  ref
+) {
+  const [selectedValue, setSelectedValue] = useState(defaultValue);
+
+  useImperativeHandle(ref, () => {
+    return {
+      value: selectedValue,
+    };
+  });
+
   return (
     <div className="row">
       <div className="col-1-sm">
@@ -19,29 +34,30 @@ const RadioGroupField = ({ ref, icon, label }) => {
         <FormControl>
           <FormLabel
             id="demo-radio-buttons-group-label"
-            style={{
-              margin: "0px !important",
-            }}
+            className="m-0"
           >
-            Gender
+            {label}
           </FormLabel>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="male"
+            defaultValue={selectedValue}
             name="radio-buttons-group"
             row
           >
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
+            {data.map((d) => (
+              <FormControlLabel
+                key={d.id}
+                value={d.id}
+                label={d.value}
+                onClick={() => setSelectedValue(d.id)}
+                control={<Radio />}
+              />
+            ))}
           </RadioGroup>
         </FormControl>
       </div>
     </div>
   );
-};
+});
 
 export default RadioGroupField;

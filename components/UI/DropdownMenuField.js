@@ -1,7 +1,26 @@
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
-import React from "react";
+import React, { useImperativeHandle, useRef, useState } from "react";
 
-const DropdownMenuField = ({ ref, icon, label }) => {
+// data: [{
+//     value: 'p',
+//     label: 'Pria'
+// }]
+const DropdownMenuField = React.forwardRef(function _(
+  { data, icon, label, defaultSelectedValue },
+  ref
+) {
+  const [selectedValue, setSelectedValue] = useState(
+    defaultSelectedValue ?? ""
+  );
+
+  useImperativeHandle(ref, () => {
+    return {
+      value: selectedValue,
+    };
+  });
+
+  if (!data) return null;
+
   return (
     <div className="row mb-3">
       <div className="col-1-sm">
@@ -12,18 +31,25 @@ const DropdownMenuField = ({ ref, icon, label }) => {
       <div className="col">
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">{label}</InputLabel>
-          <Select ref={ref} labelId="demo-simple-select-label" label={label}>
-            <MenuItem value={1}>S</MenuItem>
-            <MenuItem value={2}>M</MenuItem>
-            <MenuItem value={3}>L</MenuItem>
-            <MenuItem value={4}>XL</MenuItem>
-            <MenuItem value={5}>XXL</MenuItem>
-            <MenuItem value={6}>XXXL</MenuItem>
+          <Select
+            value={selectedValue}
+            labelId="demo-simple-select-label"
+            label={label}
+          >
+            {data.map((d) => (
+              <MenuItem
+                key={d.id}
+                value={d.id}
+                onClick={() => setSelectedValue(d.id)}
+              >
+                {d.value}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </div>
     </div>
   );
-};
+});
 
 export default DropdownMenuField;
