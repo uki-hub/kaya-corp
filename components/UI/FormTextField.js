@@ -17,12 +17,11 @@ const FormTextField = React.forwardRef(function _(
     };
   });
 
+const FormTextField = React.forwardRef(function _({ type, icon, label, style }, ref) {
   return (
     <div className="row mb-3" style={style}>
       <div className="col-1-sm" style={{ alignSelf: "center" }}>
-        {React.createElement(icon, {
-          style: { color: "grey", fontSize: "35px" },
-        })}
+        {React.createElement(icon, {style: { color: "grey", fontSize: "35px" }})}
       </div>
       <div className="col">
         <TextField

@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-import img_blog1 from "/public/assets/images/blog/blog1.jpg";
-import img_blog2 from "/public/assets/images/blog/blog2.jpg";
-import img_blog3 from "/public/assets/images/blog/blog3.jpg";
+import img_blog1 from "/public/assets/images/blog/blog1.jpeg";
+import img_blog2 from "/public/assets/images/blog/blog2.jpeg";
+import img_blog3 from "/public/assets/images/blog/blog3.jpeg";
 import img_news1 from "/public/assets/images/shap/news_memphis1.png";
 import img_news2 from "/public/assets/images/shap/news_memphis2.png";
 
@@ -13,8 +13,8 @@ export default function LandingNews(props) {
         <div className="row">
           <div className="col-lg-12">
             <h2 className="section-title">
-              <span>Info Update</span>
-              Latest News
+              <span>Activity</span>
+              Banteng Ride & Night Run 2022
             </h2>
           </div>
         </div>
@@ -34,29 +34,37 @@ export default function LandingNews(props) {
 
               <div className="post-body">
                 <div className="post-meta">
-                  <span className="post-author">
+                  {/* <span className="post-author">
                     <a href="#">BY Admin</a>
-                  </span>
+                  </span> */}
 
-                  <div className="post-meta-date">October 8, 2018</div>
+                  {/* <div className="post-meta-date">October 8, 2018</div> */}
                 </div>
                 <div className="entry-header">
                   <h2 className="entry-title">
-                    <a href="#">Check upcoming Events</a>
+                    <a href="#">Banteng Fondo Ride</a>
                   </h2>
                 </div>
 
                 <div className="entry-content">
                   <p>
-                    How you transform your business asap technology, consumer,
+                 Regulasi Kegiatan Banteng Fondo Ride Sebagai Berikut : <br/>
+                 <br/>
+                  • Tanggal : 26 November 2022<br/>                 
+                  • Lokasi : Simpang Lima Gumul Kediri - &emsp;&emsp;&emsp;&emsp; Blitar Makan Bung Karno (PP)<br/>
+                  • Jenis Sepeda : Road Bike<br/>
+                  • Donasi : Rp. 150.000<br/>
+                  <br/>
+                Dengan Mengikuti acara ini, kamu sudah ikut berpatisipasi menyumbang 1000 Sepeda untuk Guru
+                dan 2000 Sepatu untuk Siswa didaerah pedalaman.
                   </p>
                 </div>
 
-                <div className="post-footer">
+                {/* <div className="post-footer">
                   <a href="news-single.html" className="btn-link">
                     Read More <i className="icon icon-arrow-right"></i>
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -75,29 +83,39 @@ export default function LandingNews(props) {
 
               <div className="post-body">
                 <div className="post-meta">
-                  <span className="post-author">
+                  {/* <span className="post-author">
                     <a href="#">BY Admin</a>
-                  </span>
+                  </span> */}
 
-                  <div className="post-meta-date">October 8, 2018</div>
+                  {/* <div className="post-meta-date">October 8, 2018</div> */}
                 </div>
                 <div className="entry-header">
                   <h2 className="entry-title">
-                    <a href="#">Adding a New Digital</a>
+                    <a href="#">Banteng Night Run</a>
                   </h2>
                 </div>
 
                 <div className="entry-content">
-                  <p>
-                    How you transform your business asap technology, consumer,
+                <p>
+                 Regulasi Kegiatan Banteng Fondo Ride Sebagai Berikut : <br/>
+                 <br/>
+                  • Tanggal : 26 November 2022<br/>                 
+                  • Lokasi : Simpang Lima Gumul Kediri<br/>
+                  • Donasi : Rp. 100.000<br/>
+                  <br/>
+                Dengan Mengikuti acara ini, kamu sudah ikut berpatisipasi menyumbang 1000 Sepeda untuk Guru
+                dan 2000 Sepatu untuk Siswa didaerah pedalaman.
+                <br/>
+                <br/>
+                <br/>
                   </p>
                 </div>
 
-                <div className="post-footer">
+                {/* <div className="post-footer">
                   <a href="news-single.html" className="btn-link">
                     Read More <i className="icon icon-arrow-right"></i>
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -116,29 +134,40 @@ export default function LandingNews(props) {
 
               <div className="post-body">
                 <div className="post-meta">
-                  <span className="post-author">
+                  {/* <span className="post-author">
                     <a href="#">BY Admin</a>
-                  </span>
+                  </span> */}
 
-                  <div className="post-meta-date">October 8, 2018</div>
+                  {/* <div className="post-meta-date"></div> */}
                 </div>
                 <div className="entry-header">
                   <h2 className="entry-title">
-                    <a href="#">West Elm At Evantor</a>
+                    <a href="#">Banteng Fun Ride</a>
                   </h2>
                 </div>
 
                 <div className="entry-content">
-                  <p>
-                    How you transform your business asap technology, consumer,
+                <p>
+                 Regulasi Kegiatan Banteng Fondo Ride Sebagai Berikut : <br/>
+                 <br/>
+                  • Tanggal : 27 November 2022<br/>                 
+                  • Lokasi : Simpang Lima Gumul Kediri<br/>
+                  • Jenis Sepeda : Road Bike<br/>
+                  • Donasi : Rp. 50.000<br/>
+                  <br/>
+                Dengan Mengikuti acara ini, kamu sudah ikut berpatisipasi menyumbang 1000 Sepeda untuk Guru
+                dan 2000 Sepatu untuk Siswa didaerah pedalaman.
+                <br/>
+                <br/>
                   </p>
+                  
                 </div>
 
-                <div className="post-footer">
+                {/* <div className="post-footer">
                   <a href="news-single.html" className="btn-link">
                     Read More <i className="icon icon-arrow-right"></i>
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

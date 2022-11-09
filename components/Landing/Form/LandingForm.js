@@ -6,12 +6,11 @@ import img3 from "/public/assets/images/shap/home_speaker_memphis3.png";
 import FormPerserta from "./FormPeserta";
 import { useContext, useRef, useState } from "react";
 import PesertaContext from "../../../contexts/PesertaContext";
-import EventContext from "../../../contexts/EventContext";
 
 export default function LandingForm(props) {
-  const eventCtx = useContext(EventContext);
   const pesertaCtx = useContext(PesertaContext);
 
+<<<<<<< HEAD
   const formsRef = useRef([]);
 
   const [_s, __s] = useState(0);
@@ -20,6 +19,11 @@ export default function LandingForm(props) {
   const tambahPesertaHandler = () => {
     pesertaCtx.onTambahPeserta();
   };
+=======
+  if (pesertaCtx.listPeserta.length == 0) {
+    return null;
+  }
+>>>>>>> d07e45caaf0fccd90f8160c3c31bdd4019e787b3
 
   return (
     <section
@@ -57,6 +61,10 @@ export default function LandingForm(props) {
         <div className="row col-12 ">
           <button
             className="btn col mb-3 mr-1"
+<<<<<<< HEAD
+=======
+            onClick={pesertaCtx.onPesanTiket}
+>>>>>>> d07e45caaf0fccd90f8160c3c31bdd4019e787b3
             style={{ backgroundColor: "yellowgreen", float: "right" }}
             onClick={tambahPesertaHandler}
           >
@@ -64,6 +72,10 @@ export default function LandingForm(props) {
           </button>
           <button
             className="btn col"
+<<<<<<< HEAD
+=======
+            onClick={pesertaCtx.onPesanTiket}
+>>>>>>> d07e45caaf0fccd90f8160c3c31bdd4019e787b3
             style={{ backgroundColor: "indianred" }}
             // onClick={eventCtx.onBayar}
             onClick={() => {

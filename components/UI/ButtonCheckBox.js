@@ -1,21 +1,14 @@
 import { Button, FormControl, FormLabel, TextField } from "@mui/material";
-import { useImperativeHandle, useState } from "react";
+import { useState } from "react";
 
 // data: [{
 //     value: 'p',
 //     label: 'Pria'
 // }]
-const ButtonCheckBox = React.forwardRef(function _(
-  { data, initSelectedValue, label },
-  ref
-) {
+const ButtonCheckBox = ({ data, initSelectedValue, label }) => {
   const [selectedValue, setSelectedValue] = useState(initSelectedValue);
 
-  useImperativeHandle(ref, () => {
-    return {
-      value: selectedValue,
-    };
-  });
+  const checkBoxHandler = (value) => setSelectedValue(value);
 
   return (
     <div className="checkbox-groups">
@@ -28,7 +21,7 @@ const ButtonCheckBox = React.forwardRef(function _(
               className="mr-3"
               variant={d.value == selectedValue ? "contained" : "outlined"}
               size="medium"
-              onClick={() => setSelectedValue(d.value)}
+              onClick={() => checkBoxHandler(d.value)}
             >
               {d.label}
             </Button>
@@ -37,6 +30,6 @@ const ButtonCheckBox = React.forwardRef(function _(
       </FormControl>
     </div>
   );
-});
+};
 
 export default ButtonCheckBox;
