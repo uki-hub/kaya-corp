@@ -21,11 +21,13 @@ import React, {
 import EventContext from "../../../contexts/EventContext";
 
 const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
+  const [selectedCategoryCode, setSelectedCategoryCode] = useState();
+
   const eventData = useContext(EventContext).eventData;
 
   const emailRef = useRef();
   const namaKTPRef = useRef();
-  const asalKotaRef = useRef();
+  const kotaRef = useRef();
   const noTeleponRef = useRef();
   const jerseySizeRef = useRef();
   const genderRef = useRef();
@@ -36,19 +38,30 @@ const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
     return { id: d.idBrrCategory, value: d.nmCategory, brr: d.brr };
   });
 
+  const listBRR = eventData.brrCategory
+    .find((b) => b.idBrrCategory == selectedCategoryCode)
+    ?.brr?.map((b) => {
+      return {
+        id: b.idBrr,
+        value: b.nmBrr,
+      };
+    });
+
   useImperativeHandle(ref, () => {
     return {
       email: emailRef.current.value,
       namaKTP: namaKTPRef.current.value,
-      asalKota: asalKotaRef.current.value,
+      kota: kotaRef.current.value,
       noTelepon: noTeleponRef.current.value1,
       noTeleponDarurat: noTeleponRef.current.value2,
       jerseySizeCode: jerseySizeRef.current.value,
       genderCode: genderRef.current.value,
       categoryCode: categoryRef.current.value,
-      brryCode: brrRef.current.value,
+      brrCode: brrRef.current.value,
     };
   });
+
+  const categoryChangeHandler = (value) => setSelectedCategoryCode(value);
 
   return (
     <div
@@ -64,7 +77,7 @@ const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
         label="Nama Sesuai KTPs"
         icon={BadgeRoundedIcon}
       />
-      <FormTextField ref={asalKotaRef} label="Asal Kota" icon={PlaceIcon} />
+      <FormTextField ref={kotaRef} label="Asal Kota" icon={PlaceIcon} />
       <FormTextFieldDouble
         ref={noTeleponRef}
         icon={CallIcon}
@@ -76,21 +89,27 @@ const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
         data={eventData.jerseySize}
         icon={SquareFootIcon}
         label="Size Jersey"
-        defaultSelectedValue={eventData.jerseySize[0].id}
       />
       <RadioGroupField
         ref={genderRef}
         data={eventData.gender}
         icon={PersonIcon}
         label="Kelamin"
+        defaultValue={eventData.gender[0].id}
       />
       <DropdownMenuField
         ref={categoryRef}
         data={categories}
         icon={SquareFootIcon}
         label="Category"
+        onChange={categoryChangeHandler}
       />
-      <DropdownMenuField ref={brrRef} icon={SquareFootIcon} label="BRR" />
+      <DropdownMenuField
+        ref={brrRef}
+        data={listBRR}
+        icon={SquareFootIcon}
+        label="BRR"
+      />
 
       <div
         style={{

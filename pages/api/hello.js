@@ -36,7 +36,7 @@ export default async function handler(req, res) {
             price: 150000,
           },
           {
-            idBrr: "B03",
+            idBrr: "B04",
             nmBrr: "Fun Ride",
             price: 50000,
           },

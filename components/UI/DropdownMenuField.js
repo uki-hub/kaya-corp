@@ -6,18 +6,21 @@ import React, { useImperativeHandle, useRef, useState } from "react";
 //     label: 'Pria'
 // }]
 const DropdownMenuField = React.forwardRef(function _(
-  { data, icon, label, defaultSelectedValue },
+  { data, icon, label, defaultValue, onChange },
   ref
 ) {
-  const [selectedValue, setSelectedValue] = useState(
-    defaultSelectedValue ?? ""
-  );
+  const [selectedValue, setSelectedValue] = useState(defaultValue);
 
   useImperativeHandle(ref, () => {
     return {
       value: selectedValue,
     };
   });
+
+  const onChangeHandler = (value) => {
+    setSelectedValue(value);
+    if (onChange) onChange(value);
+  };
 
   if (!data) return null;
 
@@ -32,7 +35,6 @@ const DropdownMenuField = React.forwardRef(function _(
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">{label}</InputLabel>
           <Select
-            value={selectedValue}
             labelId="demo-simple-select-label"
             label={label}
           >
@@ -40,7 +42,7 @@ const DropdownMenuField = React.forwardRef(function _(
               <MenuItem
                 key={d.id}
                 value={d.id}
-                onClick={() => setSelectedValue(d.id)}
+                onClick={() => onChangeHandler(d.id)}
               >
                 {d.value}
               </MenuItem>

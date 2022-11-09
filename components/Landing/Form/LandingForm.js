@@ -18,7 +18,13 @@ export default function LandingForm(props) {
   const _f = () => __s(_s + 1);
 
   const tambahPesertaHandler = () => {
+    _f();
     pesertaCtx.onTambahPeserta();
+  };
+
+  const bayarHandler = () => {
+    _f();
+    eventCtx.onBayar(formsRef.current);
   };
 
   return (
@@ -39,21 +45,7 @@ export default function LandingForm(props) {
             persertaIndex={i}
           />
         ))}
-        {/* <button
-          className="btn mb-3"
-          onClick={pesertaCtx.onPesanTiket}
-          style={{ backgroundColor: "yellowgreen", float: "right" }}
-        >
-          TAMBAH PESERTA
-        </button>
-        <br />
-        <button
-          className="btn col mb-3"
-          onClick={pesertaCtx.onPesanTiket}
-          style={{ backgroundColor: "indianred" }}
-        >
-          BAYAR
-        </button> */}
+
         <div className="row col-12 ">
           <button
             className="btn col mb-3 mr-1"
@@ -65,11 +57,7 @@ export default function LandingForm(props) {
           <button
             className="btn col"
             style={{ backgroundColor: "indianred" }}
-            // onClick={eventCtx.onBayar}
-            onClick={() => {
-              _f();
-              console.log(formsRef.current);
-            }}
+            onClick={bayarHandler}
           >
             BAYAR
           </button>

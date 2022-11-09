@@ -10,34 +10,7 @@ const _persertaObject = {
   jerseySizeCode: "",
   genderCode: "",
   category: "",
-  brr: "",
-  _refs: {
-    email: null,
-    namaKTP: null,
-    asalKota: null,
-    noTelepon: null,
-    noTeleponDarurat: null,
-    jerseySizeCode: null,
-    genderCode: null,
-    category: null,
-    brr: null,
-  },
-};
-
-const _isDataPesertaNotEmpty = (peserta) => {
-  let isNotEmpty = false;
-  const keys = Object.keys(peserta);
-
-  for (let i = 0; i < keys.length; i++) {
-    const data = peserta[keys[i]].trim();
-
-    if (data != "") {
-      isNotEmpty = true;
-      break;
-    }
-  }
-
-  return isNotEmpty;
+  brr: "" 
 };
 
 const PesertaContext = React.createContext({

@@ -40,7 +40,6 @@ const RadioGroupField = React.forwardRef(function _(
           </FormLabel>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue={selectedValue}
             name="radio-buttons-group"
             row
           >
@@ -51,6 +50,7 @@ const RadioGroupField = React.forwardRef(function _(
                 label={d.value}
                 onClick={() => setSelectedValue(d.id)}
                 control={<Radio />}
+                checked={selectedValue == d.id }
               />
             ))}
           </RadioGroup>
