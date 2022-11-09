@@ -30,7 +30,7 @@ export default function LandingFooter(props) {
                   "url(/assets/images/shap/subscribe_pattern.png)",
               }}
             > */}
-              {/* <div className="row">
+          {/* <div className="row">
                 <div className="col-lg-6 mx-auto">
                   <div className="ts-newsletter-content">
                     <h2 className="section-title">
@@ -38,7 +38,7 @@ export default function LandingFooter(props) {
                       Want something extra?
                     </h2>
                   </div> */}
-                  {/* <div className="newsletter-form">
+          {/* <div className="newsletter-form">
                     <form
                       action="#"
                       method="post"
@@ -60,10 +60,10 @@ export default function LandingFooter(props) {
                     </form>
                   </div>
                 </div> */}
-                {/* </div>
-              </div> */}
-            </div>
           {/* </div>
+              </div> */}
+        </div>
+        {/* </div>
         </div> */}
       </section>
 
@@ -123,9 +123,9 @@ export default function LandingFooter(props) {
 
               <div className="copyright-text text-center">
                 <p>
-                  <a href="https://www.kayacorp.co.id">Copyright © 2022 kayacorp.co.id . All rights reserved.
-
-</a>
+                  <a href="https://www.kayacorp.co.id">
+                    Copyright © 2022 kayacorp.co.id . All rights reserved.
+                  </a>
                 </p>
               </div>
             </div>
@@ -133,7 +133,7 @@ export default function LandingFooter(props) {
         </div>
       </footer>
 
-      <div className="BackTo">
+      <div className="BackTo" style={{ display: "none" }}>
         <a href="#" className="fa fa-angle-up" aria-hidden="true"></a>
       </div>
     </div>

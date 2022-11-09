@@ -4,7 +4,7 @@ import img1 from "/public/assets/images/shap/home_speaker_memphis1.png";
 import img2 from "/public/assets/images/shap/home_speaker_memphis2.png";
 import img3 from "/public/assets/images/shap/home_speaker_memphis3.png";
 import FormPerserta from "./FormPeserta";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import PesertaContext from "../../../contexts/PesertaContext";
 import EventContext from "../../../contexts/EventContext";
 
@@ -18,12 +18,20 @@ export default function LandingForm(props) {
   const _f = () => __s(_s + 1);
 
   const tambahPesertaHandler = () => {
-    _f();
+    // _f();
     pesertaCtx.onTambahPeserta();
   };
 
-  const bayarHandler = () => {
+  const deletePesertaHandler = (indexPeserta) => {
     _f();
+    console.log(formsRef.current)
+    formsRef.current.splice(indexPeserta, 1);
+    console.log(formsRef.current)
+    pesertaCtx.onHapusPeserta(indexPeserta);
+  };
+
+  const bayarHandler = () => {
+    // _f();
     eventCtx.onBayar(formsRef.current);
   };
 
@@ -43,24 +51,27 @@ export default function LandingForm(props) {
             ref={(e) => (formsRef.current[i] = e)}
             key={i}
             persertaIndex={i}
+            onDeletePeserta={() => deletePesertaHandler(i)}
           />
         ))}
 
-        <div className="row col-12 ">
+        <div className="row m-0">
           <button
-            className="btn col mb-3 mr-1"
-            style={{ backgroundColor: "yellowgreen", float: "right" }}
+            className="btn col-6"
+            style={{ backgroundColor: "yellowgreen" }}
             onClick={tambahPesertaHandler}
           >
             TAMBAH PESERTA
           </button>
-          <button
-            className="btn col"
-            style={{ backgroundColor: "indianred" }}
-            onClick={bayarHandler}
-          >
-            BAYAR
-          </button>
+          <div className="col-6 pr-0">
+            <button
+              className="btn w-100"
+              style={{ backgroundColor: "indianred" }}
+              onClick={bayarHandler}
+            >
+              BAYAR
+            </button>
+          </div>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import { TextField, Container } from "@mui/material";
-import React, { useImperativeHandle, useRef, useState } from "react";
+import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 
 const FormTextField = React.forwardRef(function _(
   { type, icon, label, style },
@@ -16,10 +16,11 @@ const FormTextField = React.forwardRef(function _(
       focus: textFieldRef.current.focus,
     };
   });
+ 
 
   return (
-    <div className="row mb-3" style={style}>
-      <div className="col-1-sm" style={{ alignSelf: "center" }}>
+    <div className="row mb-3 align-items-center" style={style}>
+      <div className="col-1-sm">
         {React.createElement(icon, {
           style: { color: "grey", fontSize: "35px" },
         })}
@@ -27,7 +28,6 @@ const FormTextField = React.forwardRef(function _(
       <div className="col">
         <TextField
           inputRef={textFieldRef}
-          id="outlined-basic"
           type={type}
           label={label}
           variant="outlined"

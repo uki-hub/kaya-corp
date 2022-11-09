@@ -38,94 +38,6 @@ const _calculatePrice = (brrCategory, listBRR) => {
 };
 
 const _buildPayload = (eventData, listDataPeserta) => {
-  // [init.json]
-  // {
-  //   idEvent: "dolanan",
-  //   nmEvent: "Banteng Kediri Ride & Night Run 2022",
-  //   descEvent: "Adalah event run and ride terbesar di asia tenggara",
-  //   startPeriode: "2022-11-19",
-  //   endPeriode: "2022-12-31",
-  //   brrCategory: [
-  //     {
-  //       idBrrCategory: "C01",
-  //       nmCategory: "Run",
-  //       brr: [
-  //         {
-  //           idBrr: "B01",
-  //           nmBrr: "Run 5K",
-  //           price: 100000,
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       idBrrCategory: "C02",
-  //       nmCategory: "Ride",
-  //       brr: [
-  //         {
-  //           idBrr: "B03",
-  //           nmBrr: "Fondo Ride",
-  //           price: 150000,
-  //         },
-  //       ],
-  //     },
-  //   ],
-  //   jerseySize: [
-  //     {
-  //       id: 0,
-  //       value: "S",
-  //     },
-  //   ],
-  //   gender: [
-  //     {
-  //       id: 0,
-  //       value: "Man",
-  //     },
-  //   ],
-  // }
-  //[listDataPeserta.json]
-  // {
-  //   email: emailRef.current.value,
-  //   namaKTP: namaKTPRef.current.value,
-  //   kota: kotaRef.current.value,
-  //   noTelepon: noTeleponRef.current.value1,
-  //   noTeleponDarurat: noTeleponRef.current.value2,
-  //   jerseySizeCode: jerseySizeRef.current.value,
-  //   genderCode: genderRef.current.value,
-  //   categoryCode: categoryRef.current.value,
-  //   brrCode: brrRef.current.value,
-  // }
-  // [payload.json]
-  //   {
-  //     "idEvent" : "dolanan",
-  //     "bookDate" : "2022-11-19",
-  //     "pax" : "2",
-  //     "amount" : 200000,
-  //     "participant":[
-  //         {
-  //             "email" : "dummy@gmail.com",
-  //             "nmParticipant" : "Guntur",
-  //             "city" : "Jakarta",
-  //             "phone" :  "081215454545",
-  //             "emergPhone": "02153436654",
-  //             "jerseySize" : "S",
-  //             "gender" : "M",
-  //             "category": "Run",
-  //             "brr" : "Run 5K"
-  //         },
-  //         {
-  //             "email" : "dummy@yahoo.com",
-  //             "nmParticipant" : "Deka",
-  //             "city" : "Jakarta",
-  //             "phone" :  "085656255544",
-  //             "emergPhone": "0855444666",
-  //             "jerseySize" : "XL",
-  //             "gender" : "M",
-  //             "category": "Run",
-  //             "brr" : "Run 10K"
-  //         }
-  //     ]
-  // }
-
   const listBRR = listDataPeserta.map((d) => {
     return {
       categoryCode: d.categoryCode,
@@ -158,9 +70,6 @@ const _buildPayload = (eventData, listDataPeserta) => {
 
 export const EventContextProvider = ({ eventID, eventData, children }) => {
   const bayarHandler = (listDataPeserta) => {
-    console.log(eventData)
-    console.log(listDataPeserta)
-
     const payload = _buildPayload(eventData, listDataPeserta);
 
     console.log(payload);

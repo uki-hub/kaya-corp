@@ -9,8 +9,8 @@ const _persertaObject = {
   noTeleponDarurat: "",
   jerseySizeCode: "",
   genderCode: "",
-  category: "",
-  brr: "" 
+  categoryCode: "",
+  brrCode: "",
 };
 
 const PesertaContext = React.createContext({
@@ -18,6 +18,7 @@ const PesertaContext = React.createContext({
   onTambahPeserta: () => {},
   onKurangPeserta: () => {},
   onHapusPeserta: (indexPeserta) => {},
+  onUpdatePeserta: (indexPeserta, data) => {},
 });
 
 export const PesertaContextProvider = (props) => {
@@ -47,7 +48,16 @@ export const PesertaContextProvider = (props) => {
 
   const hapusPesertaHandler = (indexPeserta) => {
     const updatedList = [...listPeserta];
+
     updatedList.splice(indexPeserta, 1);
+
+    setListPeserta(updatedList);
+  };
+
+  const updateDataPeserta = (indexPeserta, data) => {
+    updatedList = [...listPeserta];
+
+    updatedList[indexPeserta] = data;
 
     setListPeserta(updatedList);
   };
@@ -59,6 +69,7 @@ export const PesertaContextProvider = (props) => {
         onTambahPeserta: tambahPesertaHandler,
         onKurangPeserta: kurangPesertaHandlelr,
         onHapusPeserta: hapusPesertaHandler,
+        onUpdatePeserta: updateDataPeserta,
       }}
     >
       {props.children}

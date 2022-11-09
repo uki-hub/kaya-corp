@@ -17,12 +17,12 @@ export default async function handler(req, res) {
           {
             idBrr: "B01",
             nmBrr: "Run 5K",
-            price: 100000,
+            price: 1,
           },
           {
             idBrr: "B02",
             nmBrr: "Run 10K",
-            price: 100000,
+            price: 2,
           },
         ],
       },
@@ -33,12 +33,12 @@ export default async function handler(req, res) {
           {
             idBrr: "B03",
             nmBrr: "Fondo Ride",
-            price: 150000,
+            price: 3,
           },
           {
             idBrr: "B04",
             nmBrr: "Fun Ride",
-            price: 50000,
+            price: 4,
           },
         ],
       },

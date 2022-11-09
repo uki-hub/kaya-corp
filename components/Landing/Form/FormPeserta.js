@@ -11,28 +11,39 @@ import {
   SquareFoot as SquareFootIcon,
   Person as PersonIcon,
   DeleteForever as DeleteForeverIcon,
+  ConfirmationNumber as ConfirmationNumberIcon,
 } from "@mui/icons-material";
 import React, {
   useContext,
   useRef,
   useImperativeHandle,
   useState,
+  useEffect,
 } from "react";
 import EventContext from "../../../contexts/EventContext";
+import DropdownMenuFieldDouble from "../../UI/DropdownMenuFieldDouble";
+import PesertaContext from "../../../contexts/PesertaContext";
 
-const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
+const FormPerserta = React.forwardRef(function _(
+  { persertaIndex, onDeletePeserta },
+  ref
+) {
+  const [_s, __s] = useState(0);
+  const _f = () => __s(_s + 1);
+
   const [selectedCategoryCode, setSelectedCategoryCode] = useState();
 
   const eventData = useContext(EventContext).eventData;
 
-  const emailRef = useRef();
+  const emailRef = useRef("uki");
   const namaKTPRef = useRef();
   const kotaRef = useRef();
   const noTeleponRef = useRef();
   const jerseySizeRef = useRef();
   const genderRef = useRef();
-  const categoryRef = useRef();
-  const brrRef = useRef();
+  // const categoryRef = useRef();
+  // const brrRef = useRef();
+  const brrCategoryRef = useRef();
 
   const categories = eventData.brrCategory.map((d) => {
     return { id: d.idBrrCategory, value: d.nmCategory, brr: d.brr };
@@ -56,8 +67,10 @@ const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
       noTeleponDarurat: noTeleponRef.current.value2,
       jerseySizeCode: jerseySizeRef.current.value,
       genderCode: genderRef.current.value,
-      categoryCode: categoryRef.current.value,
-      brrCode: brrRef.current.value,
+      // categoryCode: categoryRef.current.value,
+      // brrCode: brrRef.current.value,
+      categoryCode: brrCategoryRef.current.value1,
+      brrCode: brrCategoryRef.current.value2,
     };
   });
 
@@ -71,7 +84,12 @@ const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
       <div className="row">
         <h3 style={{ color: "darkslategrey" }}>Peserta {persertaIndex + 1}</h3>
       </div>
-      <FormTextField ref={emailRef} label="Email" icon={EmailIcon} />
+      <FormTextField
+        ref={emailRef}
+        type="email"
+        label="Email"
+        icon={EmailIcon}
+      />
       <FormTextField
         ref={namaKTPRef}
         label="Nama Sesuai KTPs"
@@ -97,10 +115,10 @@ const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
         label="Kelamin"
         defaultValue={eventData.gender[0].id}
       />
-      <DropdownMenuField
+      {/* <DropdownMenuField
         ref={categoryRef}
         data={categories}
-        icon={SquareFootIcon}
+        icon={ConfirmationNumberIcon}
         label="Category"
         onChange={categoryChangeHandler}
       />
@@ -109,25 +127,36 @@ const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
         data={listBRR}
         icon={SquareFootIcon}
         label="BRR"
+        onChange={_f}
+      /> */}
+      <DropdownMenuFieldDouble
+        ref={brrCategoryRef}
+        data1={categories}
+        data2={listBRR}
+        label1="Category"
+        label2="BRR"
+        onChange1={categoryChangeHandler}
+        onChange2={_f}
+        icon={ConfirmationNumberIcon}
       />
 
-      <div
-        style={{
-          position: "absolute",
-          right: "0.5rem",
-          bottom: "-1.4rem",
-        }}
-        onClick={() => {
-          console.log(emailRef.current?.value);
-        }}
-      >
-        <DeleteForeverIcon
+      {persertaIndex == 0 ? null : (
+        <div
           style={{
-            color: "red",
-            fontSize: "35px",
+            position: "absolute",
+            right: "0.5rem",
+            bottom: "-1.4rem",
           }}
-        />
-      </div>
+          onClick={onDeletePeserta}
+        >
+          <DeleteForeverIcon
+            style={{
+              color: "red",
+              fontSize: "35px",
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 });

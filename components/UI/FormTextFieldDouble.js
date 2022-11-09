@@ -1,8 +1,8 @@
-import { TextField, Container } from "@mui/material";
+import { TextField, Container, InputAdornment } from "@mui/material";
 import React, { useImperativeHandle, useRef, useState } from "react";
 
 const FormTextFieldDouble = React.forwardRef(function _(
-  { icon, label1, label2 },
+  { icon, label1, label2, type1, type2 },
   ref
 ) {
   const [_s, __s] = useState(0);
@@ -21,29 +21,39 @@ const FormTextFieldDouble = React.forwardRef(function _(
   });
 
   return (
-    <div className="row mb-3">
-      <div className="col-1-sm" style={{ alignSelf: "center" }}>
+    <div className="row mb-3 align-items-center">
+      <div className="col-1-sm">
         {React.createElement(icon, {
           style: { color: "grey", fontSize: "35px" },
         })}
       </div>
-      <div className="col">
+      <div className="col pr-1">
         <TextField
           inputRef={textFieldRef1}
+          type={type1}
           id="outlined-basic"
           label={label1}
           variant="outlined"
           fullWidth
+          placeholder="12345678"
+          InputProps={{
+            startAdornment: <InputAdornment position="start">+62</InputAdornment>,
+          }}
           onBlur={_f}
         />
       </div>
-      <div className="col">
+      <div className="col pl-1">
         <TextField
           inputRef={textFieldRef2}
+          type={type2}
           id="outlined-basic"
           label={label2}
           variant="outlined"
           fullWidth
+          placeholder="12345678"
+          InputProps={{
+            startAdornment: <InputAdornment position="start">+62</InputAdornment>,
+          }}
           onBlur={_f}
         />
       </div>

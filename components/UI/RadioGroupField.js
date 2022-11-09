@@ -25,7 +25,7 @@ const RadioGroupField = React.forwardRef(function _(
 
   return (
     <div className="row">
-      <div className="col-1-sm">
+      <div className="col-1-sm align-items-center">
         {React.createElement(icon, {
           style: { color: "grey", fontSize: "35px" },
         })}

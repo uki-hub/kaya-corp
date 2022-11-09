@@ -9,7 +9,7 @@ const DropdownMenuField = React.forwardRef(function _(
   { data, icon, label, defaultValue, onChange },
   ref
 ) {
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
+  const [selectedValue, setSelectedValue] = useState(defaultValue ?? "");
 
   useImperativeHandle(ref, () => {
     return {
@@ -22,10 +22,10 @@ const DropdownMenuField = React.forwardRef(function _(
     if (onChange) onChange(value);
   };
 
-  if (!data) return null;
+  // if (!data) return null;
 
   return (
-    <div className="row mb-3">
+    <div className="row mb-3 align-items-center">
       <div className="col-1-sm">
         {React.createElement(icon, {
           style: { color: "grey", fontSize: "35px" },
@@ -37,8 +37,11 @@ const DropdownMenuField = React.forwardRef(function _(
           <Select
             labelId="demo-simple-select-label"
             label={label}
+            value={selectedValue}
+            disabled={data == null}
           >
-            {data.map((d) => (
+            
+            {data && data.map((d) => (
               <MenuItem
                 key={d.id}
                 value={d.id}
