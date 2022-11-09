@@ -6,8 +6,10 @@ import img3 from "/public/assets/images/shap/home_speaker_memphis3.png";
 import FormPerserta from "./FormPeserta";
 import { useContext, useRef, useState } from "react";
 import PesertaContext from "../../../contexts/PesertaContext";
+import EventContext from "../../../contexts/EventContext";
 
 export default function LandingForm(props) {
+  const eventCtx = useContext(EventContext);
   const pesertaCtx = useContext(PesertaContext);
 
   const formsRef = useRef([]);

@@ -20,11 +20,12 @@ const FormTextFieldDouble = React.forwardRef(function _(
     };
   });
 
-const FormTextFieldDouble = ({ icon, ref1, ref2, label1, label2 }) => {
   return (
     <div className="row mb-3">
       <div className="col-1-sm" style={{ alignSelf: "center" }}>
-        {React.createElement(icon, {style: { color: "grey", fontSize: "35px" }})}
+        {React.createElement(icon, {
+          style: { color: "grey", fontSize: "35px" },
+        })}
       </div>
       <div className="col">
         <TextField
@@ -48,6 +49,6 @@ const FormTextFieldDouble = ({ icon, ref1, ref2, label1, label2 }) => {
       </div>
     </div>
   );
-};
+});
 
 export default FormTextFieldDouble;

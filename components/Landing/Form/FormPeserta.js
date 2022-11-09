@@ -10,7 +10,7 @@ import {
   Call as CallIcon,
   SquareFoot as SquareFootIcon,
   Person as PersonIcon,
-  DeleteForever as DeleteForeverIcon
+  DeleteForever as DeleteForeverIcon,
 } from "@mui/icons-material";
 import React, {
   useContext,
@@ -31,6 +31,10 @@ const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
   const genderRef = useRef();
   const categoryRef = useRef();
   const brrRef = useRef();
+
+  const categories = eventData.brrCategory.map((d) => {
+    return { id: d.idBrrCategory, value: d.nmCategory, brr: d.brr };
+  });
 
   useImperativeHandle(ref, () => {
     return {
@@ -90,7 +94,6 @@ const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
 
       <div
         style={{
-          
           position: "absolute",
           right: "0.5rem",
           bottom: "-1.4rem",
@@ -98,10 +101,14 @@ const FormPerserta = React.forwardRef(function _({ persertaIndex }, ref) {
         onClick={() => {
           console.log(emailRef.current?.value);
         }}
-      ><DeleteForeverIcon style={{
-        color: 'red',
-        fontSize: '35px',
-      }}/></div>
+      >
+        <DeleteForeverIcon
+          style={{
+            color: "red",
+            fontSize: "35px",
+          }}
+        />
+      </div>
     </div>
   );
 });
