@@ -10,7 +10,6 @@ import PesertaContext from "../../../contexts/PesertaContext";
 export default function LandingForm(props) {
   const pesertaCtx = useContext(PesertaContext);
 
-<<<<<<< HEAD
   const formsRef = useRef([]);
 
   const [_s, __s] = useState(0);
@@ -19,11 +18,6 @@ export default function LandingForm(props) {
   const tambahPesertaHandler = () => {
     pesertaCtx.onTambahPeserta();
   };
-=======
-  if (pesertaCtx.listPeserta.length == 0) {
-    return null;
-  }
->>>>>>> d07e45caaf0fccd90f8160c3c31bdd4019e787b3
 
   return (
     <section
@@ -61,10 +55,6 @@ export default function LandingForm(props) {
         <div className="row col-12 ">
           <button
             className="btn col mb-3 mr-1"
-<<<<<<< HEAD
-=======
-            onClick={pesertaCtx.onPesanTiket}
->>>>>>> d07e45caaf0fccd90f8160c3c31bdd4019e787b3
             style={{ backgroundColor: "yellowgreen", float: "right" }}
             onClick={tambahPesertaHandler}
           >
@@ -72,10 +62,6 @@ export default function LandingForm(props) {
           </button>
           <button
             className="btn col"
-<<<<<<< HEAD
-=======
-            onClick={pesertaCtx.onPesanTiket}
->>>>>>> d07e45caaf0fccd90f8160c3c31bdd4019e787b3
             style={{ backgroundColor: "indianred" }}
             // onClick={eventCtx.onBayar}
             onClick={() => {
