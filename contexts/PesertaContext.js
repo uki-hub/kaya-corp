@@ -4,7 +4,7 @@ const _persertaObject = {
   eventCode: "",
   email: "",
   namaKTP: "",
-  asalKota: "",
+  kota: "",
   noTelepon: "",
   noTeleponDarurat: "",
   jerseySizeCode: "",
@@ -49,13 +49,17 @@ export const PesertaContextProvider = (props) => {
   const hapusPesertaHandler = (indexPeserta) => {
     const updatedList = [...listPeserta];
 
+    console.log(updatedList)
+
     updatedList.splice(indexPeserta, 1);
+
+    console.log(updatedList)
 
     setListPeserta(updatedList);
   };
 
   const updateDataPeserta = (indexPeserta, data) => {
-    updatedList = [...listPeserta];
+    const updatedList = [...listPeserta];
 
     updatedList[indexPeserta] = data;
 

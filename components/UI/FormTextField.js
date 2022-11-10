@@ -2,21 +2,27 @@ import { TextField, Container } from "@mui/material";
 import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 
 const FormTextField = React.forwardRef(function _(
-  { type, icon, label, style },
+  { type, icon, label, style, initializeValue },
   ref
 ) {
-  const [_s, __s] = useState(0);
-  const _f = () => __s(_s + 1);
+  const [value, setValue] = useState(initializeValue);
 
   const textFieldRef = useRef();
 
+  const textFieldChangeHandler = (e) => {
+    setValue(e.target.value);
+  };
+
   useImperativeHandle(ref, () => {
     return {
-      value: textFieldRef.current.value,
+      value: value,
       focus: textFieldRef.current.focus,
     };
   });
- 
+
+  useEffect(() => {
+    setValue(initializeValue);
+  }, [initializeValue]);
 
   return (
     <div className="row mb-3 align-items-center" style={style}>
@@ -28,11 +34,12 @@ const FormTextField = React.forwardRef(function _(
       <div className="col">
         <TextField
           inputRef={textFieldRef}
+          value={value}
           type={type}
           label={label}
           variant="outlined"
           fullWidth
-          onBlur={_f}
+          onChange={textFieldChangeHandler}
         />
       </div>
     </div>

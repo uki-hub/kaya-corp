@@ -9,30 +9,29 @@ import PesertaContext from "../../../contexts/PesertaContext";
 import EventContext from "../../../contexts/EventContext";
 
 export default function LandingForm(props) {
-  const eventCtx = useContext(EventContext);
-  const pesertaCtx = useContext(PesertaContext);
-
-  const formsRef = useRef([]);
-
   const [_s, __s] = useState(0);
   const _f = () => __s(_s + 1);
+
+  const eventCtx = useContext(EventContext);
+  const pesertaCtx = useContext(PesertaContext);
 
   const tambahPesertaHandler = () => {
     // _f();
     pesertaCtx.onTambahPeserta();
   };
 
+  const updateDataPesertaHandler = (indexPeserta, dataPeserta) => {
+    pesertaCtx.onUpdatePeserta(indexPeserta, dataPeserta);
+  };
+
   const deletePesertaHandler = (indexPeserta) => {
-    _f();
-    console.log(formsRef.current)
-    formsRef.current.splice(indexPeserta, 1);
-    console.log(formsRef.current)
+    // _f();
     pesertaCtx.onHapusPeserta(indexPeserta);
   };
 
   const bayarHandler = () => {
     // _f();
-    eventCtx.onBayar(formsRef.current);
+    eventCtx.onBayar(pesertaCtx.listPeserta);
   };
 
   return (
@@ -46,12 +45,13 @@ export default function LandingForm(props) {
       <div className="container">
         <h1>Form Registration</h1>
         <br />
-        {pesertaCtx.listPeserta.map((_, i) => (
+        {pesertaCtx.listPeserta.map((d, i) => (
           <FormPerserta
-            ref={(e) => (formsRef.current[i] = e)}
             key={i}
-            persertaIndex={i}
-            onDeletePeserta={() => deletePesertaHandler(i)}
+            indexPeserta={i}
+            dataPeserta={d}
+            onEditingComplete={(data) => updateDataPesertaHandler(i, data)}
+            onDeletePeserta={deletePesertaHandler}
           />
         ))}
 

@@ -22,12 +22,13 @@ import React, {
 } from "react";
 import EventContext from "../../../contexts/EventContext";
 import DropdownMenuFieldDouble from "../../UI/DropdownMenuFieldDouble";
-import PesertaContext from "../../../contexts/PesertaContext";
 
-const FormPerserta = React.forwardRef(function _(
-  { persertaIndex, onDeletePeserta },
-  ref
-) {
+const FormPerserta = ({
+  indexPeserta,
+  dataPeserta,
+  onEditingComplete,
+  onDeletePeserta,
+}) => {
   const [_s, __s] = useState(0);
   const _f = () => __s(_s + 1);
 
@@ -35,15 +36,21 @@ const FormPerserta = React.forwardRef(function _(
 
   const eventData = useContext(EventContext).eventData;
 
-  const emailRef = useRef("uki");
-  const namaKTPRef = useRef();
-  const kotaRef = useRef();
-  const noTeleponRef = useRef();
-  const jerseySizeRef = useRef();
-  const genderRef = useRef();
+  const emailRef = useRef(dataPeserta.email);
+  const namaKTPRef = useRef(dataPeserta.namaKTP);
+  const kotaRef = useRef(dataPeserta.kota);
+  const noTeleponRef = useRef({
+    value1: dataPeserta.noTelepon,
+    value2: dataPeserta.noTeleponDarurat,
+  });
+  const jerseySizeRef = useRef(dataPeserta.jerseySizeCode);
+  const genderRef = useRef(dataPeserta.genderCode);
   // const categoryRef = useRef();
   // const brrRef = useRef();
-  const brrCategoryRef = useRef();
+  const brrCategoryRef = useRef({
+    value1: dataPeserta.categoryCode,
+    value2: dataPeserta.brrCode,
+  });
 
   const categories = eventData.brrCategory.map((d) => {
     return { id: d.idBrrCategory, value: d.nmCategory, brr: d.brr };
@@ -58,8 +65,8 @@ const FormPerserta = React.forwardRef(function _(
       };
     });
 
-  useImperativeHandle(ref, () => {
-    return {
+  const formBlurHandler = () =>
+    onEditingComplete({
       email: emailRef.current.value,
       namaKTP: namaKTPRef.current.value,
       kota: kotaRef.current.value,
@@ -67,12 +74,9 @@ const FormPerserta = React.forwardRef(function _(
       noTeleponDarurat: noTeleponRef.current.value2,
       jerseySizeCode: jerseySizeRef.current.value,
       genderCode: genderRef.current.value,
-      // categoryCode: categoryRef.current.value,
-      // brrCode: brrRef.current.value,
       categoryCode: brrCategoryRef.current.value1,
       brrCode: brrCategoryRef.current.value2,
-    };
-  });
+    });
 
   const categoryChangeHandler = (value) => setSelectedCategoryCode(value);
 
@@ -80,15 +84,17 @@ const FormPerserta = React.forwardRef(function _(
     <div
       className="form-control mb-5"
       style={{ position: "relative", padding: "40px" }}
+      onBlur={formBlurHandler}
     >
       <div className="row">
-        <h3 style={{ color: "darkslategrey" }}>Peserta {persertaIndex + 1}</h3>
+        <h3 style={{ color: "darkslategrey" }}>Peserta {indexPeserta + 1}</h3>
       </div>
       <FormTextField
         ref={emailRef}
         type="email"
         label="Email"
         icon={EmailIcon}
+        initializeValue={dataPeserta.email}
       />
       <FormTextField
         ref={namaKTPRef}
@@ -140,7 +146,7 @@ const FormPerserta = React.forwardRef(function _(
         icon={ConfirmationNumberIcon}
       />
 
-      {persertaIndex == 0 ? null : (
+      {indexPeserta == 0 ? null : (
         <div
           style={{
             position: "absolute",
@@ -159,6 +165,6 @@ const FormPerserta = React.forwardRef(function _(
       )}
     </div>
   );
-});
+};
 
 export default FormPerserta;
