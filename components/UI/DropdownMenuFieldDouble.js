@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
-import React, { useImperativeHandle, useRef, useState } from "react";
+import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 
 // data: [{
 //     value: 'p',
@@ -11,23 +11,16 @@ const DropdownMenuFieldDouble = React.forwardRef(function _(
     data2,
     label1,
     label2,
-    defaultValue1,
-    defaultValue2,
     onChange1,
     onChange2,
+    initializeValue1,
+    initializeValue2,
     icon,
   },
   ref
 ) {
-  const [selectedValue1, setSelectedValue1] = useState(defaultValue1 ?? "");
-  const [selectedValue2, setSelectedValue2] = useState(defaultValue2 ?? "");
-
-  useImperativeHandle(ref, () => {
-    return {
-      value1: selectedValue1,
-      value2: selectedValue2,
-    };
-  });
+  const [selectedValue1, setSelectedValue1] = useState();
+  const [selectedValue2, setSelectedValue2] = useState();
 
   const onChangeHandler1 = (value) => {
     setSelectedValue1(value);
@@ -38,6 +31,18 @@ const DropdownMenuFieldDouble = React.forwardRef(function _(
     setSelectedValue2(value);
     if (onChange2) onChange2(value);
   };
+
+  useImperativeHandle(ref, () => {
+    return {
+      value1: selectedValue1,
+      value2: selectedValue2,
+    };
+  });
+
+  useEffect(() => {
+    setSelectedValue1(initializeValue1);
+    setSelectedValue2(initializeValue2);
+  }, [initializeValue1, initializeValue2]);
 
   // if (!data) return null;
 

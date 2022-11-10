@@ -22,12 +22,14 @@ import React, {
 } from "react";
 import EventContext from "../../../contexts/EventContext";
 import DropdownMenuFieldDouble from "../../UI/DropdownMenuFieldDouble";
+import { scrollTo } from "../../../lib/scrollTo";
 
 const FormPerserta = ({
   indexPeserta,
   dataPeserta,
   onEditingComplete,
   onDeletePeserta,
+  errorForm,
 }) => {
   const [_s, __s] = useState(0);
   const _f = () => __s(_s + 1);
@@ -36,21 +38,25 @@ const FormPerserta = ({
 
   const eventData = useContext(EventContext).eventData;
 
-  const emailRef = useRef(dataPeserta.email);
-  const namaKTPRef = useRef(dataPeserta.namaKTP);
-  const kotaRef = useRef(dataPeserta.kota);
-  const noTeleponRef = useRef({
-    value1: dataPeserta.noTelepon,
-    value2: dataPeserta.noTeleponDarurat,
-  });
-  const jerseySizeRef = useRef(dataPeserta.jerseySizeCode);
-  const genderRef = useRef(dataPeserta.genderCode);
-  // const categoryRef = useRef();
-  // const brrRef = useRef();
-  const brrCategoryRef = useRef({
-    value1: dataPeserta.categoryCode,
-    value2: dataPeserta.brrCode,
-  });
+  const refs = {
+    email: useRef(),
+    namaKTP: useRef(),
+    kota: useRef(),
+    noTelepon: useRef(),
+    jerseySizeCode: useRef(),
+    genderCode: useRef(),
+    brrCode: useRef(),
+  };
+
+  // const emailRef = useRef();
+  // const namaKTPRef = useRef();
+  // const kotaRef = useRef();
+  // const noTeleponRef = useRef();
+  // const jerseySizeRef = useRef();
+  // const genderRef = useRef();
+  // // const categoryRef = useRef();
+  // // const brrRef = useRef();
+  // const brrCategoryRef = useRef();
 
   const categories = eventData.brrCategory.map((d) => {
     return { id: d.idBrrCategory, value: d.nmCategory, brr: d.brr };
@@ -65,20 +71,41 @@ const FormPerserta = ({
       };
     });
 
+  // const formBlurHandler = () =>
+  //   onEditingComplete({
+  //     email: emailRef.current.value,
+  //     namaKTP: namaKTPRef.current.value,
+  //     kota: kotaRef.current.value,
+  //     noTelepon: noTeleponRef.current.value1,
+  //     noTeleponDarurat: noTeleponRef.current.value2,
+  //     jerseySizeCode: jerseySizeRef.current.value,
+  //     genderCode: genderRef.current.value,
+  //     categoryCode: brrCategoryRef.current.value1,
+  //     brrCode: brrCategoryRef.current.value2,
+  //   });
+
   const formBlurHandler = () =>
     onEditingComplete({
-      email: emailRef.current.value,
-      namaKTP: namaKTPRef.current.value,
-      kota: kotaRef.current.value,
-      noTelepon: noTeleponRef.current.value1,
-      noTeleponDarurat: noTeleponRef.current.value2,
-      jerseySizeCode: jerseySizeRef.current.value,
-      genderCode: genderRef.current.value,
-      categoryCode: brrCategoryRef.current.value1,
-      brrCode: brrCategoryRef.current.value2,
+      email: refs.email.current.value,
+      namaKTP: refs.namaKTP.current.value,
+      kota: refs.kota.current.value,
+      noTelepon: refs.noTelepon.current.value1,
+      noTeleponDarurat: refs.noTelepon.current.value2,
+      jerseySizeCode: refs.jerseySizeCode.current.value,
+      genderCode: refs.genderCode.current.value,
+      categoryCode: refs.brrCode.current.value1,
+      brrCode: refs.brrCode.current.value2,
     });
 
   const categoryChangeHandler = (value) => setSelectedCategoryCode(value);
+
+  useEffect(() => {
+    if (errorForm) {
+      console.log("invalidForm");
+      console.log(refs[errorForm.invalidFieldName]);
+      refs[errorForm.invalidFieldName].current.focus();
+    }
+  }, [errorForm]);
 
   return (
     <div
@@ -90,36 +117,51 @@ const FormPerserta = ({
         <h3 style={{ color: "darkslategrey" }}>Peserta {indexPeserta + 1}</h3>
       </div>
       <FormTextField
-        ref={emailRef}
+        // ref={emailRef}
+        ref={refs.email}
         type="email"
         label="Email"
         icon={EmailIcon}
         initializeValue={dataPeserta.email}
       />
       <FormTextField
-        ref={namaKTPRef}
+        // ref={namaKTPRef}
+        ref={refs.namaKTP}
         label="Nama Sesuai KTPs"
         icon={BadgeRoundedIcon}
+        initializeValue={dataPeserta.namaKTP}
       />
-      <FormTextField ref={kotaRef} label="Asal Kota" icon={PlaceIcon} />
+      <FormTextField
+        // ref={kotaRef}
+        ref={refs.kota}
+        label="Asal Kota"
+        icon={PlaceIcon}
+        initializeValue={dataPeserta.kota}
+      />
       <FormTextFieldDouble
-        ref={noTeleponRef}
+        // ref={noTeleponRef}
+        ref={refs.noTelepon}
         icon={CallIcon}
         label1="No Telepon"
         label2="No Telepon Darurat"
+        initializeValue1={dataPeserta.noTelepon}
+        initializeValue2={dataPeserta.noTeleponDarurat}
       />
       <DropdownMenuField
-        ref={jerseySizeRef}
+        // ref={jerseySizeRef}
+        ref={refs.jerseySizeCode}
         data={eventData.jerseySize}
         icon={SquareFootIcon}
         label="Size Jersey"
+        initializeValue={dataPeserta.jerseySizeCode}
       />
       <RadioGroupField
-        ref={genderRef}
+        // ref={genderRef}
+        ref={refs.genderCode}
         data={eventData.gender}
         icon={PersonIcon}
         label="Kelamin"
-        defaultValue={eventData.gender[0].id}
+        initializeValue={eventData.gender[0].id}
       />
       {/* <DropdownMenuField
         ref={categoryRef}
@@ -136,14 +178,17 @@ const FormPerserta = ({
         onChange={_f}
       /> */}
       <DropdownMenuFieldDouble
-        ref={brrCategoryRef}
+        // ref={brrCategoryRef}
+        ref={refs.brrCode}
+        icon={ConfirmationNumberIcon}
         data1={categories}
         data2={listBRR}
         label1="Category"
         label2="BRR"
         onChange1={categoryChangeHandler}
         onChange2={_f}
-        icon={ConfirmationNumberIcon}
+        initializeValue1={dataPeserta.categoryCode}
+        initializeValue2={dataPeserta.brrCode}
       />
 
       {indexPeserta == 0 ? null : (
@@ -153,7 +198,10 @@ const FormPerserta = ({
             right: "0.5rem",
             bottom: "-1.4rem",
           }}
-          onClick={onDeletePeserta}
+          onClick={() => {
+            console.log(refs.email);
+            refs.email.current.focus();
+          }}
         >
           <DeleteForeverIcon
             style={{

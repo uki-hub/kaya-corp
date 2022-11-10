@@ -9,29 +9,71 @@ import PesertaContext from "../../../contexts/PesertaContext";
 import EventContext from "../../../contexts/EventContext";
 
 export default function LandingForm(props) {
-  const [_s, __s] = useState(0);
-  const _f = () => __s(_s + 1);
+  const [errorForm, setErrorForm] = useState({
+    invalidIndexPeserta: null,
+    invalidFieldName: null,
+  });
 
   const eventCtx = useContext(EventContext);
   const pesertaCtx = useContext(PesertaContext);
 
-  const tambahPesertaHandler = () => {
-    // _f();
-    pesertaCtx.onTambahPeserta();
-  };
+  const tambahPesertaHandler = () => pesertaCtx.onTambahPeserta();
 
-  const updateDataPesertaHandler = (indexPeserta, dataPeserta) => {
+  const updateDataPesertaHandler = (indexPeserta, dataPeserta) =>
     pesertaCtx.onUpdatePeserta(indexPeserta, dataPeserta);
-  };
 
-  const deletePesertaHandler = (indexPeserta) => {
-    // _f();
+  const deletePesertaHandler = (indexPeserta) =>
     pesertaCtx.onHapusPeserta(indexPeserta);
+
+  const validateForms = (listPeserta) => {
+    let isValid = true;
+    let invalidIndexPeserta;
+    let invalidFieldName;
+
+    for (let i = 0; i < listPeserta.length; i++) {
+      const peserta = listPeserta[i];
+
+      const pesertaKeys = Object.keys(peserta);
+
+      for (let j = 0; j < pesertaKeys.length; j++) {
+        const key = pesertaKeys[j];
+
+        if (peserta[key]?.toString().trim() == "") {
+          isValid = false;
+          invalidIndexPeserta = i;
+          invalidFieldName = key;
+
+          console.log("break1");
+
+          break;
+        }
+      }
+
+      if (!isValid) {
+        console.log("break2");
+        break;
+      }
+    }
+
+    return isValid
+      ? null
+      : {
+          invalidIndexPeserta,
+          invalidFieldName,
+        };
   };
 
   const bayarHandler = () => {
-    // _f();
-    eventCtx.onBayar(pesertaCtx.listPeserta);
+    const listPeserta = [...pesertaCtx.listPeserta];
+
+    const invalidForm = validateForms(listPeserta);
+    console.error(invalidForm);
+
+    if (!invalidForm) {
+      eventCtx.onBayar(listPeserta);
+    } else {
+      setErrorForm (invalidForm);
+    }
   };
 
   return (
@@ -52,6 +94,7 @@ export default function LandingForm(props) {
             dataPeserta={d}
             onEditingComplete={(data) => updateDataPesertaHandler(i, data)}
             onDeletePeserta={deletePesertaHandler}
+            errorForm={errorForm.invalidIndexPeserta == i && errorForm}
           />
         ))}
 

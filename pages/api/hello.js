@@ -45,33 +45,33 @@ export default async function handler(req, res) {
     ],
     jerseySize: [
       {
-        id: 0,
+        id: "0",
         value: "S",
       },
       {
-        id: 1,
+        id: "1",
         value: "M",
       },
       {
-        id: 2,
+        id: "2",
         value: "L",
       },
       {
-        id: 3,
+        id: "3",
         value: "XL",
       },
       {
-        id: 4,
+        id: "4",
         value: "XXL",
       },
     ],
     gender: [
       {
-        id: 0,
+        id: "0",
         value: "Man",
       },
       {
-        id: 2,
+        id: "2",
         value: "Woman",
       },
     ],

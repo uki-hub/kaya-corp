@@ -1,15 +1,20 @@
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
-import React, { useImperativeHandle, useRef, useState } from "react";
+import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 
 // data: [{
 //     value: 'p',
 //     label: 'Pria'
 // }]
 const DropdownMenuField = React.forwardRef(function _(
-  { data, icon, label, defaultValue, onChange },
+  { data, icon, label, onChange, initializeValue },
   ref
 ) {
-  const [selectedValue, setSelectedValue] = useState(defaultValue ?? "");
+  const [selectedValue, setSelectedValue] = useState();
+
+  const onChangeHandler = (value) => {
+    setSelectedValue(value);
+    if (onChange) onChange(value);
+  };
 
   useImperativeHandle(ref, () => {
     return {
@@ -17,10 +22,9 @@ const DropdownMenuField = React.forwardRef(function _(
     };
   });
 
-  const onChangeHandler = (value) => {
-    setSelectedValue(value);
-    if (onChange) onChange(value);
-  };
+  useEffect(() => {
+    setSelectedValue(initializeValue);
+  }, [initializeValue]);
 
   // if (!data) return null;
 
@@ -37,19 +41,20 @@ const DropdownMenuField = React.forwardRef(function _(
           <Select
             labelId="demo-simple-select-label"
             label={label}
-            value={selectedValue}
+            // value={selectedValue}
             disabled={data == null}
           >
-            
-            {data && data.map((d) => (
-              <MenuItem
-                key={d.id}
-                value={d.id}
-                onClick={() => onChangeHandler(d.id)}
-              >
-                {d.value}
-              </MenuItem>
-            ))}
+            {data &&
+              data.map((d) => (
+                <MenuItem
+                  key={d.id}
+                  value={d.id}
+                  selected={d.id == selectedValue}
+                  onClick={() => onChangeHandler(d.id)}
+                >
+                  {d.value}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
       </div>

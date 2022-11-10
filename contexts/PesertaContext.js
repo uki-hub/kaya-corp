@@ -1,7 +1,6 @@
 import React, { createRef, useRef, useState } from "react";
 
 const _persertaObject = {
-  eventCode: "",
   email: "",
   namaKTP: "",
   kota: "",
@@ -49,11 +48,11 @@ export const PesertaContextProvider = (props) => {
   const hapusPesertaHandler = (indexPeserta) => {
     const updatedList = [...listPeserta];
 
-    console.log(updatedList)
+    console.log(updatedList);
 
     updatedList.splice(indexPeserta, 1);
 
-    console.log(updatedList)
+    console.log(updatedList);
 
     setListPeserta(updatedList);
   };
