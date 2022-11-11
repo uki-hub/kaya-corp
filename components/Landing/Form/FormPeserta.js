@@ -92,7 +92,7 @@ const FormPerserta = ({
 
   const categoryChangeHandler = (value) => setSelectedCategoryCode(value);
   console.log("==================================================FORMPESERTA");
-  (eventData);
+  console.log(eventData);
   useEffect(() => {
     if (dataPeserta.categoryCode)
       setSelectedCategoryCode(dataPeserta.categoryCode);

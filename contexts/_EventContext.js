@@ -19,7 +19,7 @@ const validateDataPeserta = (listPeserta) => {
     for (let j = 0; j < pesertaKeys.length; j++) {
       const key = pesertaKeys[j];
 
-      if (peserta[key]?.toString().trim() == "") {
+      if (peserta[key] == null || peserta[key]?.toString().trim() == "") {
         isValid = false;
         invalidIndexPeserta = i;
         invalidFieldName = key;
@@ -37,6 +37,14 @@ const validateDataPeserta = (listPeserta) => {
 
     if (!isValid) break;
   }
+
+  console.log(
+    "======================================================================="
+  );
+  console.log({
+    invalidIndexPeserta,
+    invalidFieldName,
+  });
 
   return isValid
     ? null

@@ -13,6 +13,7 @@ import { PesertaContextProvider } from "../../contexts/PesertaContext";
 import axios from "axios";
 import { EventContextProvider } from "../../contexts/EventContext";
 import NoEvent from "../../components/Landing/NoEvent/NoEvent";
+import { getEventInitializeData } from "../../repositories/EventRepository";
 
 export default function EventPage({ eventID, initData }) {
   if (!initData) return <NoEvent />;
@@ -41,19 +42,14 @@ export default function EventPage({ eventID, initData }) {
 export async function getServerSideProps(context) {
   const eventId = context.query["eventid"];
 
-  const response = await axios.post(
-    "https://api.bantengseries.com//api/ticket/initialize.php",
-    {
-      idevent: eventId,
-    }
-  );
+  const data = await getEventInitializeData(eventId);
 
-  if (response.data == null || response.data.length == 0)
+  if (data == null || data.length == 0)
     return {
       props: {},
     };
 
   return {
-    props: { eventID: eventId, initData: response.data[0] },
+    props: { eventID: eventId, initData: data[0] },
   };
 }
