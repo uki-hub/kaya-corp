@@ -1,5 +1,3 @@
-import Router from "next/router";
-
 import LandingHeader from "../../components/Landing/Header/LandingHeader";
 import LandingBanner from "../../components/Landing/Banner/LandingBanner";
 import LandingEventSchedule from "../../components/Landing/EventSchedule/LandingEventSchedule";
@@ -14,8 +12,11 @@ import BundleScript from "../../components/Landing/BundleScript";
 import { PesertaContextProvider } from "../../contexts/PesertaContext";
 import axios from "axios";
 import { EventContextProvider } from "../../contexts/EventContext";
+import NoEvent from "../../components/Landing/NoEvent/NoEvent";
 
 export default function EventPage({ eventID, initData }) {
+  if (!initData) return <NoEvent />;
+
   return (
     <EventContextProvider eventID={eventID} eventData={initData}>
       <PesertaContextProvider>
@@ -47,10 +48,10 @@ export async function getServerSideProps(context) {
     }
   );
 
-  if (!response.data && response.data.length == 0)
-    Router.push({
-      pathname: "/",
-    });
+  if (response.data == null || response.data.length == 0)
+    return {
+      props: {},
+    };
 
   return {
     props: { eventID: eventId, initData: response.data[0] },

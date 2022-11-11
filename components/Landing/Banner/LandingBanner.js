@@ -23,7 +23,7 @@ export default function LandingBanner() {
                   data-wow-duration="1.5s"
                   data-wow-delay="800ms"
                 >
-                  <a href="#" className="btn">
+                  <a href="#ticket-form-actions" className="btn">
                     Buy Ticket
                   </a>
                 </div>

@@ -51,7 +51,7 @@ export default function LandingForm(props) {
         backgroundImage: "url(/assets/images/speakers/speaker_bg.png)",
       }}
     >
-      <div className="container">
+      <div id="ticket-form-actions" className="container">
         <h1>Form Registration</h1>
         <br />
         {pesertaCtx.listPeserta.map((d, i) => (
@@ -85,7 +85,7 @@ export default function LandingForm(props) {
         </div>
       </div>
 
-      <div id="ticket-form-actions" ref={actionRef} className="speaker-shap">
+      <div ref={actionRef} className="speaker-shap">
         <Image className="shap1" src={img1} alt="" />
         <Image className="shap2" src={img2} alt="" />
         <Image className="shap3" src={img3} alt="" />
