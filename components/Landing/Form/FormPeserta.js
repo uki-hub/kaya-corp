@@ -22,7 +22,7 @@ import React, {
 } from "react";
 import EventContext from "../../../contexts/EventContext";
 import DropdownMenuFieldDouble from "../../UI/DropdownMenuFieldDouble";
-import { scrollTo } from "../../../lib/scrollTo";
+import { scrollTo } from "../../../lib/DaScroll";
 
 const FormPerserta = ({
   indexPeserta,
@@ -101,11 +101,9 @@ const FormPerserta = ({
 
   useEffect(() => {
     if (errorForm) {
-      console.log("invalidForm");
-      console.log(refs[errorForm.invalidFieldName]);
       refs[errorForm.invalidFieldName].current.focus();
     }
-  }, [errorForm]);
+  }, [refs, errorForm]);
 
   return (
     <div
@@ -199,7 +197,6 @@ const FormPerserta = ({
             bottom: "-1.4rem",
           }}
           onClick={() => {
-            console.log(refs.email);
             refs.email.current.focus();
           }}
         >

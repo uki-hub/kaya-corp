@@ -48,11 +48,7 @@ export const PesertaContextProvider = (props) => {
   const hapusPesertaHandler = (indexPeserta) => {
     const updatedList = [...listPeserta];
 
-    console.log(updatedList);
-
     updatedList.splice(indexPeserta, 1);
-
-    console.log(updatedList);
 
     setListPeserta(updatedList);
   };

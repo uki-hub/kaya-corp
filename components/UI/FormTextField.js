@@ -1,6 +1,6 @@
 import { TextField, Container } from "@mui/material";
 import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
-import { scrollTo } from "../../lib/scrollTo";
+import DaScroll, { scrollTo } from "../../lib/DaScroll";
 
 const FormTextField = React.forwardRef(function _(
   { type, icon, label, style, initializeValue },
@@ -17,7 +17,11 @@ const FormTextField = React.forwardRef(function _(
   useImperativeHandle(ref, () => {
     return {
       value: value,
-      focus: () => scrollTo({ id: textFieldRef.current.id }),
+      focus: () => {
+        DaScroll(textFieldRef?.current?.id, () =>
+          textFieldRef?.current?.focus()
+        );
+      },
     };
   });
 
