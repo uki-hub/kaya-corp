@@ -1,12 +1,18 @@
 import Image from "next/image";
+import { useContext } from "react";
 
-import img_blog1 from "/public/assets/images/blog/blog1.jpeg";
-import img_blog2 from "/public/assets/images/blog/blog2.jpeg";
-import img_blog3 from "/public/assets/images/blog/blog3.jpeg";
+import EventContext from "../../../contexts/EventContext";
+
 import img_news1 from "/public/assets/images/shap/news_memphis1.png";
 import img_news2 from "/public/assets/images/shap/news_memphis2.png";
 
 export default function LandingNews(props) {
+  const eventCtx = useContext(EventContext);
+
+  const img_blog1 = require(`/events/${eventCtx.eventID}/blog/blog1.jpeg`);
+  const img_blog2 = require(`/events/${eventCtx.eventID}/blog/blog2.jpeg`);
+  const img_blog3 = require(`/events/${eventCtx.eventID}/blog/blog3.jpeg`);
+
   return (
     <section className="ts-blog section-bg">
       <div className="container">
@@ -48,15 +54,22 @@ export default function LandingNews(props) {
 
                 <div className="entry-content">
                   <p>
-                 Regulasi Kegiatan Banteng Fondo Ride Sebagai Berikut : <br/>
-                 <br/>
-                  • Tanggal : 26 November 2022<br/>                 
-                  • Lokasi : Simpang Lima Gumul Kediri - &emsp;&emsp;&emsp;&emsp; Blitar Makan Bung Karno (PP)<br/>
-                  • Jenis Sepeda : Road Bike<br/>
-                  • Donasi : Rp. 150.000<br/>
-                  <br/>
-                Dengan Mengikuti acara ini, kamu sudah ikut berpatisipasi menyumbang 1000 Sepeda untuk Guru
-                dan 2000 Sepatu untuk Siswa didaerah pedalaman.
+                    Regulasi Kegiatan Banteng Fondo Ride Sebagai Berikut :{" "}
+                    <br />
+                    <br />
+                    • Tanggal : 26 November 2022
+                    <br />
+                    • Lokasi : Simpang Lima Gumul Kediri -
+                    &emsp;&emsp;&emsp;&emsp; Blitar Makan Bung Karno (PP)
+                    <br />
+                    • Jenis Sepeda : Road Bike
+                    <br />
+                    • Donasi : Rp. 150.000
+                    <br />
+                    <br />
+                    Dengan Mengikuti acara ini, kamu sudah ikut berpatisipasi
+                    menyumbang 1000 Sepeda untuk Guru dan 2000 Sepatu untuk
+                    Siswa didaerah pedalaman.
                   </p>
                 </div>
 
@@ -96,18 +109,23 @@ export default function LandingNews(props) {
                 </div>
 
                 <div className="entry-content">
-                <p>
-                 Regulasi Kegiatan Banteng Fondo Ride Sebagai Berikut : <br/>
-                 <br/>
-                  • Tanggal : 26 November 2022<br/>                 
-                  • Lokasi : Simpang Lima Gumul Kediri<br/>
-                  • Donasi : Rp. 100.000<br/>
-                  <br/>
-                Dengan Mengikuti acara ini, kamu sudah ikut berpatisipasi menyumbang 1000 Sepeda untuk Guru
-                dan 2000 Sepatu untuk Siswa didaerah pedalaman.
-                <br/>
-                <br/>
-                <br/>
+                  <p>
+                    Regulasi Kegiatan Banteng Fondo Ride Sebagai Berikut :{" "}
+                    <br />
+                    <br />
+                    • Tanggal : 26 November 2022
+                    <br />
+                    • Lokasi : Simpang Lima Gumul Kediri
+                    <br />
+                    • Donasi : Rp. 100.000
+                    <br />
+                    <br />
+                    Dengan Mengikuti acara ini, kamu sudah ikut berpatisipasi
+                    menyumbang 1000 Sepeda untuk Guru dan 2000 Sepatu untuk
+                    Siswa didaerah pedalaman.
+                    <br />
+                    <br />
+                    <br />
                   </p>
                 </div>
 
@@ -147,20 +165,25 @@ export default function LandingNews(props) {
                 </div>
 
                 <div className="entry-content">
-                <p>
-                 Regulasi Kegiatan Banteng Fondo Ride Sebagai Berikut : <br/>
-                 <br/>
-                  • Tanggal : 27 November 2022<br/>                 
-                  • Lokasi : Simpang Lima Gumul Kediri<br/>
-                  • Jenis Sepeda : Road Bike<br/>
-                  • Donasi : Rp. 50.000<br/>
-                  <br/>
-                Dengan Mengikuti acara ini, kamu sudah ikut berpatisipasi menyumbang 1000 Sepeda untuk Guru
-                dan 2000 Sepatu untuk Siswa didaerah pedalaman.
-                <br/>
-                <br/>
+                  <p>
+                    Regulasi Kegiatan Banteng Fondo Ride Sebagai Berikut :{" "}
+                    <br />
+                    <br />
+                    • Tanggal : 27 November 2022
+                    <br />
+                    • Lokasi : Simpang Lima Gumul Kediri
+                    <br />
+                    • Jenis Sepeda : Road Bike
+                    <br />
+                    • Donasi : Rp. 50.000
+                    <br />
+                    <br />
+                    Dengan Mengikuti acara ini, kamu sudah ikut berpatisipasi
+                    menyumbang 1000 Sepeda untuk Guru dan 2000 Sepatu untuk
+                    Siswa didaerah pedalaman.
+                    <br />
+                    <br />
                   </p>
-                  
                 </div>
 
                 {/* <div className="post-footer">

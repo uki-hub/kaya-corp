@@ -1,15 +1,19 @@
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
+import DaScroll from "../../lib/DaScroll";
 
 // data: [{
 //     value: 'p',
 //     label: 'Pria'
 // }]
 const DropdownMenuField = React.forwardRef(function _(
-  { data, icon, label, onChange, initializeValue },
+  { data, icon, label, onChange, initializeValue, error },
   ref
 ) {
-  const [selectedValue, setSelectedValue] = useState();
+  const [selectedValue, setSelectedValue] = useState("");
+  const [isError, setIsError] = useState(false);
+
+  const selectRef = useRef();
 
   const onChangeHandler = (value) => {
     setSelectedValue(value);
@@ -19,12 +23,18 @@ const DropdownMenuField = React.forwardRef(function _(
   useImperativeHandle(ref, () => {
     return {
       value: selectedValue,
+      focus: () => {
+        // DaScroll(selectRef?.current?.id);
+        selectRef?.current?.focus();
+        setIsError(true);
+      },
     };
   });
 
   useEffect(() => {
     setSelectedValue(initializeValue);
-  }, [initializeValue]);
+    setIsError(error);
+  }, [initializeValue, error]);
 
   // if (!data) return null;
 
@@ -36,12 +46,12 @@ const DropdownMenuField = React.forwardRef(function _(
         })}
       </div>
       <div className="col">
-        <FormControl fullWidth>
+        <FormControl ref={selectRef} fullWidth error={isError}>
           <InputLabel id="demo-simple-select-label">{label}</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             label={label}
-            // value={selectedValue}
+            value={selectedValue}
             disabled={data == null}
           >
             {data &&
@@ -49,7 +59,7 @@ const DropdownMenuField = React.forwardRef(function _(
                 <MenuItem
                   key={d.id}
                   value={d.id}
-                  selected={d.id == selectedValue}
+                  // selected={d.id == selectedValue}
                   onClick={() => onChangeHandler(d.id)}
                 >
                   {d.value}

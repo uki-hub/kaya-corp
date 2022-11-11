@@ -13,16 +13,9 @@ import {
   DeleteForever as DeleteForeverIcon,
   ConfirmationNumber as ConfirmationNumberIcon,
 } from "@mui/icons-material";
-import React, {
-  useContext,
-  useRef,
-  useImperativeHandle,
-  useState,
-  useEffect,
-} from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import EventContext from "../../../contexts/EventContext";
 import DropdownMenuFieldDouble from "../../UI/DropdownMenuFieldDouble";
-import { scrollTo } from "../../../lib/DaScroll";
 
 const FormPerserta = ({
   indexPeserta,
@@ -58,12 +51,12 @@ const FormPerserta = ({
   // // const brrRef = useRef();
   // const brrCategoryRef = useRef();
 
-  const categories = eventData.brrCategory.map((d) => {
+  const categories = eventData.brrCategory?.map((d) => {
     return { id: d.idBrrCategory, value: d.nmCategory, brr: d.brr };
   });
 
   const listBRR = eventData.brrCategory
-    .find((b) => b.idBrrCategory == selectedCategoryCode)
+    ?.find((b) => b.idBrrCategory == selectedCategoryCode)
     ?.brr?.map((b) => {
       return {
         id: b.idBrr,
@@ -98,12 +91,38 @@ const FormPerserta = ({
     });
 
   const categoryChangeHandler = (value) => setSelectedCategoryCode(value);
-
+  console.log("==================================================FORMPESERTA");
+  (eventData);
   useEffect(() => {
+    if (dataPeserta.categoryCode)
+      setSelectedCategoryCode(dataPeserta.categoryCode);
+
     if (errorForm) {
-      refs[errorForm.invalidFieldName].current.focus();
+      // _f();
+
+      switch (errorForm.invalidFieldName) {
+        case "noTelepon":
+          refs["noTelepon"].current.focus1();
+          break;
+
+        case "noTeleponDarurat":
+          refs["noTelepon"].current.focus2();
+          break;
+
+        case "categoryCode":
+          refs["brrCode"].current.focus1();
+          break;
+
+        case "brrCode":
+          refs["brrCode"].current.focus2();
+          break;
+
+        default:
+          refs[errorForm.invalidFieldName].current.focus();
+          break;
+      }
     }
-  }, [refs, errorForm]);
+  }, [errorForm]);
 
   return (
     <div
@@ -121,6 +140,7 @@ const FormPerserta = ({
         label="Email"
         icon={EmailIcon}
         initializeValue={dataPeserta.email}
+        error={errorForm.invalidFieldName == "email"}
       />
       <FormTextField
         // ref={namaKTPRef}
@@ -128,6 +148,7 @@ const FormPerserta = ({
         label="Nama Sesuai KTPs"
         icon={BadgeRoundedIcon}
         initializeValue={dataPeserta.namaKTP}
+        error={errorForm.invalidFieldName == "namaKTP"}
       />
       <FormTextField
         // ref={kotaRef}
@@ -135,6 +156,7 @@ const FormPerserta = ({
         label="Asal Kota"
         icon={PlaceIcon}
         initializeValue={dataPeserta.kota}
+        error={errorForm.invalidFieldName == "kota"}
       />
       <FormTextFieldDouble
         // ref={noTeleponRef}
@@ -144,6 +166,8 @@ const FormPerserta = ({
         label2="No Telepon Darurat"
         initializeValue1={dataPeserta.noTelepon}
         initializeValue2={dataPeserta.noTeleponDarurat}
+        error1={errorForm.invalidFieldName == "noTelepon"}
+        error2={errorForm.invalidFieldName == "noTeleponDarurat"}
       />
       <DropdownMenuField
         // ref={jerseySizeRef}
@@ -152,14 +176,16 @@ const FormPerserta = ({
         icon={SquareFootIcon}
         label="Size Jersey"
         initializeValue={dataPeserta.jerseySizeCode}
+        error={errorForm.invalidFieldName == "jerseySizeCode"}
       />
       <RadioGroupField
         // ref={genderRef}
         ref={refs.genderCode}
-        data={eventData.gender}
+        data={eventData.gender ?? []}
         icon={PersonIcon}
         label="Kelamin"
-        initializeValue={eventData.gender[0].id}
+        initializeValue={dataPeserta.genderCode ?? eventData.gender?.at(0)?.id}
+        error={errorForm.invalidFieldName == "genderCode"}
       />
       {/* <DropdownMenuField
         ref={categoryRef}
@@ -187,6 +213,8 @@ const FormPerserta = ({
         onChange2={_f}
         initializeValue1={dataPeserta.categoryCode}
         initializeValue2={dataPeserta.brrCode}
+        error1={errorForm.invalidFieldName == "categoryCode"}
+        error2={errorForm.invalidFieldName == "brrCode"}
       />
 
       {indexPeserta == 0 ? null : (
@@ -196,9 +224,7 @@ const FormPerserta = ({
             right: "0.5rem",
             bottom: "-1.4rem",
           }}
-          onClick={() => {
-            refs.email.current.focus();
-          }}
+          onClick={onDeletePeserta}
         >
           <DeleteForeverIcon
             style={{

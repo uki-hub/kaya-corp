@@ -7,6 +7,7 @@ import FormPerserta from "./FormPeserta";
 import { useContext, useEffect, useRef, useState } from "react";
 import PesertaContext from "../../../contexts/PesertaContext";
 import EventContext from "../../../contexts/EventContext";
+import DaScroll from "../../../lib/DaScroll";
 
 export default function LandingForm(props) {
   const [errorForm, setErrorForm] = useState({
@@ -14,10 +15,15 @@ export default function LandingForm(props) {
     invalidFieldName: null,
   });
 
+  const actionRef = useRef();
+
   const eventCtx = useContext(EventContext);
   const pesertaCtx = useContext(PesertaContext);
 
-  const tambahPesertaHandler = () => pesertaCtx.onTambahPeserta();
+  const tambahPesertaHandler = () => {
+    pesertaCtx.onTambahPeserta();
+    DaScroll("ticket-form-actions");
+  };
 
   const updateDataPesertaHandler = (indexPeserta, dataPeserta) =>
     pesertaCtx.onUpdatePeserta(indexPeserta, dataPeserta);
@@ -25,54 +31,15 @@ export default function LandingForm(props) {
   const deletePesertaHandler = (indexPeserta) =>
     pesertaCtx.onHapusPeserta(indexPeserta);
 
-  const validateForms = (listPeserta) => {
-    let isValid = true;
-    let invalidIndexPeserta;
-    let invalidFieldName;
-
-    for (let i = 0; i < listPeserta.length; i++) {
-      const peserta = listPeserta[i];
-
-      const pesertaKeys = Object.keys(peserta);
-
-      for (let j = 0; j < pesertaKeys.length; j++) {
-        const key = pesertaKeys[j];
-
-        if (peserta[key]?.toString().trim() == "") {
-          isValid = false;
-          invalidIndexPeserta = i;
-          invalidFieldName = key;
-
-          console.log("break1");
-
-          break;
-        }
-      }
-
-      if (!isValid) {
-        console.log("break2");
-        break;
-      }
-    }
-
-    return isValid
-      ? null
-      : {
-          invalidIndexPeserta,
-          invalidFieldName,
-        };
-  };
-
   const bayarHandler = () => {
     const listPeserta = [...pesertaCtx.listPeserta];
 
-    const invalidForm = validateForms(listPeserta);
-    console.error(invalidForm);
+    const invalidForm = eventCtx.onValidateDataPeserta(listPeserta);
 
     if (!invalidForm) {
       eventCtx.onBayar(listPeserta);
     } else {
-      setErrorForm (invalidForm);
+      setErrorForm(invalidForm);
     }
   };
 
@@ -93,7 +60,7 @@ export default function LandingForm(props) {
             indexPeserta={i}
             dataPeserta={d}
             onEditingComplete={(data) => updateDataPesertaHandler(i, data)}
-            onDeletePeserta={deletePesertaHandler}
+            onDeletePeserta={() => deletePesertaHandler(i)}
             errorForm={errorForm.invalidIndexPeserta == i && errorForm}
           />
         ))}
@@ -118,7 +85,7 @@ export default function LandingForm(props) {
         </div>
       </div>
 
-      <div className="speaker-shap">
+      <div id="ticket-form-actions" ref={actionRef} className="speaker-shap">
         <Image className="shap1" src={img1} alt="" />
         <Image className="shap2" src={img2} alt="" />
         <Image className="shap3" src={img3} alt="" />

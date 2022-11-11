@@ -5,27 +5,37 @@ import {
   RadioGroup,
   Radio,
 } from "@mui/material";
-import React, { useEffect, useImperativeHandle, useState } from "react";
+import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
+import DaScroll from "../../lib/DaScroll";
 
 // data: [{
 //     value: 'p',
 //     label: 'Pria'
 // }]
 const RadioGroupField = React.forwardRef(function _(
-  { data, icon, label, initializeValue },
+  { data, icon, label, initializeValue, error },
   ref
 ) {
-  const [selectedValue, setSelectedValue] = useState();
+  const [selectedValue, setSelectedValue] = useState(0);
+  const [isError, setIsError] = useState(false);
+
+  const radioRef = useRef();
 
   useImperativeHandle(ref, () => {
     return {
       value: selectedValue,
+      focus: () => {
+        // DaScroll(radioRef?.current?.id);
+        radioRef?.current?.focus();
+        setIsError1(true);
+      },
     };
   });
 
   useEffect(() => {
     setSelectedValue(initializeValue);
-  }, [initializeValue]);
+    setIsError(error);
+  }, [initializeValue, error]);
 
   return (
     <div className="row">
@@ -35,7 +45,7 @@ const RadioGroupField = React.forwardRef(function _(
         })}
       </div>
       <div className="col">
-        <FormControl>
+        <FormControl ref={radioRef} error={isError}>
           <FormLabel id="demo-radio-buttons-group-label" className="m-0">
             {label}
           </FormLabel>

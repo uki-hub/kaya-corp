@@ -6,10 +6,10 @@ const _persertaObject = {
   kota: "",
   noTelepon: "",
   noTeleponDarurat: "",
-  jerseySizeCode: "",
-  genderCode: "",
-  categoryCode: "",
-  brrCode: "",
+  jerseySizeCode: null,
+  genderCode: null,
+  categoryCode: null,
+  brrCode: null,
 };
 
 const PesertaContext = React.createContext({

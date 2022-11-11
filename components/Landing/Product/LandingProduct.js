@@ -1,27 +1,21 @@
 import Image from "next/image";
+import { useContext } from "react";
+import EventContext from "../../../contexts/EventContext";
 
-import img_dot from "/public/assets/images/pricing/dot.png";
 import img_pricing from "/public/assets/images/shap/pricing_memphis1.png";
-import img_blog3 from "/public/assets/images/blog/blog3.jpeg";
-import sepeda from "/public/assets/images/pricing/sepeda.jpg";
-import sepatu from "/public/assets/images/pricing/sepatu.jpg";
-
 
 export default function LandingProduct() {
+  const eventCtx = useContext(EventContext);
+
+  const img_product1 = require(`/events/${eventCtx.eventID}/product/sepatu.jpg`);
+  const img_product2 = require(`/events/${eventCtx.eventID}/product/sepeda.jpg`);
+
   return (
-    <section
-      className="ts-pricing gradient"
-      style={{
-        backgroundImage: "url(images / pricing / pricing_img.jpg)",
-      }}
-    >
+    <section className="ts-pricing gradient">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
-            <h2 className="section-title white">
-              {/* <span>BANTENG</span> */}
-              BANTENG CHARITY
-            </h2>
+            <h2 className="section-title white">BANTENG CHARITY</h2>
           </div>
         </div>
 
@@ -30,75 +24,31 @@ export default function LandingProduct() {
             className="col-lg-6 wow fadeInUp"
             data-wow-duration="1.5s"
             data-wow-delay="400ms"
-          >        <div className="post">
+          >
+            {" "}
+            <div className="post">
               <div className="post-media post-image">
                 <a href="#">
-                  <Image src={sepeda} className="img-fluid" alt="" />
+                  <Image src={img_product1} className="img-fluid" alt="" />
                 </a>
               </div>
-              </div>
-              </div>
+            </div>
+          </div>
 
           <div
             className="col-lg-6 wow fadeInUp"
             data-wow-duration="1.5s"
             data-wow-delay="400ms"
-          >        <div className="post">
+          >
+            {" "}
+            <div className="post">
               <div className="post-media post-image">
                 <a href="#">
-                  <Image src={sepatu} className="img-fluid" alt="" />
+                  <Image src={img_product2} className="img-fluid" alt="" />
                 </a>
               </div>
-              </div>
-</div>
-          {/* <div
-            className="col-lg-4 wow fadeInUp"
-            data-wow-duration="1.5s"
-            data-wow-delay="600ms"
-          >
-            <div className="pricing-item">
-              <Image
-                className="pricing-dot"
-                src={img_dot}
-                alt=""
-              />
-              <div className="ts-pricing-box">
-                <span className="big-dot"></span>
-                <div className="ts-pricing-header">
-                  <h2 className="ts-pricing-name">Platinum</h2>
-                  <h3 className="ts-pricing-price">
-                    <span className="currency">$</span>699
-                  </h3>
-                </div>
-                <div className="ts-pricing-progress">
-                  <p className="amount-progres-text">
-                    Available tickets for this price
-                  </p>
-                  <div className="ts-progress">
-                    <div
-                      className="ts-progress-inner"
-                      sstyle={{ width: "50%" }}
-                    ></div>
-                  </div>
-                  <p className="ts-pricing-value">250/500</p>
-                </div>
-                <div className="promotional-code">
-                  <p className="promo-code-text">Enter Promotional Code</p>
-                  <a href="#" className="btn pricing-btn">
-                    Buy Ticket
-                  </a>
-                  <p className="vate-text">All prices exclude 25% VAT</p>
-                </div>
-              </div>
-
-              <Image
-                className="pricing-dot1"
-                src={img_dot}
-                alt=""
-              />
             </div>
           </div>
-        </div> */}
         </div>
       </div>
 
@@ -107,11 +57,7 @@ export default function LandingProduct() {
         data-wow-duration="1.5s"
         data-wow-delay="400ms"
       >
-        <Image
-          className="shap2"
-          src={img_pricing}
-          alt=""
-        />
+        <Image className="shap2" src={img_pricing} alt="" />
       </div>
     </section>
   );

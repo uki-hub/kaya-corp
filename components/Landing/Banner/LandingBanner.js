@@ -1,14 +1,17 @@
-import Image from "next/image";
-
-// import img from "/public/assets/images/hero_area/banner_img.png";
+import { useContext } from "react";
+import EventContext from "../../../contexts/EventContext";
 
 export default function LandingBanner() {
+  const eventCtx = useContext(EventContext);
+
+  const img = require(`/events/${eventCtx.eventID}/background/main_background.jpg`);
+
   return (
     <section className="hero-area">
       <div
         className="banner-item"
         style={{
-          backgroundImage: "url(/assets/images/hero_area/banner_bg.jpg)",
+          backgroundImage: `url("${img.default.src}")`,
         }}
       >
         <div className="container">

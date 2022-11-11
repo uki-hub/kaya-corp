@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Router from "next/router";
 
 import LandingHeader from "../../components/Landing/Header/LandingHeader";
 import LandingBanner from "../../components/Landing/Banner/LandingBanner";
@@ -21,7 +21,7 @@ export default function EventPage({ eventID, initData }) {
       <PesertaContextProvider>
         <BundleScript />
         <div className="body-inner">
-          <LandingHeader />
+          {/* <LandingHeader /> */}
           <LandingBanner />
           {/* <LandingEventSchedule /> */}
           <LandingForm />
@@ -38,9 +38,21 @@ export default function EventPage({ eventID, initData }) {
 }
 
 export async function getServerSideProps(context) {
-  const response = await axios.get("http://localhost:3000/api/hello");
+  const eventId = context.query["eventid"];
+
+  const response = await axios.post(
+    "https://api.bantengseries.com//api/ticket/initialize.php",
+    {
+      idevent: eventId,
+    }
+  );
+
+  if (!response.data && response.data.length == 0)
+    Router.push({
+      pathname: "/",
+    });
 
   return {
-    props: { eventID: context.query["eventid"], initData: response.data },
+    props: { eventID: eventId, initData: response.data[0] },
   };
 }

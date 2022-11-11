@@ -1,5 +1,6 @@
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
+import DaScroll from "../../lib/DaScroll";
 
 // data: [{
 //     value: 'p',
@@ -15,12 +16,20 @@ const DropdownMenuFieldDouble = React.forwardRef(function _(
     onChange2,
     initializeValue1,
     initializeValue2,
+    error1,
+    error2,
     icon,
   },
   ref
 ) {
-  const [selectedValue1, setSelectedValue1] = useState();
-  const [selectedValue2, setSelectedValue2] = useState();
+  const [selectedValue1, setSelectedValue1] = useState("");
+  const [selectedValue2, setSelectedValue2] = useState("");
+
+  const [isError1, setIsError1] = useState(false);
+  const [isError2, setIsError2] = useState(false);
+
+  const selectRef1 = useRef();
+  const selectRef2 = useRef();
 
   const onChangeHandler1 = (value) => {
     setSelectedValue1(value);
@@ -36,13 +45,25 @@ const DropdownMenuFieldDouble = React.forwardRef(function _(
     return {
       value1: selectedValue1,
       value2: selectedValue2,
+      focus1: () => {
+        // DaScroll(selectRef1?.current?.id);
+        selectRef1?.current?.focus();
+        setIsError1(true);
+      },
+      focus2: () => {
+        // DaScroll(selectRef2?.current?.id);
+        selectRef2?.current?.focus();
+        setIsError2(true);
+      },
     };
   });
 
   useEffect(() => {
     setSelectedValue1(initializeValue1);
     setSelectedValue2(initializeValue2);
-  }, [initializeValue1, initializeValue2]);
+    setIsError1(error1);
+    setIsError2(error2);
+  }, [initializeValue1, initializeValue2, error1, error2]);
 
   // if (!data) return null;
 
@@ -54,7 +75,7 @@ const DropdownMenuFieldDouble = React.forwardRef(function _(
         })}
       </div>
       <div className="col pr-1">
-        <FormControl fullWidth>
+        <FormControl ref={selectRef1} fullWidth error={isError1}>
           <InputLabel id="demo-simple-select-label">{label1}</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -76,7 +97,7 @@ const DropdownMenuFieldDouble = React.forwardRef(function _(
         </FormControl>
       </div>
       <div className="col pl-1">
-        <FormControl fullWidth>
+        <FormControl ref={selectRef1} fullWidth error={isError2}>
           <InputLabel id="demo-simple-select-label">{label2}</InputLabel>
           <Select
             labelId="demo-simple-select-label"

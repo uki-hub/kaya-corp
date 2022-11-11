@@ -3,10 +3,11 @@ import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import DaScroll, { scrollTo } from "../../lib/DaScroll";
 
 const FormTextField = React.forwardRef(function _(
-  { type, icon, label, style, initializeValue },
+  { type, icon, label, style, initializeValue, error },
   ref
 ) {
   const [value, setValue] = useState(initializeValue);
+  const [isError, setIsError] = useState(false);
 
   const textFieldRef = useRef();
 
@@ -18,16 +19,17 @@ const FormTextField = React.forwardRef(function _(
     return {
       value: value,
       focus: () => {
-        DaScroll(textFieldRef?.current?.id, () =>
-          textFieldRef?.current?.focus()
-        );
+        // DaScroll(textFieldRef?.current?.id);
+        textFieldRef?.current?.focus();
+        setIsError(true);
       },
     };
   });
 
   useEffect(() => {
     setValue(initializeValue);
-  }, [initializeValue]);
+    setIsError(error);
+  }, [initializeValue, error]);
 
   return (
     <div className="row mb-3 align-items-center" style={style}>
@@ -44,6 +46,7 @@ const FormTextField = React.forwardRef(function _(
           label={label}
           variant="outlined"
           fullWidth
+          error={isError}
           onChange={textFieldChangeHandler}
         />
       </div>

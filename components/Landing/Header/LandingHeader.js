@@ -1,4 +1,4 @@
-import img from "/public/assets/images/logos/logo.png";
+// import img from "/public/assets/images/logos/logo.png";
 
 import Image from "next/image";
 
