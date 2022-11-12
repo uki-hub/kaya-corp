@@ -20,11 +20,10 @@ export const EventContextProvider = ({ eventID, eventData, children }) => {
 
     const data = await sendPembayaranEvent(payload);
 
+    // console.log('============================================================================================')
+    // console.log(data);
 
-    Router.push({
-      pathname: "/thankyou",
-      query: { id: JSON.stringify(payload) },
-    });
+    window.location = data.redirect_url;
   };
 
   return (
