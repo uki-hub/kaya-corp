@@ -25,16 +25,20 @@ export default function LandingForm(props) {
 
     let t = setTimeout(() => {
       DaScroll("ticket-forms");
-    }, 150);
-
-    
+    }, 100);
   };
 
   const updateDataPesertaHandler = (indexPeserta, dataPeserta) =>
     pesertaCtx.onUpdatePeserta(indexPeserta, dataPeserta);
 
-  const deletePesertaHandler = (indexPeserta) =>
+  const deletePesertaHandler = (indexPeserta) => {
     pesertaCtx.onHapusPeserta(indexPeserta);
+
+    let t = setTimeout(() => {
+      DaScroll("ticket-forms");
+    }, 100);
+  }
+  
 
   const bayarHandler = () => {
     const listPeserta = [...pesertaCtx.listPeserta];

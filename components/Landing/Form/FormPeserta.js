@@ -2,6 +2,7 @@ import FormTextField from "../../UI/FormTextField";
 import FormTextFieldDouble from "../../UI/FormTextFieldDouble";
 import DropdownMenuField from "../../UI/DropdownMenuField";
 import RadioGroupField from "../../UI/RadioGroupField";
+import CircleContainer from "../../UI/CircleContainer";
 
 import {
   Email as EmailIcon,
@@ -129,8 +130,41 @@ const FormPerserta = ({
       style={{ position: "relative", padding: "40px" }}
       onBlur={formBlurHandler}
     >
-      <div className="row">
-        <h3 style={{ color: "darkslategrey" }}>Peserta {indexPeserta + 1}</h3>
+      <div className="row align-items-center mb-3">
+        <label
+          className="m-0 mr-2"
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            color: "darkslategrey",
+            marginRight: "0.5rem",
+          }}
+        >
+          Peserta {indexPeserta + 1}
+        </label>
+        {indexPeserta == 0 ? null : (
+          <div
+            style={{
+              backgroundColor: "red",
+              width: "1.5rem",
+              height: "1.5rem",
+              borderRadius: "5px",
+            }}
+            onClick={onDeletePeserta}
+          >
+            <div
+              style={{
+                // width: "1rem",
+                // height: "5px",
+                background: "white",
+                margin: "auto",
+                borderRadius: "1px",
+                marginTop: "0.6rem",
+              }}
+            />
+            <span>X</span>
+          </div>
+        )}
       </div>
       <FormTextField
         // ref={emailRef}
@@ -216,7 +250,7 @@ const FormPerserta = ({
         error2={errorForm.invalidFieldName == "brrCode"}
       />
 
-      {indexPeserta == 0 ? null : (
+      {/* {indexPeserta == 0 ? null : (
         <div
           style={{
             position: "absolute",
@@ -232,7 +266,7 @@ const FormPerserta = ({
             }}
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 };
