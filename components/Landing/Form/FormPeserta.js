@@ -154,15 +154,14 @@ const FormPerserta = ({
           >
             <div
               style={{
-                // width: "1rem",
-                // height: "5px",
+                width: "1rem",
+                height: "5px",
                 background: "white",
                 margin: "auto",
                 borderRadius: "1px",
                 marginTop: "0.6rem",
               }}
             />
-            <span>X</span>
           </div>
         )}
       </div>
