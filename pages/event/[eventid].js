@@ -13,9 +13,14 @@ import { PesertaContextProvider } from "../../contexts/PesertaContext";
 import axios from "axios";
 import { EventContextProvider } from "../../contexts/EventContext";
 import NoEvent from "../../components/Landing/NoEvent/NoEvent";
-import { getEventInitializeData } from "../../repositories/EventRepository";
+import {
+  getEventInitializeData,
+  sendPembayaranEvent,
+} from "../../repositories/EventRepository";
 
-export default function EventPage({ eventID, initData }) {
+export default function EventPage({ eventID, initData, d }) {
+  if (d) return <>{d}</>;
+
   if (!initData) return <NoEvent />;
 
   return (
@@ -40,6 +45,18 @@ export default function EventPage({ eventID, initData }) {
 }
 
 export async function getServerSideProps(context) {
+  const form = context.query["form"];
+
+  if (form != null) {
+    const res = await sendPembayaranEvent(form);
+
+    return {
+      props: {
+        d: res,
+      },
+    };
+  }
+
   const eventId = context.query["eventid"];
 
   const data = await getEventInitializeData(eventId);

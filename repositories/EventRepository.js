@@ -12,10 +12,12 @@ const getEventInitializeData = async (eventId) => {
 };
 
 const sendPembayaranEvent = async (payload) => {
-  const response = await axios.post(
-    "https://api.bantengseries.com//api/ticket/save.php",
-    payload
-  );
+  const response = await axios.post("/api/save", payload);
+
+  // console.log(
+  //   "================================================================"
+  // );
+  // console.log(response);
 
   return response.data;
 };
