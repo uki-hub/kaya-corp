@@ -177,7 +177,7 @@ const FormPerserta = ({
       <FormTextField
         // ref={namaKTPRef}
         ref={refs.namaKTP}
-        label="Nama Sesuai KTPs"
+        label="Nama Sesuai KTP"
         icon={BadgeRoundedIcon}
         initializeValue={dataPeserta.namaKTP}
         error={errorForm.invalidFieldName == "namaKTP"}
