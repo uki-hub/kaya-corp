@@ -38,13 +38,7 @@ const validateDataPeserta = (listPeserta) => {
     if (!isValid) break;
   }
 
-  console.log(
-    "======================================================================="
-  );
-  console.log({
-    invalidIndexPeserta,
-    invalidFieldName,
-  });
+
 
   return isValid
     ? null

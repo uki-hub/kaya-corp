@@ -1,4 +1,9 @@
+import { width } from "@mui/system";
 import { useRouter } from "next/router";
+import Lottie from "react-lottie";
+import checkAnimation from "/public/assets/lotties/check.json";
+import classes from "./thankyou.module.css";
+import Link from "next/link";
 
 const ThankYou = (props) => {
   const router = useRouter();
@@ -6,28 +11,30 @@ const ThankYou = (props) => {
   const transactionId = router.query["transactionId"];
 
   return (
-    <>
-      <header class="site-header" id="header">
-        <h1 class="site-header__title" data-lead-id="site-header-title">
-          THANK YOU!
-        </h1>
-      </header>
-
-      <div class="main-content">
-        <i class="fa fa-check main-content__checkmark" id="checkmark"></i>
-        <p class="main-content__body" data-lead-id="main-content-body">
-          Thanks a bunch for filling that out. It means a lot to us, just like
-          you do! We really appreciate you giving us a moment of your time
-          today. Thanks for being you.
-        </p>
+    <div className={classes.parent}>
+      <div className={classes.child}>
+        <h1 style={{     marginBottom: '2rem', color: "white" }}>Thank You</h1>
+        <Lottie
+          options={{
+            loop: false,
+            autoplay: true,
+            animationData: checkAnimation,
+            rendererSettings: {
+              className: "check-animation",
+            },
+          }}
+          height={250}
+          width={250}
+        />
+        <div style={{ whiteSpace: "nowrap", color: "white" }}>
+          terima kasih untuk pembelian tiket event
+        </div>
+        <br />
+        <Link className={"btn " + classes.goback} href={"/"}>
+          HOME
+        </Link>
       </div>
-
-      <footer class="site-footer" id="footer">
-        <p class="site- " id="fineprint">
-          Copyright ©2014 | All Rights Reserved
-        </p>
-      </footer>
-    </>
+    </div>
   );
 };
 

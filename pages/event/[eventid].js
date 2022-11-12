@@ -30,7 +30,7 @@ export default function EventPage({ eventID, initData }) {
           {/* <LandingSchedule /> */}
           <LandingProduct />
           <LandingNews />
-          <LandingSponsor />
+          {/* <LandingSponsor /> */}
           <LandingMap />
           <LandingFooter />
         </div>

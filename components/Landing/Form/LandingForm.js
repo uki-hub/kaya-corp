@@ -22,7 +22,12 @@ export default function LandingForm(props) {
 
   const tambahPesertaHandler = () => {
     pesertaCtx.onTambahPeserta();
-    DaScroll("ticket-form-actions");
+
+    let t = setTimeout(() => {
+      DaScroll("ticket-forms");
+    }, 150);
+
+    
   };
 
   const updateDataPesertaHandler = (indexPeserta, dataPeserta) =>
@@ -51,7 +56,7 @@ export default function LandingForm(props) {
         backgroundImage: "url(/assets/images/speakers/speaker_bg.png)",
       }}
     >
-      <div id="ticket-form-actions" className="container">
+      <div id="ticket-form" className="container">
         <h1>Form Registration</h1>
         <br />
         {pesertaCtx.listPeserta.map((d, i) => (
@@ -65,7 +70,7 @@ export default function LandingForm(props) {
           />
         ))}
 
-        <div className="row m-0">
+        <div id="ticket-forms" className="row m-0">
           <button
             className="btn col-6"
             style={{ backgroundColor: "yellowgreen" }}

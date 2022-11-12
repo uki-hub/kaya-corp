@@ -33,9 +33,7 @@ export default function LandingNews(props) {
           >
             <div className="post">
               <div className="post-media post-image">
-                <a href="#">
                   <Image src={img_blog1} className="img-fluid" alt="" />
-                </a>
               </div>
 
               <div className="post-body">
@@ -48,7 +46,7 @@ export default function LandingNews(props) {
                 </div>
                 <div className="entry-header">
                   <h2 className="entry-title">
-                    <a href="#">Banteng Fondo Ride</a>
+                    Banteng Fondo Ride
                   </h2>
                 </div>
 
@@ -89,9 +87,7 @@ export default function LandingNews(props) {
           >
             <div className="post">
               <div className="post-media post-image">
-                <a href="#">
                   <Image src={img_blog2} className="img-fluid" alt="" />
-                </a>
               </div>
 
               <div className="post-body">
@@ -104,7 +100,7 @@ export default function LandingNews(props) {
                 </div>
                 <div className="entry-header">
                   <h2 className="entry-title">
-                    <a href="#">Banteng Night Run</a>
+                    Banteng Night Run
                   </h2>
                 </div>
 
@@ -145,9 +141,7 @@ export default function LandingNews(props) {
           >
             <div className="post">
               <div className="post-media post-image">
-                <a href="#">
                   <Image src={img_blog3} className="img-fluid" alt="" />
-                </a>
               </div>
 
               <div className="post-body">
@@ -160,7 +154,7 @@ export default function LandingNews(props) {
                 </div>
                 <div className="entry-header">
                   <h2 className="entry-title">
-                    <a href="#">Banteng Fun Ride</a>
+                    Banteng Fun Ride
                   </h2>
                 </div>
 

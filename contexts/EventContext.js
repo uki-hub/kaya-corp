@@ -20,8 +20,6 @@ export const EventContextProvider = ({ eventID, eventData, children }) => {
 
     const data = await sendPembayaranEvent(payload);
 
-    console.log("===================================================");
-    console.log(data);
 
     Router.push({
       pathname: "/thankyou",

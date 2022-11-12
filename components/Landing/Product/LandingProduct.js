@@ -28,9 +28,7 @@ export default function LandingProduct() {
             {" "}
             <div className="post">
               <div className="post-media post-image">
-                <a href="#">
                   <Image src={img_product1} className="img-fluid" alt="" />
-                </a>
               </div>
             </div>
           </div>
@@ -43,9 +41,7 @@ export default function LandingProduct() {
             {" "}
             <div className="post">
               <div className="post-media post-image">
-                <a href="#">
                   <Image src={img_product2} className="img-fluid" alt="" />
-                </a>
               </div>
             </div>
           </div>

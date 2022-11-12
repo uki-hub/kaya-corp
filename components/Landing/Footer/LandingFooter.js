@@ -20,7 +20,7 @@ export default function LandingFooter(props) {
                   <span>Hurry up!</span>
                   Book your Seat
                 </h2>
-                <a href="#" className="btn">
+                <a href="#ticket-form" className="btn">
                   Buy Ticket
                 </a>
               </div>
