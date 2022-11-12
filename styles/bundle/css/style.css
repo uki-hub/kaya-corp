@@ -3861,3 +3861,7 @@ faq-item
   font-weight: 700;
   margin-top: 2px;
 }
+
+.buy-ticket:hover {
+  /* color: blue !important; */
+}

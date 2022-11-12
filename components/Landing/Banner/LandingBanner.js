@@ -14,38 +14,40 @@ export default function LandingBanner() {
           backgroundImage: `url("${img.default.src}")`,
         }}
       >
-        <a href="#ticket-form" className="buy-ticket">
+        <div
+          style={{
+            position: "absolute",
+            bottom: "5rem",
+            right: 0,
+            left: "0",
+            textAlign: "center",
+          }}
+        >
           <div
+            href="#ticket-form"
             style={{
-              position: "absolute",
-              bottom: "5rem",
-              right: 0,
-              left: "0",
-              textAlign: "center",
+              backgroundImage: 'url("/assets/images/splash.png")',
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+              backgroundPosition: "center center",
             }}
           >
-            <div
-              href="#ticket-form"
-              style={{
-                backgroundImage: 'url("/assets/images/splash.png")',
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "center center",
-              }}
-            >
+            <a href="#ticket-form">
               <label
+                className="buy-ticket"
                 style={{
                   fontSize: "2rem",
                   height: "6rem",
                   lineHeight: "6.5rem",
                   color: "ghostwhite",
+                  cursor: "pointer",
                 }}
               >
                 Buy Ticket
               </label>
-            </div>
+            </a>
           </div>
-        </a>
+        </div>
       </div>
 
       {/* <div className="tiles"></div> */}
