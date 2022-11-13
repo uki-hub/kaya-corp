@@ -122,7 +122,7 @@ const FormPerserta = ({
           break;
       }
     }
-  }, [errorForm]);
+  }, [refs, errorForm, dataPeserta.categoryCode]);
 
   return (
     <div

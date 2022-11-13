@@ -6,15 +6,14 @@ import classes from "./thankyou.module.css";
 import Link from "next/link";
 import { getConfirmation } from "../repositories/EventRepository";
 
-const ThankYou = ({ data }) => {
-  const router = useRouter();
-
+const ThankYou = (props) => {
   const goHomeHandler = () => (window.location.href = "/event/brr");
+  
   return (
     <>
       <div className={classes.parent}>
         <div className={classes.child}>
-          <h1 style={{ marginBottom: "2rem", color: "white" }}>Thank You</h1>
+          <h1 style={{ marginBottom: "3rem", color: "white" }}>Thank You</h1>
           <Lottie
             options={{
               loop: false,
@@ -42,11 +41,11 @@ const ThankYou = ({ data }) => {
 
 export default ThankYou;
 
-export async function getStaticProps(context) {
-  return {
-    props: {},
-  };
-}
+// export async function getStaticProps(context) {
+//   return {
+//     props: {},
+//   };
+// }
 
 // export async function getServerSideProps(context) {
 //   const orderId = context.query["order_id"];

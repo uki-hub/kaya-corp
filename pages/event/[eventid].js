@@ -22,12 +22,11 @@ export default function EventPage({ eventID, initData }) {
     setIsLoaded(true);
   }, [isLoaded]);
 
-  if (!initData) return <NoEvent />;
+  if (!initData) window.location.href = "/event/brr";
 
   return (
     <EventContextProvider eventID={eventID} eventData={initData}>
       <PesertaContextProvider>
-        
         <div className="body-inner">
           {/* <LandingHeader /> */}
           <LandingBanner />
@@ -54,6 +53,10 @@ export async function getServerSideProps(context) {
   if (data == null || data.length == 0)
     return {
       props: {},
+      redirect: {
+        permanent: true,
+        destination: "/event/brr",
+      },
     };
 
   return {
