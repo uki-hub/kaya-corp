@@ -10,23 +10,24 @@ import LandingMap from "../../components/Landing/Map/LandingMap";
 import LandingFooter from "../../components/Landing/Footer/LandingFooter";
 import BundleScript from "../../components/Landing/BundleScript";
 import { PesertaContextProvider } from "../../contexts/PesertaContext";
-import axios from "axios";
 import { EventContextProvider } from "../../contexts/EventContext";
 import NoEvent from "../../components/Landing/NoEvent/NoEvent";
-import {
-  getEventInitializeData,
-  sendPembayaranEvent,
-} from "../../repositories/EventRepository";
+import { getEventInitializeData } from "../../repositories/EventRepository";
+import { useEffect, useState } from "react";
 
-export default function EventPage({ eventID, initData, d }) {
-  if (d) return <>{d}</>;
+export default function EventPage({ eventID, initData }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, [isLoaded]);
 
   if (!initData) return <NoEvent />;
 
   return (
     <EventContextProvider eventID={eventID} eventData={initData}>
       <PesertaContextProvider>
-        <BundleScript />
+        
         <div className="body-inner">
           {/* <LandingHeader /> */}
           <LandingBanner />
@@ -39,12 +40,13 @@ export default function EventPage({ eventID, initData, d }) {
           <LandingMap />
           <LandingFooter />
         </div>
+        {isLoaded && <BundleScript />}
       </PesertaContextProvider>
     </EventContextProvider>
   );
 }
 
-export async function getServerSideProps(context) { 
+export async function getServerSideProps(context) {
   const eventId = context.query["eventid"];
 
   const data = await getEventInitializeData(eventId);

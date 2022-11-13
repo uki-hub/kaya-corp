@@ -694,7 +694,8 @@ img.pull-right {
 }
 
 .banner-item {
-  min-height: 850px;
+  /* min-height: 950px; */
+  min-height: 58rem;
   color: #fff;
   background-repeat: no-repeat;
   background-size: cover;

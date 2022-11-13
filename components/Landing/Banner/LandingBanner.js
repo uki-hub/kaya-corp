@@ -17,7 +17,7 @@ export default function LandingBanner() {
         <div
           style={{
             position: "absolute",
-            bottom: "5rem",
+            bottom: "6rem",
             right: 0,
             left: "0",
             textAlign: "center",
