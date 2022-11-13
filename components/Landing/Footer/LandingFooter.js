@@ -18,7 +18,7 @@ export default function LandingFooter(props) {
               <div className="book-seat-content text-center mb-100">
                 <h2 className="section-title white">
                   <span>Hurry up!</span>
-                  Book your Seat
+                  Book your Ticket
                 </h2>
                 <a href="#ticket-form" className="btn">
                   Buy Ticket

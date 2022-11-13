@@ -38,8 +38,6 @@ const validateDataPeserta = (listPeserta) => {
     if (!isValid) break;
   }
 
-
-
   return isValid
     ? null
     : {
@@ -77,16 +75,30 @@ const buildPayload = (eventData, listDataPeserta) => {
     pax: listDataPeserta.length,
     amount: _calculatePrice(eventData.brrCategory, listBRR),
     participant: listDataPeserta.map((d) => {
+      // console.log(eventData.jerseySize)
+      // console.log(d.jerseySizeCode)
+
+      const jerseySize = eventData.jerseySize.find(
+        (f) => f.id == d.jerseySizeCode
+      ).value;
+      const gender = eventData.gender.find((f) => f.id == d.genderCode).value;
+
+      const _categories = eventData.brrCategory.find(
+        (f) => f.idBrrCategory == d.categoryCode
+      );
+      const category = _categories.nmCategory;
+      const brr = _categories.brr.find((f) => f.idBrr == d.brrCode).nmBrr;
+
       return {
         email: d.email,
         nmParticipant: d.namaKTP,
         city: d.kota,
         phone: d.noTelepon,
         emergPhone: d.noTeleponDarurat,
-        jerseySize: d.jerseySizeCode,
-        gender: d.genderCode,
-        category: d.categoryCode,
-        brr: d.brrCode,
+        jerseySize: jerseySize,
+        gender: gender,
+        category: category,
+        brr: brr,
       };
     }),
   };

@@ -74,7 +74,7 @@ const FormTextFieldDouble = React.forwardRef(function _(
           label={label1}
           variant="outlined"
           fullWidth
-          placeholder="12345678"
+          placeholder="8121112223"
           error={isError1}
           InputProps={{
             startAdornment: (
@@ -97,7 +97,7 @@ const FormTextFieldDouble = React.forwardRef(function _(
           label={label2}
           variant="outlined"
           fullWidth
-          placeholder="12345678"
+          placeholder="8121112223"
           error={isError2}
           InputProps={{
             maxLength: 12,

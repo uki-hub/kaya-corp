@@ -7,6 +7,9 @@ import Link from "next/link";
 import { getConfirmation } from "../repositories/EventRepository";
 
 const ThankYou = ({ data }) => {
+  const router = useRouter();
+
+  const goHomeHandler = () => (window.location.href = "/event/brr");
   return (
     <>
       <div className={classes.parent}>
@@ -28,14 +31,10 @@ const ThankYou = ({ data }) => {
             terima kasih untuk pembelian tiket event
           </div>
           <br />
-          <Link className={"btn " + classes.goback} href={`/event/brr`}>
-            {/* <Link className={"btn " + classes.goback} href={`/event/${data.idEvent}`}> */}
+          <div className={"btn " + classes.goback} onClick={goHomeHandler}>
             HOME
-          </Link>
+          </div>
         </div>
-        {/* <div style={{ height: 600, width: 400 }}>
-          <InvoiceCard />
-        </div> */}
       </div>
     </>
   );
@@ -43,14 +42,20 @@ const ThankYou = ({ data }) => {
 
 export default ThankYou;
 
-export async function getServerSideProps(context) {
-  const orderId = context.query["order_id"];
-
-  const data = await getConfirmation(orderId);
-
+export async function getStaticProps(context) {
   return {
-    props: {
-      data: data,
-    },
+    props: {},
   };
 }
+
+// export async function getServerSideProps(context) {
+//   const orderId = context.query["order_id"];
+
+//   const data = await getConfirmation(orderId);
+
+//   return {
+//     props: {
+//       data: data,
+//     },
+//   };
+// }
