@@ -44,19 +44,7 @@ export default function EventPage({ eventID, initData, d }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const form = context.query["form"];
-
-  if (form != null) {
-    const res = await sendPembayaranEvent(form);
-
-    return {
-      props: {
-        d: res,
-      },
-    };
-  }
-
+export async function getServerSideProps(context) { 
   const eventId = context.query["eventid"];
 
   const data = await getEventInitializeData(eventId);

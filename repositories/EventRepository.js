@@ -22,4 +22,20 @@ const sendPembayaranEvent = async (payload) => {
   return response.data;
 };
 
-export { getEventInitializeData, sendPembayaranEvent };
+const getConfirmation = async (transactionId) => {
+  const response = await axios.post(
+    "https://api.bantengseries.com/api/ticket/confirmation.php",
+    {
+      transactionId: transactionId,
+    }
+  );
+
+  console.log(
+    "================================================================"
+  );
+  console.log(response);
+
+  return response.data;
+};
+
+export { getEventInitializeData, sendPembayaranEvent, getConfirmation };
