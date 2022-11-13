@@ -61,9 +61,9 @@ export default function LandingFooter(props) {
         </div>
       </footer>
 
-      <div className="BackTo" style={{ display: "none" }}>
+      {/* <div className="BackTo" style={{ display: "none" }}>
         <a href="#" className="fa fa-angle-up" aria-hidden="true"></a>
-      </div>
+      </div> */}
     </div>
   );
 }

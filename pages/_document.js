@@ -18,6 +18,11 @@ export default class MyDocument extends Document {
           />
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
           {this.props.emotionStyleTags}
+          <script
+            type="text/javascript"
+            src={"/assets/js/tawk.js"}
+            defer
+          />
         </Head>
         <body className="p-0" style={{ overflowX: "hidden" }}>
           <Main />

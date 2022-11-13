@@ -213,20 +213,20 @@ jQuery(function ($) {
   /*  Back to top
    /* ----------------------------------------------------------- */
 
-  $(window).on("scroll", function () {
-    if ($(window).scrollTop() > $(window).height()) {
-      $(".BackTo").fadeIn("slow");
-    } else {
-      $(".BackTo").fadeOut("slow");
-    }
-  });
-  $("body, html").on("click", ".BackTo", function (e) {
-    e.preventDefault();
-    $("html, body").animate(
-      {
-        scrollTop: 0,
-      },
-      800
-    );
-  });
+  // $(window).on("scroll", function () {
+  //   if ($(window).scrollTop() > $(window).height()) {
+  //     $(".BackTo").fadeIn("slow");
+  //   } else {
+  //     $(".BackTo").fadeOut("slow");
+  //   }
+  // });
+  // $("body, html").on("click", ".BackTo", function (e) {
+  //   e.preventDefault();
+  //   $("html, body").animate(
+  //     {
+  //       scrollTop: 0,
+  //     },
+  //     800
+  //   );
+  // });
 });
