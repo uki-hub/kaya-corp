@@ -1,5 +1,3 @@
-import classes from "./Invoice.module.css";
-
 const InvoiceCard = (props) => {
   return <div>
     <h1>Invoice</h1>

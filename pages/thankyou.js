@@ -5,7 +5,6 @@ import checkAnimation from "/public/assets/lotties/check.json";
 import classes from "./thankyou.module.css";
 import Link from "next/link";
 import { getConfirmation } from "../repositories/EventRepository";
-import InvoiceCard from "../components/Invoice/Invoice";
 
 const ThankYou = ({ data }) => {
   return (
