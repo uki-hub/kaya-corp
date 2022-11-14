@@ -1,6 +1,6 @@
 import { width } from "@mui/system";
 import { useRouter } from "next/router";
-import Lottie from "react-lottie";
+// import Lottie from "react-lottie";
 import checkAnimation from "/public/assets/lotties/check.json";
 import classes from "./thankyou.module.css";
 import Link from "next/link";
@@ -14,7 +14,7 @@ const ThankYou = (props) => {
       <div className={classes.parent}>
         <div className={classes.child}>
           <h1 style={{ marginBottom: "3rem", color: "white" }}>Thank You</h1>
-          <Lottie
+          {/* <Lottie
             options={{
               loop: false,
               autoplay: true,
@@ -25,7 +25,7 @@ const ThankYou = (props) => {
             }}
             height={250}
             width={250}
-          />
+          /> */}
           <div style={{ whiteSpace: "nowrap", color: "white" }}>
             terima kasih untuk pembelian tiket event
           </div>
@@ -41,11 +41,11 @@ const ThankYou = (props) => {
 
 export default ThankYou;
 
-// export async function getStaticProps(context) {
-//   return {
-//     props: {},
-//   };
-// }
+export async function getStaticProps(context) {
+  return {
+    props: {},
+  };
+}
 
 // export async function getServerSideProps(context) {
 //   const orderId = context.query["order_id"];

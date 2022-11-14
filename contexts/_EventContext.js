@@ -86,8 +86,11 @@ const buildPayload = (eventData, listDataPeserta) => {
       const _categories = eventData.brrCategory.find(
         (f) => f.idBrrCategory == d.categoryCode
       );
+      const _brr = _categories.brr.find((f) => f.idBrr == d.brrCode);
+
       const category = _categories.nmCategory;
-      const brr = _categories.brr.find((f) => f.idBrr == d.brrCode).nmBrr;
+      const brr = _brr.nmBrr;
+      const price = _brr.price;
 
       return {
         email: d.email,
@@ -99,6 +102,7 @@ const buildPayload = (eventData, listDataPeserta) => {
         gender: gender,
         category: category,
         brr: brr,
+        price: price,
       };
     }),
   };
