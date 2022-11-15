@@ -5,6 +5,13 @@ const getEventInitializeData = async (eventId) => {
     "https://api.bantengseries.com//api/ticket/initialize.php",
     {
       idevent: eventId,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "Axios 0.21.1",
+        "Access-Control-Allow-Origin": "*",
+      },
     }
   );
 
@@ -12,7 +19,13 @@ const getEventInitializeData = async (eventId) => {
 };
 
 const sendPembayaranEvent = async (payload) => {
-  const response = await axios.post("/api/save", payload);
+  const response = await axios.post("/api/save", payload, {
+    headers: {
+      "Content-Type": "application/json",
+      "User-Agent": "Axios 0.21.1",
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
 
   // console.log(
   //   "================================================================"
@@ -22,20 +35,20 @@ const sendPembayaranEvent = async (payload) => {
   return response.data;
 };
 
-const getConfirmation = async (transactionId) => {
-  const response = await axios.post(
-    "https://api.bantengseries.com/api/ticket/confirmation.php",
-    {
-      transactionId: transactionId,
-    }
-  );
+// const getConfirmation = async (transactionId) => {
+//   const response = await axios.post(
+//     "https://api.bantengseries.com/api/ticket/confirmation.php",
+//     {
+//       transactionId: transactionId,
+//     }
+//   );
 
-  console.log(
-    "================================================================"
-  );
-  console.log(response);
+//   console.log(
+//     "================================================================"
+//   );
+//   console.log(response);
 
-  return response.data;
-};
+//   return response.data;
+// };
 
-export { getEventInitializeData, sendPembayaranEvent, getConfirmation };
+export { getEventInitializeData, sendPembayaranEvent };

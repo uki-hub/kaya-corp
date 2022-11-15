@@ -10,7 +10,14 @@ export default async function handler(req, res) {
 
   const response = await axios.post(
     "https://api.bantengseries.com//api/ticket/save.php",
-    req.body
+    req.body,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "Axios 0.21.1",
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
   );
 
   // console.log(

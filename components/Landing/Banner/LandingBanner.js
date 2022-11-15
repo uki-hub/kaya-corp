@@ -9,9 +9,14 @@ export default function LandingBanner() {
   return (
     <section className="hero-area">
       <div
-        className="banner-item"
+        // className="banner-item"
         style={{
           backgroundImage: `url("${img.default.src}")`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          // backgroundPosition: 'center center',
+          height: '100vh',
+          width: '100wh',
         }}
       >
         <div

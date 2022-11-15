@@ -48,7 +48,15 @@ export default function EventPage({ eventID, initData }) {
 export async function getServerSideProps(context) {
   const eventId = context.query["eventid"];
 
-  const data = await getEventInitializeData(eventId);
+  let data;
+
+  try {
+    data = await getEventInitializeData(eventId);
+  } catch (error) {
+    console.log(error);
+  }
+
+  console.log(data);
 
   if (data == null || data.length == 0)
     return {
@@ -63,3 +71,23 @@ export async function getServerSideProps(context) {
     props: { eventID: eventId, initData: data[0] },
   };
 }
+
+// export async function getStaticPaths() {
+//   return {
+//     paths: [{ params: { eventid: "brr" } }],
+//     fallback: "blocking",
+//   };
+// }
+
+// export async function getStaticProps({params }) {
+//   const eventId = params.eventid;
+
+//   const data = await getEventInitializeData(eventId);
+
+//   return {
+//     props: {
+//       eventID: eventId,
+//       initData: data[0],
+//     },
+//   };
+// }
