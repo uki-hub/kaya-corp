@@ -1,3 +1,15 @@
+// {
+//   "apiKey": "0ed365ed-daf4-4747-a7d8-5434dfbb33c3",
+//   "ebib": "123",
+//   "nama": "uki",
+//   "kota": "jakarta",
+//   "kategori": "run 10k",
+//   "tanggal": "2022-12-12",
+//   "gender": "M" ,
+//   "waktu": "08:00",
+//   "size": "M" 
+// }
+
 import fs from "fs";
 import path from "path";
 import puppeteer from "puppeteer";
@@ -17,7 +29,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const id = payload["id"];
+    const ebib = payload["ebib"];
     const nama = payload["nama"];
     const kota = payload["kota"];
     const kategori = payload["kategori"];
@@ -31,7 +43,7 @@ export default async function handler(req, res) {
       .toString();
 
     templateRaw = templateRaw
-      .replace("{ID}", id)
+      .replace("{ID}", ebib)
       .replace("{NAMA}", nama)
       .replace("{KOTA}", kota)
       .replace("{KATEGORI}", kategori)
@@ -54,24 +66,24 @@ export default async function handler(req, res) {
       omitBackground: true,
     });
 
-    prepareFolder(id);
+    prepareFolder(ebib);
 
     try {
-      fs.writeFileSync(`./public/kartu/${id}/kartu.png`, imgBuffer);
+      fs.writeFileSync(`./public/kartu/${ebib}/kartu.png`, imgBuffer);
     } catch (e) {
       throw 3;
     }
 
     res.json({
       succes: true,
-      url: `${req.headers.host}/kartu/${id}/kartu.png`,
+      url: `${req.headers.host}/kartu/${ebib}/kartu.png`,
     });
   } catch (e) {
     res.json({ succes: false, message: e });
   }
 }
 
-const prepareFolder = (id) => {
+const prepareFolder = (ebib) => {
   try {
     if (!fs.existsSync(`./public/kartu`))
       fs.mkdirSync(
@@ -86,9 +98,9 @@ const prepareFolder = (id) => {
   }
 
   try {
-    if (!fs.existsSync(`./public/kartu/${id}`))
+    if (!fs.existsSync(`./public/kartu/${ebib}`))
       fs.mkdirSync(
-        `./public/kartu/${id}`,
+        `./public/kartu/${ebib}`,
         {
           recursive: true,
         },

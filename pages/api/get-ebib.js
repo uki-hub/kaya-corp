@@ -1,3 +1,11 @@
+// {
+//   "apiKey": "0ed365ed-daf4-4747-a7d8-5434dfbb33c3",
+//   "ebib": "123",
+//   "nama": "uki",
+//   "lomba": "fun ride" ,
+//   "gender": "M"
+// }
+
 import fs from "fs";
 import path from "path";
 import puppeteer from "puppeteer";
@@ -17,9 +25,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const id = payload["id"];
+    const ebib = payload["ebib"];
     const nama = payload["nama"];
-    const nomor = payload["nomor"];
     const lomba = payload["lomba"];
 
     let templateRaw = fs
@@ -28,7 +35,7 @@ export default async function handler(req, res) {
 
     templateRaw = templateRaw
       .replace("{NAMA}", nama)
-      .replace("{NOMOR}", nomor)
+      .replace("{NOMOR}", ebib)
       .replace("{LOMBA}", lomba);
 
       if("M") {
@@ -53,24 +60,24 @@ export default async function handler(req, res) {
       landscape: true,
     });
 
-    prepareFolder(id);
+    prepareFolder(ebib);
 
     try {
-      fs.writeFile(`./public/ebib/${id}/ebib.pdf`, pdf, () => {});
+      fs.writeFile(`./public/ebib/${ebib}/ebib.pdf`, pdf, () => {});
     } catch (e) {
       throw 1;
     }
 
     res.json({
       succes: true,
-      url: `${req.headers.host}/ebib/${id}/ebib.pdf`,
+      url: `${req.headers.host}/ebib/${ebib}/ebib.pdf`,
     });
   } catch (e) {
     res.json({ succes: false, message: e });
   }
 }
 
-const prepareFolder = (id) => {
+const prepareFolder = (ebib) => {
   try {
     if (!fs.existsSync(`./public/ebib`))
       fs.mkdirSync(
@@ -85,9 +92,9 @@ const prepareFolder = (id) => {
   }
 
   try {
-    if (!fs.existsSync(`./public/ebib/${id}`))
+    if (!fs.existsSync(`./public/ebib/${ebib}`))
       fs.mkdirSync(
-        `./public/ebib/${id}`,
+        `./public/ebib/${ebib}`,
         {
           recursive: true,
         },
