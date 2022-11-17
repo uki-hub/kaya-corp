@@ -55,29 +55,41 @@ export default async function handler(req, res) {
       omitBackground: true,
     });
 
-    if (!fs.existsSync(`./public/peserta`))
-      fs.mkdir(
-        `./public/peserta`,
-        {
-          recursive: true,
-        },
-        (e) => {
-          throw e;
-        }
-      );
+    try {
+      if (!fs.existsSync(`./public/peserta`))
+        fs.mkdirSync(
+          `./public/peserta`,
+          {
+            recursive: true,
+          },
+          (e) => {
+            throw e;
+          }
+        );
+    } catch {
+      throw 1;
+    }
 
-    if (!fs.existsSync(`./public/peserta/${id}`))
-      fs.mkdir(
-        `./public/peserta/${id}`,
-        {
-          recursive: true,
-        },
-        (e) => {
-          throw e;
-        }
-      );
+    try {
+      if (!fs.existsSync(`./public/peserta/${id}`))
+        fs.mkdirSync(
+          `./public/peserta/${id}`,
+          {
+            recursive: true,
+          },
+          (e) => {
+            throw e;
+          }
+        );
+    } catch {
+      throw 2;
+    }
 
-    fs.writeFileSync(`./public/peserta/${id}/kartu.png`, imgBuffer);
+    try {
+      fs.writeFileSync(`./public/peserta/${id}/kartu.png`, imgBuffer);
+    } catch {
+      throw 3;
+    }
 
     res.json({
       succes: true,

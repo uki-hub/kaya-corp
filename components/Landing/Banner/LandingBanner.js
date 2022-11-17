@@ -10,6 +10,7 @@ export default function LandingBanner() {
     <section className="hero-area">
       <div
         // className="banner-item"
+        className="main-background"
         style={{
           backgroundImage: `url("${img.default.src}")`,
           backgroundRepeat: 'no-repeat',
@@ -42,7 +43,7 @@ export default function LandingBanner() {
                 className="buy-ticket"
                 style={{
                   fontSize: "2rem",
-                  height: "6rem",
+                  height: "4rem",
                   lineHeight: "6.5rem",
                   color: "ghostwhite",
                   cursor: "pointer",
