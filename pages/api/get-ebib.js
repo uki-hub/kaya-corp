@@ -19,52 +19,51 @@ export default async function handler(req, res) {
   try {
     const id = payload["id"];
     const nama = payload["nama"];
-    const kota = payload["kota"];
-    const kategori = payload["kategori"];
-    const tanggal = payload["tanggal"];
-    const gender = payload["gender"];
-    const waktu = payload["waktu"];
-    const size = payload["size"];
+    const nomor = payload["nomor"];
+    const lomba = payload["lomba"];
 
     let templateRaw = fs
-      .readFileSync(path.join("./templates/kartu-peserta-minify.html"))
+      .readFileSync(path.join("./templates/ebib-minify.html"))
       .toString();
 
     templateRaw = templateRaw
-      .replace("{ID}", id)
       .replace("{NAMA}", nama)
-      .replace("{KOTA}", kota)
-      .replace("{KATEGORI}", kategori)
-      .replace("{TANGGAL}", tanggal)
-      .replace("{KELAMIN}", gender)
-      .replace("{WAKTU}", waktu)
-      .replace("{SIZE}", size);
+      .replace("{NOMOR}", nomor)
+      .replace("{LOMBA}", lomba);
+
+      if("M") {
+        //merah
+      } else if ("G")  {
+        //biru
+      }
 
     const br = await puppeteer.launch();
     const pg = await br.newPage();
     await pg.setViewport({
       width: 1280,
-      height: 527,
+      height: 720,
+      isLandscape: true,
     });
     await pg.setContent(templateRaw);
 
-    const dom = await pg.$("body");
-
-    const imgBuffer = await dom.screenshot({
+    const pdf = await pg.pdf({
       omitBackground: true,
+      printBackground: true,
+      format: "A4",
+      landscape: true,
     });
 
     prepareFolder(id);
 
     try {
-      fs.writeFileSync(`./public/kartu/${id}/kartu.png`, imgBuffer);
+      fs.writeFile(`./public/ebib/${id}/ebib.pdf`, pdf, () => {});
     } catch (e) {
-      throw 3;
+      throw 1;
     }
 
     res.json({
       succes: true,
-      url: `${req.headers.host}/kartu/${id}/kartu.png`,
+      url: `${req.headers.host}/ebib/${id}/ebib.pdf`,
     });
   } catch (e) {
     res.json({ succes: false, message: e });
@@ -73,9 +72,9 @@ export default async function handler(req, res) {
 
 const prepareFolder = (id) => {
   try {
-    if (!fs.existsSync(`./public/kartu`))
+    if (!fs.existsSync(`./public/ebib`))
       fs.mkdirSync(
-        `./public/kartu`,
+        `./public/ebib`,
         {
           recursive: true,
         },
@@ -86,9 +85,9 @@ const prepareFolder = (id) => {
   }
 
   try {
-    if (!fs.existsSync(`./public/kartu/${id}`))
+    if (!fs.existsSync(`./public/ebib/${id}`))
       fs.mkdirSync(
-        `./public/kartu/${id}`,
+        `./public/ebib/${id}`,
         {
           recursive: true,
         },
