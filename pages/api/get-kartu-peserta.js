@@ -66,8 +66,8 @@ export default async function handler(req, res) {
             throw e;
           }
         );
-    } catch {
-      throw 1;
+    } catch (e) {
+      throw e ?? 1;
     }
 
     try {
@@ -81,14 +81,14 @@ export default async function handler(req, res) {
             throw e;
           }
         );
-    } catch {
-      throw 2;
+    } catch (e) {
+      throw e ?? 2;
     }
 
     try {
       fs.writeFileSync(`./public/peserta/${id}/kartu.png`, imgBuffer);
-    } catch {
-      throw 3;
+    } catch (e) {
+      throw e ?? 3;
     }
 
     res.json({
