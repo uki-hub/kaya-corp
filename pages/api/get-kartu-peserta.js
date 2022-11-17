@@ -27,9 +27,7 @@ export default async function handler(req, res) {
     const size = payload["size"];
 
     let templateRaw = fs
-      .readFileSync(
-        path.join(process.cwd() + "/templates/kartu-peserta-minify.html")
-      )
+      .readFileSync(path.join("./templates/kartu-peserta-minify.html"))
       .toString();
 
     templateRaw = templateRaw
@@ -56,6 +54,9 @@ export default async function handler(req, res) {
     const imgBuffer = await dom.screenshot({
       omitBackground: true,
     });
+
+    if (!fs.existsSync(`./public/peserta`))
+      fs.mkdir(`./public/peserta`, (_) => {});
 
     if (!fs.existsSync(`./public/peserta/${id}`))
       fs.mkdir(`./public/peserta/${id}`, (_) => {});
