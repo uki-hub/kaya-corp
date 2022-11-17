@@ -17,62 +17,72 @@ export default async function handler(req, res) {
   }
 
   try {
-    const fsp = fs.promises;
+    const id = payload["id"];
+    const nama = payload["nama"];
+    const kota = payload["kota"];
+    const kategori = payload["kategori"];
+    const tanggal = payload["tanggal"];
+    const gender = payload["gender"];
+    const waktu = payload["waktu"];
+    const size = payload["size"];
 
-    await fs.writeFile("uki.txt", "text");
+    let templateRaw = fs
+      .readFileSync(path.join("./templates/kartu-peserta-minify.html"))
+      .toString();
 
-    res.json({});``
+    templateRaw = templateRaw
+      .replace("{ID}", id)
+      .replace("{NAMA}", nama)
+      .replace("{KOTA}", kota)
+      .replace("{KATEGORI}", kategori)
+      .replace("{TANGGAL}", tanggal)
+      .replace("{KELAMIN}", gender)
+      .replace("{WAKTU}", waktu)
+      .replace("{SIZE}", size);
 
-    // const id = payload["id"];
-    // const nama = payload["nama"];
-    // const kota = payload["kota"];
-    // const kategori = payload["kategori"];
-    // const tanggal = payload["tanggal"];
-    // const gender = payload["gender"];
-    // const waktu = payload["waktu"];
-    // const size = payload["size"];
+    const br = await puppeteer.launch();
+    const pg = await br.newPage();
+    await pg.setViewport({
+      width: 1280,
+      height: 527,
+      // deviceScaleFactor: 1,
+    });
+    await pg.setContent(templateRaw);
 
-    // let templateRaw = fs
-    //   .readFileSync(path.join("./templates/kartu-peserta-minify.html"))
-    //   .toString();
+    const dom = await pg.$("body");
 
-    // templateRaw = templateRaw
-    //   .replace("{ID}", id)
-    //   .replace("{NAMA}", nama)
-    //   .replace("{KOTA}", kota)
-    //   .replace("{KATEGORI}", kategori)
-    //   .replace("{TANGGAL}", tanggal)
-    //   .replace("{KELAMIN}", gender)
-    //   .replace("{WAKTU}", waktu)
-    //   .replace("{SIZE}", size);
+    const imgBuffer = await dom.screenshot({
+      omitBackground: true,
+    });
 
-    // const br = await puppeteer.launch();
-    // const pg = await br.newPage();
-    // await pg.setViewport({
-    //   width: 1280,
-    //   height: 527,
-    //   // deviceScaleFactor: 1,
-    // });
-    // await pg.setContent(templateRaw);
+    if (!fs.existsSync(`./public/peserta`))
+      fs.mkdir(
+        `./public/peserta`,
+        {
+          recursive: true,
+        },
+        (e) => {
+          throw e;
+        }
+      );
 
-    // const dom = await pg.$("body");
+    if (!fs.existsSync(`./public/peserta/${id}`))
+      fs.mkdir(
+        `./public/peserta/${id}`,
+        {
+          recursive: true,
+        },
+        (e) => {
+          throw e;
+        }
+      );
 
-    // const imgBuffer = await dom.screenshot({
-    //   omitBackground: true,
-    // });
+    fs.writeFileSync(`./public/peserta/${id}/kartu.png`, imgBuffer);
 
-    // if (!fs.existsSync(`./public/peserta`))
-    //   fs.mkdir(`./public/peserta`, (_) => {});
-
-    // if (!fs.existsSync(`./public/peserta/${id}`))
-    //   fs.mkdir(`./public/peserta/${id}`, (_) => {});
-
-    // fs.writeFileSync(`./public/peserta/${id}/kartu.png`, imgBuffer);
-
-    // res.json({
-    //   succes: true,
-    //   url: `${req.headers.host}/peserta/${id}/kartu.png`,
-    // });
+    res.json({
+      succes: true,
+      url: `${req.headers.host}/peserta/${id}/kartu.png`,
+    });
   } catch (e) {
     res.json({ succes: false, message: e });
   }
