@@ -890,7 +890,7 @@ small device /mobile sm and large
   }
 
   .main-background {
-    background-position: center center;
+    background-position: center center !important;
   }
 
   .buy-ticket {
