@@ -17,6 +17,7 @@ export default function LandingBanner() {
           backgroundSize: "cover",
           height: "100vh",
           width: "100%",
+          backgroundPosition: "0px -25px"
         }}
       >
         <div className="buy-ticket">
