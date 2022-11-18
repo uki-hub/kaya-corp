@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   try {
     const ebib = payload["ebib"];
 
-    fs.rmSync(`./public/kartu/${ebib}/kartu.png`, { force: true });
+    fs.rmSync(`./public/ebib/${ebib}/ebib.pdf`, { force: true });
 
     res.json({
       succes: true,

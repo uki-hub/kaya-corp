@@ -1,5 +1,6 @@
 // {
 //   "apiKey": "0ed365ed-daf4-4747-a7d8-5434dfbb33c3",
+//   "idEvent": "123",
 //   "ebib": "123",
 //   "nama": "uki",
 //   "lomba": "fun ride" ,
@@ -25,9 +26,11 @@ export default async function handler(req, res) {
   }
 
   try {
+    const idEvent = payload["idEvent"];
     const ebib = payload["ebib"];
     const nama = payload["nama"];
     const lomba = payload["lomba"];
+    const gender = payload["gender"];
 
     let templateRaw = fs
       .readFileSync(path.join("./templates/ebib-minify.html"))
@@ -38,10 +41,10 @@ export default async function handler(req, res) {
       .replace("{NOMOR}", ebib)
       .replace("{LOMBA}", lomba);
 
-      if("M") {
-        //merah
-      } else if ("G")  {
-        //biru
+      if(gender == "M") {
+        templateRaw = templateRaw.replaceAll("{WARNA}", "#ED1F24");
+      } else if (gender == "W")  {
+        templateRaw = templateRaw.replaceAll("{WARNA}", "#37863F");
       }
 
     const br = await puppeteer.launch();
@@ -60,28 +63,41 @@ export default async function handler(req, res) {
       landscape: true,
     });
 
-    prepareFolder(ebib);
+    prepareFolder(idEvent, ebib);
 
     try {
-      fs.writeFile(`./public/ebib/${ebib}/ebib.pdf`, pdf, () => {});
+      fs.writeFile(`./public/${idEvent}/ebib/${ebib}/${ebib}.pdf`, pdf, () => {});
     } catch (e) {
       throw 1;
     }
 
     res.json({
       succes: true,
-      url: `${req.headers.host}/ebib/${ebib}/ebib.pdf`,
+      url: `${req.headers.host}/${idEvent}/ebib/${ebib}/${ebib}.pdf`,
     });
   } catch (e) {
     res.json({ succes: false, message: e });
   }
 }
 
-const prepareFolder = (ebib) => {
+const prepareFolder = (idEvent, ebib) => {
   try {
-    if (!fs.existsSync(`./public/ebib`))
+    if (!fs.existsSync(`./public/${idEvent}`))
       fs.mkdirSync(
-        `./public/ebib`,
+        `./public/${idEvent}`,
+        {
+          recursive: true,
+        },
+        () => {}
+      );
+  } catch (e) {
+    throw 0;
+  }
+
+  try {
+    if (!fs.existsSync(`./public/${idEvent}/ebib`))
+      fs.mkdirSync(
+        `./public/${idEvent}/ebib`,
         {
           recursive: true,
         },
@@ -92,9 +108,9 @@ const prepareFolder = (ebib) => {
   }
 
   try {
-    if (!fs.existsSync(`./public/ebib/${ebib}`))
+    if (!fs.existsSync(`./public/${idEvent}/ebib/${ebib}`))
       fs.mkdirSync(
-        `./public/ebib/${ebib}`,
+        `./public/${idEvent}/ebib/${ebib}`,
         {
           recursive: true,
         },

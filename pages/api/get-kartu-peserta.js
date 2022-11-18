@@ -1,5 +1,6 @@
 // {
 //   "apiKey": "0ed365ed-daf4-4747-a7d8-5434dfbb33c3",
+//   "idEvent": "123",
 //   "ebib": "123",
 //   "nama": "uki",
 //   "kota": "jakarta",
@@ -7,7 +8,7 @@
 //   "tanggal": "2022-12-12",
 //   "gender": "M" ,
 //   "waktu": "08:00",
-//   "size": "M" 
+//   "size": "M"
 // }
 
 import fs from "fs";
@@ -29,6 +30,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    const idEvent = payload["idEvent"];
     const ebib = payload["ebib"];
     const nama = payload["nama"];
     const kota = payload["kota"];
@@ -37,6 +39,10 @@ export default async function handler(req, res) {
     const gender = payload["gender"];
     const waktu = payload["waktu"];
     const size = payload["size"];
+
+    console.log("========================")
+    console.log(ebib)
+    console.log("========================")
 
     let templateRaw = fs
       .readFileSync(path.join("./templates/kartu-peserta-minify.html"))
@@ -66,28 +72,44 @@ export default async function handler(req, res) {
       omitBackground: true,
     });
 
-    prepareFolder(ebib);
+    prepareFolder(idEvent, ebib);
 
     try {
-      fs.writeFileSync(`./public/kartu/${ebib}/kartu.png`, imgBuffer);
+      fs.writeFileSync(
+        `./public/${idEvent}/kartu/${ebib}/${ebib}.png`,
+        imgBuffer
+      );
     } catch (e) {
       throw 3;
     }
 
     res.json({
       succes: true,
-      url: `${req.headers.host}/kartu/${ebib}/kartu.png`,
+      url: `${req.headers.host}/${idEvent}/kartu/${ebib}/${ebib}.png`,
     });
   } catch (e) {
     res.json({ succes: false, message: e });
   }
 }
 
-const prepareFolder = (ebib) => {
+const prepareFolder = (idEvent, ebib) => {
   try {
-    if (!fs.existsSync(`./public/kartu`))
+    if (!fs.existsSync(`./public/${idEvent}`))
       fs.mkdirSync(
-        `./public/kartu`,
+        `./public/${idEvent}`,
+        {
+          recursive: true,
+        },
+        () => {}
+      );
+  } catch (e) {
+    throw 0;
+  }
+
+  try {
+    if (!fs.existsSync(`./public/${idEvent}/kartu`))
+      fs.mkdirSync(
+        `./public/${idEvent}/kartu`,
         {
           recursive: true,
         },
@@ -98,9 +120,9 @@ const prepareFolder = (ebib) => {
   }
 
   try {
-    if (!fs.existsSync(`./public/kartu/${ebib}`))
+    if (!fs.existsSync(`./public/${idEvent}/kartu/${ebib}`))
       fs.mkdirSync(
-        `./public/kartu/${ebib}`,
+        `./public/${idEvent}/kartu/${ebib}`,
         {
           recursive: true,
         },
