@@ -14,19 +14,26 @@ import { EventContextProvider } from "../../contexts/EventContext";
 import NoEvent from "../../components/Landing/NoEvent/NoEvent";
 import { getEventInitializeData } from "../../repositories/EventRepository";
 import { useEffect, useState } from "react";
+import LandingBackdrop from "../../components/Landing/Backdrop/LandingBackdrop";
 
 export default function EventPage({ eventID, initData }) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
-  }, [isLoaded]);
+  }, [isLoaded, submitted]);
 
   if (!initData) window.location.href = "/event/brr";
 
   return (
-    <EventContextProvider eventID={eventID} eventData={initData}>
+    <EventContextProvider
+      eventID={eventID}
+      eventData={initData}
+      onSubmitted={() => setSubmitted(true)}
+    >
       <PesertaContextProvider>
+        {submitted && <LandingBackdrop />}
         <div className="body-inner">
           {/* <LandingHeader /> */}
           <LandingBanner />
@@ -55,8 +62,6 @@ export async function getServerSideProps(context) {
   } catch (error) {
     console.log(error);
   }
-
-  console.log(data);
 
   if (data == null || data.length == 0)
     return {

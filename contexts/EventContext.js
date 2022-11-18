@@ -1,6 +1,6 @@
 import Router from "next/router";
 
-import React from "react";
+import React, { useState } from "react";
 import { sendPembayaranEvent } from "../repositories/EventRepository";
 import { buildPayload, validateDataPeserta } from "./_EventContext";
 
@@ -11,17 +11,21 @@ const EventContext = React.createContext({
   onValidateDataPeserta: (listPeserta) => {},
 });
 
-export const EventContextProvider = ({ eventID, eventData, children }) => {
+export const EventContextProvider = ({
+  eventID,
+  eventData,
+  onSubmitted,
+  children,
+}) => {
   const validateDataPesertaHandler = (listPeserta) =>
     validateDataPeserta(listPeserta);
 
   const bayarHandler = async (listDataPeserta) => {
+    onSubmitted();
+
     const payload = buildPayload(eventData, listDataPeserta);
 
     const data = await sendPembayaranEvent(payload);
-
-    // console.log('============================================================================================')
-    // console.log(data);
 
     window.location = data.redirect_url;
   };
