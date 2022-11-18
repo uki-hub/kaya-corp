@@ -4,7 +4,12 @@ import axios from "axios";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    res.status(405).send({ message: "Only POST requests allowed" });
+    res.status(405).send();
+    return;
+  }
+
+  if(req.body['apiKey'] == null || req.body['apiKey'] != process.env['api-key']) {
+    res.status(400).send();
     return;
   }
 

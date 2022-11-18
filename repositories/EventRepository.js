@@ -19,13 +19,20 @@ const getEventInitializeData = async (eventId) => {
 };
 
 const sendPembayaranEvent = async (payload) => {
-  const response = await axios.post("/api/save", payload, {
-    headers: {
-      "Content-Type": "application/json",
-      "User-Agent": "Axios 0.21.1",
-      "Access-Control-Allow-Origin": "*",
+  const response = await axios.post(
+    "/api/save",
+    {
+      apiKey: "0ed365ed-daf4-4747-a7d8-5434dfbb33c3",
+      ...payload,
     },
-  });
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "Axios 0.21.1",
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  );
 
   // console.log(
   //   "================================================================"
