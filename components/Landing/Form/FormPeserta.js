@@ -200,6 +200,8 @@ const FormPerserta = ({
         initializeValue2={dataPeserta.noTeleponDarurat}
         error1={errorForm.invalidFieldName == "noTelepon"}
         error2={errorForm.invalidFieldName == "noTeleponDarurat"}
+        type1={"tel"}
+        type2={"tel"}
       />
       <DropdownMenuField
         // ref={jerseySizeRef}
