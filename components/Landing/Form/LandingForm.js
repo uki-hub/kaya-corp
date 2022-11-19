@@ -37,8 +37,7 @@ export default function LandingForm(props) {
     let t = setTimeout(() => {
       DaScroll("ticket-forms");
     }, 100);
-  }
-  
+  };
 
   const bayarHandler = () => {
     const listPeserta = [...pesertaCtx.listPeserta];
@@ -77,7 +76,11 @@ export default function LandingForm(props) {
         <div id="ticket-forms" className="row m-0">
           <button
             className="btn col-6"
-            style={{ backgroundColor: "yellowgreen" }}
+            style={{
+              backgroundColor: "yellowgreen",
+              padding: "0 !important",
+              lineHeight: "0 !important",
+            }}
             onClick={tambahPesertaHandler}
           >
             TAMBAH PESERTA
@@ -85,7 +88,11 @@ export default function LandingForm(props) {
           <div className="col-6 pr-0">
             <button
               className="btn w-100"
-              style={{ backgroundColor: "indianred" }}
+              style={{
+                backgroundColor: "indianred",
+                padding: "0 !important",
+                lineHeight: "0 !important",
+              }}
               onClick={bayarHandler}
             >
               BAYAR
