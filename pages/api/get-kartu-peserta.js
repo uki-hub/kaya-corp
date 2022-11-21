@@ -40,10 +40,6 @@ export default async function handler(req, res) {
     const waktu = payload["waktu"];
     const size = payload["size"];
 
-    console.log("========================")
-    console.log(ebib)
-    console.log("========================")
-
     let templateRaw = fs
       .readFileSync(path.join("./templates/kartu-peserta-minify.html"))
       .toString();
@@ -93,32 +89,6 @@ export default async function handler(req, res) {
 }
 
 const prepareFolder = (idEvent, ebib) => {
-  try {
-    if (!fs.existsSync(`./public/${idEvent}`))
-      fs.mkdirSync(
-        `./public/${idEvent}`,
-        {
-          recursive: true,
-        },
-        () => {}
-      );
-  } catch (e) {
-    throw 0;
-  }
-
-  try {
-    if (!fs.existsSync(`./public/${idEvent}/kartu`))
-      fs.mkdirSync(
-        `./public/${idEvent}/kartu`,
-        {
-          recursive: true,
-        },
-        () => {}
-      );
-  } catch (e) {
-    throw 1;
-  }
-
   try {
     if (!fs.existsSync(`./public/${idEvent}/kartu/${ebib}`))
       fs.mkdirSync(

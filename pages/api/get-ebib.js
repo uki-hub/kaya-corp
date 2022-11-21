@@ -63,54 +63,28 @@ export default async function handler(req, res) {
       landscape: true,
     });
 
-    prepareFolder(idEvent, ebib);
+    prepareFolder(idEvent, lomba, ebib);
 
     try {
-      fs.writeFile(`./public/${idEvent}/ebib/${ebib}/${ebib}.pdf`, pdf, () => {});
+      fs.writeFile(`./public/${idEvent}/${lomba}/ebib/${ebib}/${ebib}.pdf`, pdf, () => {});
     } catch (e) {
       throw 1;
     }
 
     res.json({
       succes: true,
-      url: `${req.headers.host}/${idEvent}/ebib/${ebib}/${ebib}.pdf`,
+      url: `${req.headers.host}/${idEvent}/${lomba}/ebib/${ebib}/${ebib}.pdf`,
     });
   } catch (e) {
     res.json({ succes: false, message: e });
   }
 }
 
-const prepareFolder = (idEvent, ebib) => {
+const prepareFolder = (idEvent, lomba, ebib) => {  
   try {
-    if (!fs.existsSync(`./public/${idEvent}`))
+    if (!fs.existsSync(`./public/${idEvent}/${lomba}/ebib/${ebib}`))
       fs.mkdirSync(
-        `./public/${idEvent}`,
-        {
-          recursive: true,
-        },
-        () => {}
-      );
-  } catch (e) {
-    throw 0;
-  }
-
-  try {
-    if (!fs.existsSync(`./public/${idEvent}/ebib`))
-      fs.mkdirSync(
-        `./public/${idEvent}/ebib`,
-        {
-          recursive: true,
-        },
-        () => {}
-      );
-  } catch (e) {
-    throw 1;
-  }
-
-  try {
-    if (!fs.existsSync(`./public/${idEvent}/ebib/${ebib}`))
-      fs.mkdirSync(
-        `./public/${idEvent}/ebib/${ebib}`,
+        `./public/${idEvent}/${lomba}/ebib/${ebib}`,
         {
           recursive: true,
         },
