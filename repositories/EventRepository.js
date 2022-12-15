@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getEventInitializeData = async (eventId) => {
+const getEventInitializeDataRepo = async (eventId) => {
   const _payload = JSON.stringify({
     idevent: eventId,
   });
@@ -18,9 +18,8 @@ const getEventInitializeData = async (eventId) => {
   return data;
 };
 
-const sendPembayaranEvent = async (payload) => {
+const sendPembayaranEventRepo = async (payload) => {
   const _payload = JSON.stringify({
-    // apiKey: "0ed365ed-daf4-4747-a7d8-5434dfbb33c3",
     ...payload,
   });
 
