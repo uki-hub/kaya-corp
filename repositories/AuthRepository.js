@@ -1,0 +1,17 @@
+const signInRepo = async (payload) => {
+  const _payload = JSON.stringify(payload);
+
+  var response = await fetch(
+    "https://api.bantengseries.com/api/users2/signin.php",
+    {
+      method: "POST",
+      body: _payload,
+    }
+  );
+
+  const data = await response.json();
+
+  return data;
+};
+
+export { signInRepo };
