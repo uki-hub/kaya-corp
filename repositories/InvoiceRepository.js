@@ -1,6 +1,6 @@
-const getInvoices = async (payload) => {
+const getInvoicesRepo = async (userid) => {
   const _payload = JSON.stringify({
-    userid: "123",
+    userid,
   });
 
   var response = await fetch(
@@ -16,4 +16,4 @@ const getInvoices = async (payload) => {
   return data;
 };
 
-export { getInvoices };
+export { getInvoicesRepo };

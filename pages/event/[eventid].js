@@ -13,15 +13,19 @@ import { PesertaContextProvider } from "../../contexts/PesertaContext";
 import { EventContextProvider } from "../../contexts/EventContext";
 import NoEvent from "../../components/Landing/NoEvent/NoEvent";
 import { getEventInitializeDataRepo } from "../../repositories/EventRepository";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LandingBackdrop from "../../components/Landing/Backdrop/LandingBackdrop";
+import AuthContext, { AuthContextProvider } from "../../contexts/AuthContext";
+import AuthDataParser from "../../lib/AuthDataParser";
 
-export default function EventPage({ eventID, initData }) {
+export default function EventPage({ authData, eventID, initData }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
     setIsLoaded(true);
+    if (authData) auth.onSetAuthData(authData);
   }, [isLoaded, submitted]);
 
   if (!initData) window.location.href = "/event/brr";
@@ -52,30 +56,29 @@ export default function EventPage({ eventID, initData }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const eventId = context.query["eventid"];
+export async function getServerSideProps({ query, req }) {
+  const eventID = query["eventid"];
+  const authData = AuthDataParser(req);
 
   let data;
 
   try {
-    data = await getEventInitializeDataRepo(eventId);
+    data = await getEventInitializeDataRepo(eventID);
   } catch (error) {
     console.log(error);
   }
 
-  if (data == null || data.length == 0) {
-    //404 custom page
+  if (data == null || data.length == 0)
     return {
       props: {},
       redirect: {
         permanent: true,
-        destination: "/event/brr",
+        destination: "/404",
       },
     };
-  }
 
   return {
-    props: { eventID: eventId, initData: data[0] },
+    props: { eventID, initData: data[0], authData: authData ?? null },
   };
 }
 

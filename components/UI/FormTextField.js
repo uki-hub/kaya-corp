@@ -33,11 +33,13 @@ const FormTextField = React.forwardRef(function _(
 
   return (
     <div className="row mb-3 align-items-center" style={style}>
-      <div className="col-1-sm">
-        {React.createElement(icon, {
-          style: { color: "grey", fontSize: "35px" },
-        })}
-      </div>
+      {icon && (
+        <div className="col-1-sm">
+          {React.createElement(icon, {
+            style: { color: "grey", fontSize: "35px" },
+          })}
+        </div>
+      )}
       <div className="col">
         <TextField
           inputRef={textFieldRef}

@@ -2,7 +2,7 @@ import { width } from "@mui/system";
 import { useRouter } from "next/router";
 // import Lottie from "react-lottie";
 import checkAnimation from "/public/assets/lotties/check.json";
-import classes from "./thankyou.module.css";
+import classes from "../styles/pages/thankyou.module.css";
 import Link from "next/link";
 import { getConfirmation } from "../repositories/EventRepository";
 

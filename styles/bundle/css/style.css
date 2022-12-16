@@ -3896,22 +3896,39 @@ faq-item
   width: 100%;
   top: 20px;
   z-index: 9;
-  height: 25px;
+  height: 40px;
+  background: darkred;
 }
 
 .landing-header .items {
   display: flex;
+  flex-direction: row;
   place-content: flex-end;
   align-items: center;
   gap: 10px;
   height: 100%;
   padding: 0 40px;
+}
+
+.landing-header .items .item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.landing-header .items .item label {
+  align-items: center;
   font-size: 20px;
   color: white;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
   cursor: pointer;
+  margin: 0;
+}
+
+.landing-header .items .item label:hover {
+  color: lightcoral;
 }
 
 .landing-header .items .divider {
@@ -3923,9 +3940,36 @@ faq-item
 }
 
 .landing-header .items .cart {
-  margin-right: 15px;
+  /* margin-right: 15px; */
+  color: white;
+  font-size: 30px;
 }
 
-.landing-header .items .item:hover {
-  color: lightcoral;
+.landing-header .items .profile {
+  margin-right: 5px;
+  color: white;
+  font-size: 30px;
+}
+
+.landing-header .items .item ul {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 110px;
+  width: 100%;
+  top: 35px;
+  right: 0px;
+  background-color: whitesmoke;
+  padding: 3px 10px;
+}
+
+.landing-header .items .item ul li label {
+  font-size: 16px;
+  color: #888888;
+  cursor: pointer;
+}
+
+.landing-header .items .item ul li label:hover {
+  color: darkslategrey;
 }

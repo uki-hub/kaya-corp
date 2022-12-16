@@ -1,13 +1,9 @@
 class StorageService {
-  #ls;
+  constructor() {}
 
-  constructor() {
-    this.#ls = localStorage;
-  }
-
-  static user(value) {
-    if (value) this.#ls.setItem("user", value);
-    else return this.#ls.getItem("user");
+  static authData(value) {
+    if (value) localStorage.setItem("authData", JSON.stringify(value));
+    else return JSON.parse(localStorage.getItem("authData"));
 
     return;
   }

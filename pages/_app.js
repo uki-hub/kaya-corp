@@ -18,6 +18,7 @@ import "../styles/bundle/css/owl.carousel.min.css";
 import "../styles/bundle/css/responsive.css";
 import "../styles/bundle/css/style.css";
 import "../styles/bundle/css/xsIcon.css";
+import { AuthContextProvider } from "../contexts/AuthContext";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -31,7 +32,9 @@ export default function MyApp(props) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <AuthContextProvider>
+          <Component {...pageProps} />
+        </AuthContextProvider>
       </ThemeProvider>
     </CacheProvider>
   );

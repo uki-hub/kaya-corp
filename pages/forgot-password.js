@@ -5,48 +5,28 @@ import AuthContext from "../contexts/AuthContext";
 import LandingBackdrop from "../components/Landing/Backdrop/LandingBackdrop";
 import { useRouter } from "next/router";
 import AuthDataParser from "../lib/AuthDataParser";
-import classes from "../styles/pages/register.module.css";
+import classes from "../styles/pages/forgot-password.module.css";
 
-export default function Register() {
+export default function ForgotPassword() {
   const [submitted, setSubmitted] = useState(false);
-  const router = useRouter();
-  const useridRef = useRef();
-  const passwordRef = useRef();
-  const emailRef = useRef();
-  const fullNameRef = useRef();
   const auth = useContext(AuthContext);
+  const router = useRouter();
+  const emailRef = useRef();
 
   const sendEmailHandler = async () => {
     setSubmitted(true);
 
-    const result = await auth.onRegister({
-      userid: useridRef.current.value,
-      password: passwordRef.current.value,
-      email: emailRef.current.value,
-      fullname: fullNameRef.current.value,
-    });
+    const result = await auth.onForgotPassword(emailRef.current.value);
 
-    if (result) router.push("/");
+    setSubmitted(false);
   };
 
   return (
     <div className={classes.background}>
       {submitted && <LandingBackdrop />}
+
       <div className={classes.form}>
-        <FormTextField
-          ref={useridRef}
-          type="text"
-          label="User ID"
-          initializeValue={""}
-          error={true}
-        />
-        <FormTextField
-          ref={passwordRef}
-          type="password"
-          label="Password"
-          initializeValue={""}
-          error={true}
-        />
+        <label>Forgot Password</label>
         <FormTextField
           ref={emailRef}
           type="email"
@@ -54,16 +34,8 @@ export default function Register() {
           initializeValue={""}
           error={true}
         />
-        <FormTextField
-          ref={fullNameRef}
-          type="test"
-          label="Full Name"
-          initializeValue={""}
-          error={true}
-        />
-
         <div className={"btn col"} onClick={sendEmailHandler}>
-          Register
+          Send Email
         </div>
       </div>
     </div>
