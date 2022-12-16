@@ -1,16 +1,21 @@
-// import img from "/public/assets/images/logos/logo.png";
+import React from "react";
 
-import Image from "next/image";
+import { ShoppingBasket as ShoppingBasketIcon } from "@mui/icons-material";
+import Link from "next/link";
 
 export default function LandingHeader(props) {
   return (
-    <header id="header" className="header header-transparent">
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light">
-          {/* <a className="navbar-brand" href="index-2.html">
-            <Image src={img} alt="logo" />
-          </a> */}
-        </nav>
+    <header className="landing-header">
+      <div className="items">
+        {React.createElement(ShoppingBasketIcon, {
+          className: "item cart",
+          style: { color: "white", fontSize: "30px" },
+        })}
+        <Link href={'/signin'}>
+          <div className="item">Masuk</div>
+        </Link>
+        <div className="divider" />
+        <div className="item">Daftar</div>
       </div>
     </header>
   );

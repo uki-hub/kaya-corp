@@ -12,7 +12,7 @@ import BundleScript from "../../components/Landing/BundleScript";
 import { PesertaContextProvider } from "../../contexts/PesertaContext";
 import { EventContextProvider } from "../../contexts/EventContext";
 import NoEvent from "../../components/Landing/NoEvent/NoEvent";
-import { getEventInitializeData } from "../../repositories/EventRepository";
+import { getEventInitializeDataRepo } from "../../repositories/EventRepository";
 import { useEffect, useState } from "react";
 import LandingBackdrop from "../../components/Landing/Backdrop/LandingBackdrop";
 
@@ -35,7 +35,7 @@ export default function EventPage({ eventID, initData }) {
       <PesertaContextProvider>
         {submitted && <LandingBackdrop />}
         <div className="body-inner">
-          {/* <LandingHeader /> */}
+          <LandingHeader />
           <LandingBanner />
           {/* <LandingEventSchedule /> */}
           <LandingForm />
@@ -52,47 +52,49 @@ export default function EventPage({ eventID, initData }) {
   );
 }
 
-// export async function getServerSideProps(context) {
-//   const eventId = context.query["eventid"];
+export async function getServerSideProps(context) {
+  const eventId = context.query["eventid"];
 
-//   let data;
+  let data;
 
-//   try {
-//     data = await getEventInitializeData(eventId);
-//   } catch (error) {
-//     console.log(error);
-//   }
+  try {
+    data = await getEventInitializeDataRepo(eventId);
+  } catch (error) {
+    console.log(error);
+  }
 
-//   if (data == null || data.length == 0)
-//     return {
-//       props: {},
-//       redirect: {
-//         permanent: true,
-//         destination: "/event/brr",
-//       },
-//     };
+  if (data == null || data.length == 0) {
+    //404 custom page
+    return {
+      props: {},
+      redirect: {
+        permanent: true,
+        destination: "/event/brr",
+      },
+    };
+  }
 
+  return {
+    props: { eventID: eventId, initData: data[0] },
+  };
+}
+
+// export async function getStaticPaths() {
 //   return {
-//     props: { eventID: eventId, initData: data[0] },
+//     paths: [{ params: { eventid: "brr" } }],
+//     fallback: "blocking",
 //   };
 // }
 
-export async function getStaticPaths() {
-  return {
-    paths: [{ params: { eventid: "brr" } }],
-    fallback: "blocking",
-  };
-}
+// export async function getStaticProps({params }) {
+//   const eventId = params.eventid;
 
-export async function getStaticProps({params }) {
-  const eventId = params.eventid;
+//   const data = await getEventInitializeDataRepo(eventId);
 
-  const data = await getEventInitializeData(eventId);
-
-  return {
-    props: {
-      eventID: eventId,
-      initData: data[0],
-    },
-  };
-}
+//   return {
+//     props: {
+//       eventID: eventId,
+//       initData: data[0],
+//     },
+//   };
+// }

@@ -1,7 +1,7 @@
 import Router from "next/router";
 
 import React, { useState } from "react";
-import { sendPembayaranEvent } from "../repositories/EventRepository";
+import { sendPembayaranEventRepo } from "../repositories/EventRepository";
 import { buildPayload, validateDataPeserta } from "./_EventContext";
 
 const EventContext = React.createContext({
@@ -25,7 +25,7 @@ export const EventContextProvider = ({
 
     const payload = buildPayload(eventData, listDataPeserta);
 
-    const data = await sendPembayaranEvent(payload);
+    const data = await sendPembayaranEventRepo(payload);
 
     window.location = data.redirect_url;
   };

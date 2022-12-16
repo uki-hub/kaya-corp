@@ -3890,3 +3890,42 @@ faq-item
 .widget-visible {
   z-index: 998 !important;
 }
+
+.landing-header {
+  position: absolute;
+  width: 100%;
+  top: 20px;
+  z-index: 9;
+  height: 25px;
+}
+
+.landing-header .items {
+  display: flex;
+  place-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  padding: 0 40px;
+  font-size: 20px;
+  color: white;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.landing-header .items .divider {
+  height: 100%;
+  width: 2px;
+  border-radius: 5px;
+  background: white;
+  margin: 0 2px;
+}
+
+.landing-header .items .cart {
+  margin-right: 15px;
+}
+
+.landing-header .items .item:hover {
+  color: lightcoral;
+}

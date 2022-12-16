@@ -37,4 +37,4 @@ const sendPembayaranEventRepo = async (payload) => {
   return data;
 };
 
-export { getEventInitializeData, sendPembayaranEvent };
+export { getEventInitializeDataRepo, sendPembayaranEventRepo };
