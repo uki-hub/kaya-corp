@@ -71,6 +71,7 @@ export default function Login() {
 export async function getServerSideProps({ req }) {
   const authData = AuthDataParser(req);
 
+
   if (authData)
     return {
       redirect: {

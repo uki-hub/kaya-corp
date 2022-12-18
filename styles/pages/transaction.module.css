@@ -13,29 +13,41 @@
 
 .form {
   padding: 30px 5px;
-  max-width: 600px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-}
-
-.form .form-title {
-  font-size: 25px;
-  font-weight: bold;
-  color: darkslategray;
-}
-
-.form .change-password-form {
-  position: relative;
-  border: #888 1px solid;
-  border-radius: 7px;
+  max-height: 80vh;
   padding: 20px;
-  margin: 0 15px;
 }
 
-.form .change-password-form .change-password-label {
-  position: absolute;
-  top: -15px;
-  background-color: white;
-  padding: 0 3px;
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px 15px;
+  border: 1px solid rgb(224, 224, 224);
+  max-height: 72vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
+
+.transaction-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 7px;
+  border: #888 1px solid;
+  cursor: pointer;
+  padding: 10px 15px;
+}
+
+.transaction-row .transaction-header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.transaction-row label {
+  margin: 0;
+}
+

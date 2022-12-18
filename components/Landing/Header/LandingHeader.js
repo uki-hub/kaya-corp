@@ -12,16 +12,21 @@ export default function LandingHeader(props) {
   const auth = useContext(AuthContext);
   const router = useRouter();
 
+  const homeHandler = () => router.push("/");
+
   const transactionHandler = () => router.push("/transaction");
+  
   const profileHandler = () =>
     router.push({
       pathname: "/profile",
     });
+
   const logoutHandler = () => auth.onLogout();
 
   return (
     <header className="landing-header">
       <div className="items">
+        <label onClick={homeHandler}>Home</label>
         <ShoppingBasketIcon className="item cart" />
         {!auth.isSigned() && (
           <>

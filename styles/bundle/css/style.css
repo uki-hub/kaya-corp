@@ -3973,3 +3973,9 @@ faq-item
 .landing-header .items .item ul li label:hover {
   color: darkslategrey;
 }
+
+.divider {
+  width: 100%;
+  height: 2px;
+  color: #888888;
+}

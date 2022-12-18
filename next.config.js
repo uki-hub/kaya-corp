@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    unoptimized: true,
+    unoptimized: false,
   },
   env: {
     "api-key": "0ed365ed-daf4-4747-a7d8-5434dfbb33c3",
