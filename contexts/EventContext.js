@@ -1,7 +1,8 @@
 import Router from "next/router";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { sendPembayaranEventRepo } from "../repositories/EventRepository";
+import AuthContext from "./AuthContext";
 import { buildPayload, validateDataPeserta } from "./_EventContext";
 
 const EventContext = React.createContext({
@@ -17,15 +18,18 @@ export const EventContextProvider = ({
   onSubmitted,
   children,
 }) => {
+  const auth = useContext(AuthContext);
+
   const validateDataPesertaHandler = (listPeserta) =>
     validateDataPeserta(listPeserta);
 
   const bayarHandler = async (listDataPeserta) => {
     onSubmitted();
 
-    const payload = buildPayload(eventData, listDataPeserta);
+    const payload = buildPayload(auth.authData, eventData, listDataPeserta);
 
-    const data = await sendPembayaranEventRepo(payload);
+    console.log(payload);
+    // const data = await sendPembayaranEventRepo(payload);
 
     window.location = data.redirect_url;
   };

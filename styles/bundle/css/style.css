@@ -3988,3 +3988,14 @@ faq-item
   max-height: 85px;
   transition: max-height 0.25s ease-in;
 }
+
+.bottom-sheet-menu {
+  display: flex;
+  flex-direction: column;
+  height: 30vh;
+}
+
+.bottom-sheet-menu label {
+  font-weight: bold;
+  margin: 0;
+}

@@ -53,14 +53,14 @@ export default function Login() {
           type="email"
           label="Email"
           initializeValue={""}
-          error={true}
+          error={false}
         />
         <FormTextField
           ref={passwordRef}
           type="password"
           label="Password"
           initializeValue={""}
-          error={true}
+          error={false}
         />
         {warning && (
           <label

@@ -1,11 +1,3 @@
-const _validateEmail = (email) => {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-};
-
 const validateDataPeserta = (listPeserta) => {
   let isValid = true;
   let invalidIndexPeserta;
@@ -23,14 +15,9 @@ const validateDataPeserta = (listPeserta) => {
         isValid = false;
         invalidIndexPeserta = i;
         invalidFieldName = key;
-      }
 
-      if (key == "email")
-        if (!_validateEmail(peserta[key]?.toString().trim())) {
-          isValid = false;
-          invalidIndexPeserta = i;
-          invalidFieldName = key;
-        }
+        if (key == "noTeleponDarurat") isValid = true;
+      }
 
       if (!isValid) break;
     }
@@ -61,7 +48,7 @@ const _calculatePrice = (brrCategory, listBRR) => {
   return totalPrice;
 };
 
-const buildPayload = (eventData, listDataPeserta) => {
+const buildPayload = (authData, eventData, listDataPeserta) => {
   const listBRR = listDataPeserta.map((d) => {
     return {
       categoryCode: d.categoryCode,
@@ -70,6 +57,7 @@ const buildPayload = (eventData, listDataPeserta) => {
   });
 
   const result = {
+    userid: authData.userid,
     idEvent: eventData.idEvent,
     bookDate: null,
     pax: listDataPeserta.length,
@@ -93,7 +81,6 @@ const buildPayload = (eventData, listDataPeserta) => {
       const price = _brr.price;
 
       return {
-        email: d.email,
         nmParticipant: d.namaKTP,
         city: d.kota,
         phone: d.noTelepon,

@@ -20,7 +20,7 @@ const KartuPeserta = ({ data }) => {
         <label
           style={{
             position: "absolute",
-            "font-size": "30px",
+            fontSize: "30px",
             left: "50px",
             top: "120px",
           }}
@@ -30,7 +30,7 @@ const KartuPeserta = ({ data }) => {
         <label
           style={{
             position: "absolute",
-            "font-size": "30px",
+            fontSize: "30px",
             left: "50px",
             top: "200px",
           }}
@@ -40,7 +40,7 @@ const KartuPeserta = ({ data }) => {
         <label
           style={{
             position: "absolute",
-            "font-size": "30px",
+            fontSize: "30px",
             left: "50px",
             top: "355px",
           }}
@@ -50,7 +50,7 @@ const KartuPeserta = ({ data }) => {
         <label
           style={{
             position: "absolute",
-            "font-size": "30px",
+            fontSize: "30px",
             left: "50px",
             top: "465px",
           }}
@@ -60,7 +60,7 @@ const KartuPeserta = ({ data }) => {
         <label
           style={{
             position: "absolute",
-            "font-size": "30px",
+            fontSize: "30px",
             left: "445px",
             top: "355px",
           }}
@@ -70,7 +70,7 @@ const KartuPeserta = ({ data }) => {
         <label
           style={{
             position: "absolute",
-            "font-size": "30px",
+            fontSize: "30px",
             left: "445px",
             top: "465px",
           }}
@@ -80,7 +80,7 @@ const KartuPeserta = ({ data }) => {
         <label
           style={{
             position: "absolute",
-            "font-size": "30px",
+            fontSize: "30px",
             left: "690px",
             top: "355px",
           }}
@@ -90,7 +90,7 @@ const KartuPeserta = ({ data }) => {
         <label
           style={{
             position: "absolute",
-            "font-size": "30px",
+            fontSize: "30px",
             left: "690px",
             top: "465px",
           }}

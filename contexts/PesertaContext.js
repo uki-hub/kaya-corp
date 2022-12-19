@@ -1,7 +1,6 @@
 import React, { createRef, useRef, useState } from "react";
 
 const _persertaObject = {
-  email: "",
   namaKTP: "",
   kota: "",
   noTelepon: "",

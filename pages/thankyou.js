@@ -1,20 +1,16 @@
-import { width } from "@mui/system";
 import { useRouter } from "next/router";
-// import Lottie from "react-lottie";
-import checkAnimation from "/public/assets/lotties/check.json";
 import classes from "../styles/pages/thankyou.module.css";
-import Link from "next/link";
-import { getConfirmation } from "../repositories/EventRepository";
 
 const ThankYou = (props) => {
-  const goHomeHandler = () => (window.location.href = "/event/brr");
-  
+  const router = useRouter();
+
+  const goHomeHandler = () => router.push("/transaction");
+
   return (
-    <>
-      <div className={classes.parent}>
-        <div className={classes.child}>
-          <h1 style={{ marginBottom: "3rem", color: "white" }}>Thank You</h1>
-          {/* <Lottie
+    <div className={classes.parent}>
+      <div className={classes.child}>
+        <h1 style={{ marginBottom: "3rem", color: "white" }}>Thank You</h1>
+        {/* <Lottie
             options={{
               loop: false,
               autoplay: true,
@@ -26,16 +22,15 @@ const ThankYou = (props) => {
             height={250}
             width={250}
           /> */}
-          <div style={{ whiteSpace: "nowrap", color: "white" }}>
-            terima kasih untuk pembelian tiket event
-          </div>
-          <br />
-          <div className={"btn " + classes.goback} onClick={goHomeHandler}>
-            HOME
-          </div>
+        <div style={{ whiteSpace: "nowrap", color: "white" }}>
+          terima kasih untuk pembelian tiket event
+        </div>
+        <br />
+        <div className={"btn " + classes.goback} onClick={goHomeHandler}>
+          Lihat Transaksi
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

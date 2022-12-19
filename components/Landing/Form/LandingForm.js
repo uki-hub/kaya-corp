@@ -8,6 +8,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import PesertaContext from "../../../contexts/PesertaContext";
 import EventContext from "../../../contexts/EventContext";
 import DaScroll from "../../../lib/DaScroll";
+import AuthContext from "../../../contexts/AuthContext";
+import { useRouter } from "next/router";
 
 export default function LandingForm(props) {
   const [errorForm, setErrorForm] = useState({
@@ -15,15 +17,15 @@ export default function LandingForm(props) {
     invalidFieldName: null,
   });
 
-  const actionRef = useRef();
-
+  const router = useRouter();
+  const authCtx = useContext(AuthContext);
   const eventCtx = useContext(EventContext);
   const pesertaCtx = useContext(PesertaContext);
 
   const tambahPesertaHandler = () => {
     pesertaCtx.onTambahPeserta();
 
-    let t = setTimeout(() => {
+    setTimeout(() => {
       DaScroll("ticket-forms");
     }, 100);
   };
@@ -34,7 +36,7 @@ export default function LandingForm(props) {
   const deletePesertaHandler = (indexPeserta) => {
     pesertaCtx.onHapusPeserta(indexPeserta);
 
-    let t = setTimeout(() => {
+    setTimeout(() => {
       DaScroll("ticket-forms");
     }, 100);
   };
@@ -43,6 +45,8 @@ export default function LandingForm(props) {
     const listPeserta = [...pesertaCtx.listPeserta];
 
     const invalidForm = eventCtx.onValidateDataPeserta(listPeserta);
+
+    if (!authCtx.isSigned()) return router.push("/login");
 
     if (!invalidForm) {
       eventCtx.onBayar(listPeserta);
@@ -101,7 +105,7 @@ export default function LandingForm(props) {
         </div>
       </div>
 
-      <div ref={actionRef} className="speaker-shap">
+      <div className="speaker-shap">
         <Image className="shap1" src={img1} alt="" />
         <Image className="shap2" src={img2} alt="" />
         <Image className="shap3" src={img3} alt="" />

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import {
   ShoppingBasket as ShoppingBasketIcon,
@@ -7,10 +7,15 @@ import {
 import Link from "next/link";
 import AuthContext from "../../../contexts/AuthContext";
 import { useRouter } from "next/router";
+import useScreenInfo from "../../../hooks/useScreenInfo";
+import { Dialog, Slide } from "@mui/material";
+import BottomSheet from "../../UI/BottomSheet";
 
 export default function LandingHeader(props) {
+  const [open, setOpen] = useState(false);
   const auth = useContext(AuthContext);
   const router = useRouter();
+  const isMobile = useScreenInfo().isMobile;
 
   const homeHandler = () => router.push("/");
 
@@ -28,8 +33,22 @@ export default function LandingHeader(props) {
     });
   };
 
+  const openMenuHandler = () => setOpen(true);
+
+  const closeMenuHandler = () => setOpen(false);
+
   return (
     <header className="landing-header">
+      <BottomSheet
+        open={auth.isSigned() && isMobile && open}
+        onClose={closeMenuHandler}
+      >
+        <div className="bottom-sheet-menu">
+          <label onClick={profileHandler}>Profile</label>
+          <label onClick={transactionHandler}>Transaksi</label>
+          <label onClick={logoutHandler}>Logout</label>
+        </div>
+      </BottomSheet>
       <div className="items">
         <label
           onClick={homeHandler}
@@ -60,8 +79,8 @@ export default function LandingHeader(props) {
           </>
         )}
         {/* {auth.isSigned() && <div className="divider" />} */}
-        {auth.isSigned() && (
-          <div id="bangsat" className="item profile">
+        {auth.isSigned() && !isMobile && (
+          <div className="item profile">
             <AccountCircleIcon className="item profile-icon" />
             <label>{auth.authData.fullname}</label>
             <div className="profile-options">
@@ -69,6 +88,12 @@ export default function LandingHeader(props) {
               <label onClick={transactionHandler}>Transaksi</label>
               <label onClick={logoutHandler}>Logout</label>
             </div>
+          </div>
+        )}
+        {auth.isSigned() && isMobile && (
+          <div className="item profile" onClick={openMenuHandler}>
+            <AccountCircleIcon className="item profile-icon" />
+            <label>{auth.authData.fullname}</label>
           </div>
         )}
       </div>

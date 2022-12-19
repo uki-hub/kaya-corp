@@ -5,7 +5,6 @@ import RadioGroupField from "../../UI/RadioGroupField";
 import CircleContainer from "../../UI/CircleContainer";
 
 import {
-  Email as EmailIcon,
   BadgeRounded as BadgeRoundedIcon,
   Place as PlaceIcon,
   Call as CallIcon,
@@ -33,7 +32,6 @@ const FormPerserta = ({
   const eventData = useContext(EventContext).eventData;
 
   const refs = {
-    email: useRef(),
     namaKTP: useRef(),
     kota: useRef(),
     noTelepon: useRef(),
@@ -80,7 +78,6 @@ const FormPerserta = ({
 
   const formBlurHandler = () =>
     onEditingComplete({
-      email: refs.email.current.value,
       namaKTP: refs.namaKTP.current.value,
       kota: refs.kota.current.value,
       noTelepon: refs.noTelepon.current.value1,
@@ -164,16 +161,7 @@ const FormPerserta = ({
             />
           </div>
         )}
-      </div>
-      <FormTextField
-        // ref={emailRef}
-        ref={refs.email}
-        type="email"
-        label="Email"
-        icon={EmailIcon}
-        initializeValue={dataPeserta.email}
-        error={errorForm.invalidFieldName == "email"}
-      />
+      </div>      
       <FormTextField
         // ref={namaKTPRef}
         ref={refs.namaKTP}
