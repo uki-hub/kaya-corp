@@ -25,20 +25,20 @@ const AuthContext = React.createContext({
   onRegister: async (payload) => {},
   onForgotPassword: async (email) => {},
   onSetAuthData: (authData) => {},
-  warnings: [],
+  warning: null,
 });
 
 const AuthContextProvider = (props) => {
   const [authData, setAuthData] = useState(props.authData ?? _EMPTY);
-  const [warnings, setWarnings] = useState([]);
+  const [warning, setWarning] = useState([]);
 
   useEffect(() => {
     // const authData = StorageService.authData();
     // if (authData?.userid) _setAuthData(authData);
   }, []);
 
-  const _setWarnings = (value) => {
-    setWarnings(value ?? "Terjadi error :(");
+  const _setWarning = (value) => {
+    setWarning(value ?? "Terjadi error :(");
     return false;
   };
 
@@ -50,7 +50,7 @@ const AuthContextProvider = (props) => {
       password,
     });
 
-    if (data == null || !data.isSuccess) return _setWarnings(data.data);
+    if (data == null || !data.isSuccess) return _setWarning(data.data);
 
     setAuthData(data.data);
 
@@ -68,7 +68,7 @@ const AuthContextProvider = (props) => {
       fullname: formData.fullname,
     });
 
-    if (data == null || !data.isSuccess) return _setWarnings(data.data);
+    if (data == null || !data.isSuccess) return _setWarning(data.data);
 
     return await loginHandler(formData.userid, formData.password);
   };
@@ -76,7 +76,7 @@ const AuthContextProvider = (props) => {
   const forgotPasswordHandler = async (email) => {
     const data = forgotPasswordRepo(email);
 
-    if (data == null || !data.isSuccess) return _setWarnings(data.message);
+    if (data == null || !data.isSuccess) return _setWarning(data.message);
 
     return true;
   };
@@ -98,7 +98,7 @@ const AuthContextProvider = (props) => {
         onRegister: registerHandler,
         onForgotPassword: forgotPasswordHandler,
         onSetAuthData: setAuthDataHandler,
-        warnings: warnings,
+        warnings: warning,
       }}
     >
       {props.children}

@@ -246,7 +246,7 @@ export default function Transaction({ authData, invoices }) {
       <div className="container">
         <div className={"container " + classes.form}>
           <div className="row m-0">
-            <label>Search</label>
+            <label>Daftar Transaksi</label>
           </div>
           <div className={classes["transaction-list"]}>
             {data.map((t, i) => {
@@ -260,7 +260,13 @@ export default function Transaction({ authData, invoices }) {
                     <label className={classes["transaction-no"]}>
                       {t.transNo}
                     </label>
-                    <label className={classes["transaction-sts"]}>
+                    <label
+                      className={classes["transaction-sts"]}
+                      style={{
+                        backgroundColor:
+                          t.stsPayment == "PAID" ? "green" : "red",
+                      }}
+                    >
                       {t.stsPayment}
                     </label>
                     <label className={classes["transaction-date"]}>

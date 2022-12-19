@@ -1,9 +1,5 @@
 const changePasswordRepo = async (payload) => {
-  const _payload = JSON.stringify({
-    userid: "123",
-    oldpassword: "querty",
-    newpassword: "admin",
-  });
+  const _payload = JSON.stringify(payload);
 
   var response = await fetch(
     "https://api.bantengseries.com/api/users2/changePassword.php",

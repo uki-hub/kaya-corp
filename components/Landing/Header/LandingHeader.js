@@ -15,19 +15,34 @@ export default function LandingHeader(props) {
   const homeHandler = () => router.push("/");
 
   const transactionHandler = () => router.push("/transaction");
-  
+
   const profileHandler = () =>
     router.push({
       pathname: "/profile",
     });
 
-  const logoutHandler = () => auth.onLogout();
+  const logoutHandler = () => {
+    auth.onLogout();
+    router.push({
+      pathname: "/",
+    });
+  };
 
   return (
     <header className="landing-header">
       <div className="items">
-        <label onClick={homeHandler}>Home</label>
-        <ShoppingBasketIcon className="item cart" />
+        <label
+          onClick={homeHandler}
+          style={{
+            marginRight: "auto",
+            color: "white",
+            fontWeight: "Bold",
+            cursor: "pointer",
+          }}
+        >
+          Home
+        </label>
+        {/* <ShoppingBasketIcon className="item cart" /> */}
         {!auth.isSigned() && (
           <>
             <div style={{ width: "5px" }} />
@@ -44,22 +59,16 @@ export default function LandingHeader(props) {
             </Link>
           </>
         )}
-        {auth.isSigned() && <div className="divider" />}
+        {/* {auth.isSigned() && <div className="divider" />} */}
         {auth.isSigned() && (
-          <div className="item">
-            <AccountCircleIcon className="item profile" />
+          <div id="bangsat" className="item profile">
+            <AccountCircleIcon className="item profile-icon" />
             <label>{auth.authData.fullname}</label>
-            <ul>
-              <li>
-                <label onClick={profileHandler}>Profile</label>
-              </li>
-              <li>
-                <label onClick={transactionHandler}>Transaksi</label>
-              </li>
-              <li>
-                <label onClick={logoutHandler}>Logout</label>
-              </li>
-            </ul>
+            <div className="profile-options">
+              <label onClick={profileHandler}>Profile</label>
+              <label onClick={transactionHandler}>Transaksi</label>
+              <label onClick={logoutHandler}>Logout</label>
+            </div>
           </div>
         )}
       </div>

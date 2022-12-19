@@ -1,27 +1,45 @@
 import classes from "../styles/pages/profile.module.css";
 import { Email as EmailIcon } from "@mui/icons-material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import FormTextField from "../components/UI/FormTextField";
 import AuthContext from "../contexts/AuthContext";
 import AuthDataParser from "../lib/AuthDataParser";
 import LandingBackdrop from "../components/Landing/Backdrop/LandingBackdrop";
 import LabelForm from "../components/UI/LabelForm";
 import LandingHeader from "../components/Landing/Header/LandingHeader";
-
-// {
-//   "isSuccess": true,
-//   "data": {
-//   "userid": "123",
-//   "password": "admin",
-//   "fullname": "Kaya Developer",
-//   "email": "kayacorp.developer@gmail.com",
-//   "stsdelete": null,
-//   "lastupdate": "2022-12-15 06:57:09"
-//   }
+import { changePasswordRepo } from "../repositories/UserRepository";
 
 export default function Profile({ authData }) {
   const [submitted, setSubmitted] = useState(false);
   const auth = useContext(AuthContext);
+  const oldPasswordRef = useRef();
+  const newPasswordRef = useRef();
+  const confirmPasswordRef = useRef();
+  const [warning, setWarning] = useState();
+
+  const changePasswordHandler = async () => {
+    const warnings = [];
+
+    if (
+      oldPasswordRef.current.value == "" ||
+      newPasswordRef.current.value == "" ||
+      confirmPasswordRef.current.value == ""
+    ) {
+      setWarning("Please fill all the fields");
+      return;
+    }
+
+    if (newPasswordRef.current.value == confirmPasswordRef.current.value) {
+      setWarning("Please make sure confirm password is same with new password");
+      return;
+    }
+
+    const result = await changePasswordRepo({
+      userid: auth.authData.userid,
+      oldpassword: oldPasswordRef.current.value,
+      newpassword: confirmPasswordRef.current.value,
+    });
+  };
 
   useEffect(() => {
     if (authData) auth.onSetAuthData(authData);
@@ -34,35 +52,62 @@ export default function Profile({ authData }) {
       <div className="container">
         <div className={"container " + classes.form}>
           <label className={classes["form-title"] + " col mb-3"}>Profile</label>
-          <LabelForm label="User Id" text={authData.userid} />
-          <LabelForm label="Full Name" text={authData.fullname} />
-          <LabelForm label="Email" text={authData.email} />
+          <LabelForm
+            label="User Id"
+            text={authData.userid}
+            style={{ margin: "0 20px" }}
+          />
+          <LabelForm
+            label="Full Name"
+            text={authData.fullname}
+            style={{ margin: "0 20px" }}
+          />
+          <LabelForm
+            label="Email"
+            text={authData.email}
+            style={{ margin: "0 20px" }}
+          />
           <div className={classes["change-password-form"] + " mt-3"}>
             <label className={classes["change-password-label"]}>
               Change Password
             </label>
             <FormTextField
-              // ref={passwordRef}
+              ref={oldPasswordRef}
               type="password"
               label="Old Password"
               initializeValue={""}
               error={false}
             />
             <FormTextField
-              // ref={passwordRef}
+              ref={newPasswordRef}
               type="password"
               label="New Password"
               initializeValue={""}
               error={false}
             />
             <FormTextField
-              // ref={passwordRef}
+              ref={confirmPasswordRef}
               type="password"
               label="Confirm New Password"
               initializeValue={""}
               error={false}
             />
-            <div className={"btn col"}>Change Password</div>
+            {warning && (
+              <label
+                style={{
+                  color: "red",
+                  userSelect: "none",
+                  display: "block",
+                  margin: "0",
+                  fontSize: "14px",
+                }}
+              >
+                {warning}
+              </label>
+            )}
+            <div className={"btn col"} onClick={changePasswordHandler}>
+              Change Password
+            </div>
           </div>
         </div>
       </div>

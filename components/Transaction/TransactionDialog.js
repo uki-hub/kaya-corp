@@ -36,16 +36,73 @@ const TransactionDialog = ({ data, open, onCloseHandler }) => {
             labelWidth="10%"
           />
           <LabelForm label="Pax" text={data.pax} labelWidth="10%" />
-          <LabelForm
-            label="Daftar Peserta"
-            text=""
-            labelWidth="10%"
-            style={{ marginTop: "10px" }}
-          />
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              margin: "5px 0",
+              alignItems: "center",
+            }}
+          >
+            <label
+              style={{
+                width: "10%",
+                fontWeight: "bold",
+                color: "rgb(136, 136, 136)",
+                userSelect: "none",
+              }}
+            >
+              Daftar Peserta
+            </label>
+            {data.stsPayment == "PAID" && (
+              <form
+                target="_blank"
+                action="/generate/kartu-peserta"
+                method="post"
+                style={{ marginLeft: "auto" }}
+              >
+                <input
+                  type="hidden"
+                  name="data"
+                  value={JSON.stringify(data.participant)}
+                />
+                <input
+                  className={classes["generate-btn"]}
+                  type="submit"
+                  value="Generate Semua"
+                />
+              </form>
+            )}
+          </div>
+
           <div className={classes["participant-list"]}>
             {data.participant.map((p, j) => (
               <div key={j} className={classes["participant-details"]}>
-                <label>Peserta {j + 1}</label>
+                <div style={{ display: "flex" }}>
+                  <label style={{ fontWeight: "bold", color: "#686868" }}>
+                    Peserta {j + 1}
+                  </label>
+                  {data.stsPayment == "PAID" && (
+                    <form
+                      target="_blank"
+                      action="/generate/kartu-peserta"
+                      method="post"
+                      style={{ marginLeft: "auto" }}
+                    >
+                      <input
+                        type="hidden"
+                        name="data"
+                        value={JSON.stringify([p])}
+                      />
+                      <input
+                        className={classes["generate-btn"]}
+                        type="submit"
+                        value="Generate Kartu Peserta"
+                        style={{ width: "185px" }}
+                      />
+                    </form>
+                  )}
+                </div>
                 <div className={classes["participant-info"]}>
                   <LabelForm30
                     label="Participant Code"

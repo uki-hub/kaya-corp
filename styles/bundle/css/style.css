@@ -3897,7 +3897,6 @@ faq-item
   top: 20px;
   z-index: 9;
   height: 40px;
-  background: darkred;
 }
 
 .landing-header .items {
@@ -3927,10 +3926,6 @@ faq-item
   margin: 0;
 }
 
-.landing-header .items .item label:hover {
-  color: lightcoral;
-}
-
 .landing-header .items .divider {
   height: 100%;
   width: 2px;
@@ -3945,37 +3940,51 @@ faq-item
   font-size: 30px;
 }
 
-.landing-header .items .profile {
+.landing-header .items .profile-icon {
   margin-right: 5px;
   color: white;
   font-size: 30px;
-}
-
-.landing-header .items .item ul {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  min-width: 110px;
-  width: 100%;
-  top: 35px;
-  right: 0px;
-  background-color: whitesmoke;
-  padding: 3px 10px;
-}
-
-.landing-header .items .item ul li label {
-  font-size: 16px;
-  color: #888888;
-  cursor: pointer;
-}
-
-.landing-header .items .item ul li label:hover {
-  color: darkslategrey;
 }
 
 .divider {
   width: 100%;
   height: 2px;
   color: #888888;
+}
+
+.profile-options {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 110px;
+  width: 100%;
+  top: 30px;
+  right: 0px;
+  background-color: white;
+  border-radius: 7px;
+  overflow: hidden;
+  max-height: 0px;
+  transition: max-height 0.25s ease-out;
+}
+
+.profile-options:hover {
+  max-height: 85px;
+  transition: max-height 0.25s ease-in;
+}
+
+.profile-options label {
+  font-size: 16px !important;
+  color: #888 !important;
+  cursor: pointer;
+  margin-left: 10px !important;
+}
+
+.landing-header .item .profile:hover {
+  cursor: pointer;
+}
+
+.landing-header .items .item label:hover ~ .profile-options {
+  max-height: 85px;
+  transition: max-height 0.25s ease-in;
 }
