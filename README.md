@@ -11,6 +11,7 @@
 - hide daftar peserta di transaction details jika belum paid
 - tambah close di form modal
 - fix dimensi di kartu peserta buat a4
+- tambahin total harga sebeum pesan
 
 can maybe?
 - add sistem keranjang pembelian
