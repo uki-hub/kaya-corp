@@ -19,6 +19,7 @@
   max-height: 80vh;
   padding: 20px;
   height: 80vh;
+  width: 80%;
 }
 
 .transaction-list {
@@ -61,7 +62,15 @@
 .transaction-no {
   color: darkslategray;
   font-weight: bold;
-  margin-right: 10px !important;
+  margin-right: 5px !important;
+}
+
+.transaction-amount {
+  border: solid 1px darkgray;
+  border-radius: 5px;
+  padding: 0px 3px;
+  color: gray;
+  margin-right: 5px !important;
 }
 
 .transaction-sts {

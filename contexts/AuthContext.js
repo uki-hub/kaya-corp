@@ -17,6 +17,8 @@ const _EMPTY = {
   lastupdate: null,
 };
 
+const _UnknownErrorMessage = "Terjadi kesalahan server. (coba lagi)";
+
 const AuthContext = React.createContext({
   authData: {},
   isSigned: () => {},
@@ -25,22 +27,15 @@ const AuthContext = React.createContext({
   onRegister: async (payload) => {},
   onForgotPassword: async (email) => {},
   onSetAuthData: (authData) => {},
-  warning: null,
 });
 
 const AuthContextProvider = (props) => {
   const [authData, setAuthData] = useState(props.authData ?? _EMPTY);
-  const [warning, setWarning] = useState([]);
 
   useEffect(() => {
     // const authData = StorageService.authData();
     // if (authData?.userid) _setAuthData(authData);
   }, []);
-
-  const _setWarning = (value) => {
-    setWarning(value ?? "Terjadi error :(");
-    return false;
-  };
 
   const isSigned = () => authData?.userid != null;
 
@@ -50,14 +45,20 @@ const AuthContextProvider = (props) => {
       password,
     });
 
-    if (data == null || !data.isSuccess) return _setWarning(data.data);
+    if (data == null || !data.isSuccess)
+      return {
+        success: false,
+        message: data.data ?? _UnknownErrorMessage,
+      };
 
     setAuthData(data.data);
 
     const token = jsonwebtoken.sign(data.data, "banteng");
     CookieService.setToken(token);
 
-    return true;
+    return {
+      success: true,
+    };
   };
 
   const registerHandler = async (formData) => {
@@ -68,17 +69,27 @@ const AuthContextProvider = (props) => {
       fullname: formData.fullname,
     });
 
-    if (data == null || !data.isSuccess) return _setWarning(data.data);
+    if (data == null || !data.isSuccess)
+      return {
+        success: false,
+        message: data.message ?? _UnknownErrorMessage,
+      };
 
-    return await loginHandler(formData.userid, formData.password);
+    return {
+      success: true,
+    };
   };
 
   const forgotPasswordHandler = async (email) => {
     const data = forgotPasswordRepo(email);
 
-    if (data == null || !data.isSuccess) return _setWarning(data.message);
+    if (data == null || !data.isSuccess)
+      return {
+        success: false,
+        message: data.message ?? _UnknownErrorMessage,
+      };
 
-    return true;
+    return { success: true };
   };
 
   const logoutHandler = () => {
@@ -98,7 +109,6 @@ const AuthContextProvider = (props) => {
         onRegister: registerHandler,
         onForgotPassword: forgotPasswordHandler,
         onSetAuthData: setAuthDataHandler,
-        warnings: warning,
       }}
     >
       {props.children}

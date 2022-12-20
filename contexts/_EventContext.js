@@ -33,12 +33,19 @@ const validateDataPeserta = (listPeserta) => {
       };
 };
 
-const _calculatePrice = (brrCategory, listBRR) => {
+const calculatePrice = (eventData, listDataPeserta) => {
   let totalPrice = 0;
+
+  const listBRR = listDataPeserta.map((d) => {
+    return {
+      categoryCode: d.categoryCode,
+      brrCode: d.brrCode,
+    };
+  });
 
   listBRR.forEach((d) => {
     const price =
-      brrCategory
+      eventData.brrCategory
         .find((c) => c.idBrrCategory == d.categoryCode)
         ?.brr.find((b) => b.idBrr == d.brrCode)?.price ?? 0;
 
@@ -49,19 +56,14 @@ const _calculatePrice = (brrCategory, listBRR) => {
 };
 
 const buildPayload = (authData, eventData, listDataPeserta) => {
-  const listBRR = listDataPeserta.map((d) => {
-    return {
-      categoryCode: d.categoryCode,
-      brrCode: d.brrCode,
-    };
-  });
+  const amount = calculatePrice(eventData, listDataPeserta);
 
   const result = {
     userid: authData.userid,
     idEvent: eventData.idEvent,
     bookDate: null,
     pax: listDataPeserta.length,
-    amount: _calculatePrice(eventData.brrCategory, listBRR),
+    amount: amount,
     participant: listDataPeserta.map((d) => {
       // console.log(eventData.jerseySize)
       // console.log(d.jerseySizeCode)
@@ -97,4 +99,4 @@ const buildPayload = (authData, eventData, listDataPeserta) => {
   return result;
 };
 
-export { buildPayload, validateDataPeserta };
+export { buildPayload, validateDataPeserta, calculatePrice };

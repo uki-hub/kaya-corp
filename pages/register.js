@@ -6,8 +6,10 @@ import LandingBackdrop from "../components/Landing/Backdrop/LandingBackdrop";
 import { useRouter } from "next/router";
 import AuthDataParser from "../lib/AuthDataParser";
 import classes from "../styles/pages/register.module.css";
+import useFormat from "../hooks/useFormat";
 
 export default function Register() {
+  const [warning, setWarning] = useState();
   const [submitted, setSubmitted] = useState(false);
   const router = useRouter();
   const useridRef = useRef();
@@ -15,55 +17,86 @@ export default function Register() {
   const emailRef = useRef();
   const fullNameRef = useRef();
   const auth = useContext(AuthContext);
+  const format = useFormat();
 
-  const sendEmailHandler = async () => {
+  const alreadyHaveAnAccountHandler = () => router.push("/login");
+
+  const validate = () => {
+    if (
+      useridRef.current.value == "" ||
+      passwordRef.current.value == "" ||
+      emailRef.current.value == "" ||
+      fullNameRef.current.value == ""
+    ) {
+      setWarning("Please fill all the fields");
+      return false;
+    }
+
+    if (format.isEmail(emailRef.current.value)) {
+      setWarning("Invalid email");
+      return false;
+    }
+
+    return true;
+  };
+
+  const registerHandler = async () => {
+    if (!validate()) return;
+
     setSubmitted(true);
 
-    const result = await auth.onRegister({
+    const { success, message } = await auth.onRegister({
       userid: useridRef.current.value,
       password: passwordRef.current.value,
       email: emailRef.current.value,
       fullname: fullNameRef.current.value,
     });
 
-    if (result) router.push("/");
+    setSubmitted(false);
+
+    if (success) router.push("/login");
+    else setWarning(message);
   };
 
   return (
     <div className={classes.background}>
       {submitted && <LandingBackdrop />}
       <div className={classes.form}>
+        <label className={classes["form-title"]}>Register</label>
         <FormTextField
           ref={useridRef}
           type="text"
           label="User ID"
           initializeValue={""}
-          error={true}
+          error={false}
         />
         <FormTextField
           ref={passwordRef}
           type="password"
           label="Password"
           initializeValue={""}
-          error={true}
+          error={false}
         />
         <FormTextField
           ref={emailRef}
           type="email"
           label="Email"
           initializeValue={""}
-          error={true}
+          error={false}
         />
         <FormTextField
           ref={fullNameRef}
-          type="test"
+          type="text"
           label="Full Name"
           initializeValue={""}
-          error={true}
+          error={false}
         />
-
-        <div className={"btn col"} onClick={sendEmailHandler}>
+        {warning && <label className="warning">{warning}</label>}
+        <div className={"btn col"} onClick={registerHandler}>
           Register
+        </div>
+        <div className={"row m-0 " + classes["other-options"]}>
+          <label onClick={alreadyHaveAnAccountHandler}>Sudah Punya Akun?</label>
         </div>
       </div>
     </div>

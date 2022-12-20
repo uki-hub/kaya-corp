@@ -14,6 +14,7 @@ const BottomSheet = ({ open, children, onClose }) => {
           bottom: 0,
           margin: 0,
           width: "100%",
+          background: "transparent"
         },
       }}
       fullWidth

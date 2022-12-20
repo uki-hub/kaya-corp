@@ -12,11 +12,23 @@
 }
 
 .form {
-  padding: 10px 30px;
-  width: 400px;
-  background-color: whitesmoke;
-  border-radius: 7px;
+  width: 90%;
+  padding: 30px 20px 15px 20px;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 10px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.form .form-title {
+  font-size: 25px;
+  font-weight: bold;
+  color: darkslategray;
+  margin-bottom: 20px;
+}
+
+.other-options {
+  margin-top: 10px !important;
 }
 
 .other-options label {
@@ -29,13 +41,4 @@
 
 .other-options label:hover {
   color: darkslategray;
-}
-
-.logo {
-  height: 200px;
-  width: 200px;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  margin-bottom: 40px;
 }

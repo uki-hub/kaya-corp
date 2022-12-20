@@ -11,7 +11,7 @@ const KartuPeserta = ({ data }) => {
           position: "relative",
           width: "1280px",
           height: "527px",
-          backgroundImage: `url('data:image/png;base64, ${base64Image}');`,
+          backgroundImage: `url("data:image/png;base64, ${base64Image}")`,
           backgroundRepeat: "no-repeat",
           marginBottom: "10px",
           userSelect: "none",
@@ -65,7 +65,7 @@ const KartuPeserta = ({ data }) => {
             top: "355px",
           }}
         >
-          {d.tanggal}
+          {d.dateEvent}
         </label>
         <label
           style={{
@@ -75,7 +75,7 @@ const KartuPeserta = ({ data }) => {
             top: "465px",
           }}
         >
-          {d.waktu}
+          {d.timeEvent}
         </label>
         <label
           style={{
@@ -124,6 +124,17 @@ export async function getServerSideProps({ req }) {
       resolve({ err, fields, files });
     });
   });
+
+  if (!data.fields)
+    return {
+      redirect: {
+        permanent: true,
+        destination: "/",
+      },
+      props: {},
+    };
+
+  console.log(data.fields.data);
 
   return {
     props: {

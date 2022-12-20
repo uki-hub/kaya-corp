@@ -8,6 +8,7 @@ import LandingBackdrop from "../components/Landing/Backdrop/LandingBackdrop";
 import LabelForm from "../components/UI/LabelForm";
 import LandingHeader from "../components/Landing/Header/LandingHeader";
 import { changePasswordRepo } from "../repositories/UserRepository";
+import useScreenInfo from "../hooks/useScreenInfo";
 
 export default function Profile({ authData }) {
   const [submitted, setSubmitted] = useState(false);
@@ -16,10 +17,9 @@ export default function Profile({ authData }) {
   const newPasswordRef = useRef();
   const confirmPasswordRef = useRef();
   const [warning, setWarning] = useState();
+  const isMobile = useScreenInfo().isMobile;
 
-  const changePasswordHandler = async () => {
-    const warnings = [];
-
+  const validate = () => {
     if (
       oldPasswordRef.current.value == "" ||
       newPasswordRef.current.value == "" ||
@@ -29,16 +29,28 @@ export default function Profile({ authData }) {
       return;
     }
 
-    if (newPasswordRef.current.value == confirmPasswordRef.current.value) {
+    if (newPasswordRef.current.value != confirmPasswordRef.current.value) {
       setWarning("Please make sure confirm password is same with new password");
       return;
     }
+
+    return true;
+  };
+
+  const changePasswordHandler = async () => {
+    if (!validate()) return;
 
     const result = await changePasswordRepo({
       userid: auth.authData.userid,
       oldpassword: oldPasswordRef.current.value,
       newpassword: confirmPasswordRef.current.value,
     });
+
+    if (result.isSuccess) {
+      console.log("celebrate");
+    } else {
+      setWarning(result.message ?? "Terjadi kesalahan server. (coba lagi)");
+    }
   };
 
   useEffect(() => {
@@ -49,65 +61,51 @@ export default function Profile({ authData }) {
     <div className={classes.background}>
       {submitted && <LandingBackdrop />}
       <LandingHeader />
-      <div className="container">
-        <div className={"container " + classes.form}>
-          <label className={classes["form-title"] + " col mb-3"}>Profile</label>
-          <LabelForm
-            label="User Id"
-            text={authData.userid}
-            style={{ margin: "0 20px" }}
+      <div className={classes.form}>
+        <label className={classes["form-title"]}>Profile</label>
+        <LabelForm
+          label="User Id"
+          text={authData.userid}
+          labelWidth={isMobile ? "30%" : null}
+        />
+        <LabelForm
+          label="Full Name"
+          text={authData.fullname}
+          labelWidth={isMobile ? "30%" : null}
+        />
+        <LabelForm
+          label="Email"
+          text={authData.email}
+          labelWidth={isMobile ? "30%" : null}
+        />
+        <div className={classes["change-password-form"]}>
+          <label className={classes["change-password-label"]}>
+            Change Password
+          </label>
+          <FormTextField
+            ref={oldPasswordRef}
+            type="password"
+            label="Old Password"
+            initializeValue={""}
+            error={false}
           />
-          <LabelForm
-            label="Full Name"
-            text={authData.fullname}
-            style={{ margin: "0 20px" }}
+          <FormTextField
+            ref={newPasswordRef}
+            type="password"
+            label="New Password"
+            initializeValue={""}
+            error={false}
           />
-          <LabelForm
-            label="Email"
-            text={authData.email}
-            style={{ margin: "0 20px" }}
+          <FormTextField
+            ref={confirmPasswordRef}
+            type="password"
+            label="Confirm New Password"
+            initializeValue={""}
+            error={false}
           />
-          <div className={classes["change-password-form"] + " mt-3"}>
-            <label className={classes["change-password-label"]}>
-              Change Password
-            </label>
-            <FormTextField
-              ref={oldPasswordRef}
-              type="password"
-              label="Old Password"
-              initializeValue={""}
-              error={false}
-            />
-            <FormTextField
-              ref={newPasswordRef}
-              type="password"
-              label="New Password"
-              initializeValue={""}
-              error={false}
-            />
-            <FormTextField
-              ref={confirmPasswordRef}
-              type="password"
-              label="Confirm New Password"
-              initializeValue={""}
-              error={false}
-            />
-            {warning && (
-              <label
-                style={{
-                  color: "red",
-                  userSelect: "none",
-                  display: "block",
-                  margin: "0",
-                  fontSize: "14px",
-                }}
-              >
-                {warning}
-              </label>
-            )}
-            <div className={"btn col"} onClick={changePasswordHandler}>
-              Change Password
-            </div>
+          {warning && <label className="waning">{warning}</label>}
+          <div className={"btn col m-0 p-0"} onClick={changePasswordHandler}>
+            Change Password
           </div>
         </div>
       </div>

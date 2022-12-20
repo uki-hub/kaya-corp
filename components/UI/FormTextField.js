@@ -3,7 +3,7 @@ import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import DaScroll, { scrollTo } from "../../lib/DaScroll";
 
 const FormTextField = React.forwardRef(function _(
-  { type, icon, label, style, initializeValue, error },
+  { type, icon, label, style, initializeValue, error, onEnter },
   ref
 ) {
   const [value, setValue] = useState(initializeValue);
@@ -50,6 +50,9 @@ const FormTextField = React.forwardRef(function _(
           fullWidth
           error={isError}
           onChange={textFieldChangeHandler}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") onEnter();
+          }}
         />
       </div>
     </div>

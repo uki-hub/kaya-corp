@@ -8,7 +8,9 @@ const LabelForm = ({
 }) => {
   return (
     <div style={{ display: "flex", width: "100%", ...style }}>
-      <div style={{ display: "flex", width: labelWidth ?? "20%" }}>
+      <div
+        style={{ display: "flex", width: labelWidth ?? "20%", flex: "none" }}
+      >
         <label
           style={{
             fontWeight: "bold",
@@ -32,7 +34,11 @@ const LabelForm = ({
         </label>
       </div>
       <div>
-        <label style={{ color: "#888888", ...textStyle }}>{text}</label>
+        <label
+          style={{ color: "#888888", wordBreak: "break-word", ...textStyle }}
+        >
+          {text}
+        </label>
       </div>
     </div>
   );

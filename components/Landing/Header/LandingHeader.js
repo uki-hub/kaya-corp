@@ -27,10 +27,10 @@ export default function LandingHeader(props) {
     });
 
   const logoutHandler = () => {
-    auth.onLogout();
     router.push({
       pathname: "/",
     });
+    auth.onLogout();
   };
 
   const openMenuHandler = () => setOpen(true);
@@ -44,19 +44,74 @@ export default function LandingHeader(props) {
         onClose={closeMenuHandler}
       >
         <div className="bottom-sheet-menu">
-          <label onClick={profileHandler}>Profile</label>
-          <label onClick={transactionHandler}>Transaksi</label>
-          <label onClick={logoutHandler}>Logout</label>
+          <div
+            style={{
+              display: "flex",
+              height: "100%",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-around",
+              backgroundColor: "#eee",
+              borderTopLeftRadius: "30px",
+              borderTopRightRadius: "30px",
+            }}
+          >
+            <label
+              style={{
+                marginTop: "20px",
+                fontSize: "20px",
+                color: "#555",
+              }}
+              onClick={profileHandler}
+            >
+              Profile
+            </label>
+            <div
+              style={{
+                width: "85%",
+                height: "1px",
+                backgroundColor: "gray",
+              }}
+            />
+            <label
+              style={{
+                fontSize: "20px",
+                color: "#555",
+              }}
+              onClick={transactionHandler}
+            >
+              Transaksi
+            </label>
+            <div
+              style={{
+                width: "85%",
+                height: "1px",
+                backgroundColor: "gray",
+              }}
+            />
+            <label
+              style={{
+                marginBottom: "20px",
+                fontSize: "20px",
+                color: "#555",
+              }}
+              onClick={logoutHandler}
+            >
+              Logout
+            </label>
+          </div>
         </div>
       </BottomSheet>
       <div className="items">
         <label
           onClick={homeHandler}
           style={{
+            fontSize: "18px",
             marginRight: "auto",
             color: "white",
             fontWeight: "Bold",
             cursor: "pointer",
+            userSelect: "none",
           }}
         >
           Home
@@ -84,9 +139,13 @@ export default function LandingHeader(props) {
             <AccountCircleIcon className="item profile-icon" />
             <label>{auth.authData.fullname}</label>
             <div className="profile-options">
-              <label onClick={profileHandler}>Profile</label>
+              <label style={{ marginTop: "10px" }} onClick={profileHandler}>
+                Profile
+              </label>
               <label onClick={transactionHandler}>Transaksi</label>
-              <label onClick={logoutHandler}>Logout</label>
+              <label style={{ marginBottom: "10px" }} onClick={logoutHandler}>
+                Logout
+              </label>
             </div>
           </div>
         )}

@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import FormTextField from "../components/UI/FormTextField";
 import classes from "../styles/pages/login.module.css";
-import { Email as EmailIcon } from "@mui/icons-material";
+import { Email as EmailIcon, RestaurantMenu } from "@mui/icons-material";
 import AuthContext from "../contexts/AuthContext";
 import LandingBackdrop from "../components/Landing/Backdrop/LandingBackdrop";
 import { useRouter } from "next/router";
@@ -18,11 +18,17 @@ export default function Login() {
   const forgotPasswordHandler = () => router.push("/forgot-password");
   const registerHandler = () => router.push("/register");
 
-  const loginHandler = async () => {
+  const validate = () => {
     if (usernameRef.current.value == "" || passwordRef.current.value == "") {
       setWarning("Please fill all the fields");
-      return;
+      return false;
     }
+
+    return true;
+  };
+
+  const loginHandler = async () => {
+    if (!validate) return;
 
     setSubmitted(true);
 
@@ -43,7 +49,7 @@ export default function Login() {
       <div className={classes.form}>
         <div className={classes.logo}>
           <img
-            src="https://upload.wikimedia.org/wikipedia/id/thumb/c/cd/Logo_PDI-P.svg/800px-Logo_PDI-P.svg.png"
+            src="/assets/images/logo/login-logo.png"
             width={200}
             height={200}
           />
@@ -61,20 +67,9 @@ export default function Login() {
           label="Password"
           initializeValue={""}
           error={false}
+          onEnter={loginHandler}
         />
-        {warning && (
-          <label
-            style={{
-              color: "red",
-              userSelect: "none",
-              display: "block",
-              margin: "0",
-              fontSize: "14px",
-            }}
-          >
-            {warning}
-          </label>
-        )}
+        {warning && <label className="warning">{warning}</label>}
         <div className={"btn col-12 mb-2"} onClick={loginHandler}>
           Login
         </div>

@@ -10,17 +10,21 @@ import EventContext from "../../../contexts/EventContext";
 import DaScroll from "../../../lib/DaScroll";
 import AuthContext from "../../../contexts/AuthContext";
 import { useRouter } from "next/router";
+import useFormat from "../../../hooks/useFormat";
+import { calculatePrice } from "../../../contexts/_EventContext";
 
 export default function LandingForm(props) {
   const [errorForm, setErrorForm] = useState({
     invalidIndexPeserta: null,
     invalidFieldName: null,
   });
+  const [totalHarga, setTotalHarga] = useState();
 
   const router = useRouter();
   const authCtx = useContext(AuthContext);
   const eventCtx = useContext(EventContext);
   const pesertaCtx = useContext(PesertaContext);
+  const format = useFormat();
 
   const tambahPesertaHandler = () => {
     pesertaCtx.onTambahPeserta();
@@ -71,12 +75,20 @@ export default function LandingForm(props) {
             key={i}
             indexPeserta={i}
             dataPeserta={d}
-            onEditingComplete={(data) => updateDataPesertaHandler(i, data)}
+            onEditingComplete={(data) => {
+              updateDataPesertaHandler(i, data);
+              setTotalHarga(eventCtx.eventData, data);
+            }}
             onDeletePeserta={() => deletePesertaHandler(i)}
             errorForm={errorForm.invalidIndexPeserta == i && errorForm}
           />
         ))}
-
+        <label className="form-total-harga-label">Total Harga&nbsp;:&nbsp;</label>
+        <label className="form-total-harga-label-amount">
+          {format.toThousandRupiah(
+            calculatePrice(eventCtx.eventData, pesertaCtx.listPeserta)
+          )}
+        </label>
         <div id="ticket-forms" className="row m-0">
           <button
             className="btn col-6"

@@ -3,8 +3,7 @@
   border-radius: 7px;
   border: 1px solid rgb(224, 224, 224);
   padding: 20px;
-  margin-top: 15px;
-  margin: 25px 20px;
+  margin: 15px 20px 20px;
 }
 
 .transaction-dialog label {
@@ -29,7 +28,7 @@
   border-radius: 7px;
   border: 1px solid rgb(224, 224, 224);
   padding: 20px;
-  max-height: 65vh;
+  max-height: 50vh;
   overflow-y: auto;
 }
 
@@ -49,8 +48,28 @@
   width: 140px;
   border-radius: 7px;
   border: solid 1px darkgray;
-  background: gray;
+  background: #d20055;
   color: white;
   cursor: pointer;
   font-weight: bold;
+}
+
+.close-btn {
+  margin-left: 20px;
+  margin-top: 10px;
+  width: min-content;
+  height: 30px;
+  border: solid 2px #d20055;
+  font-weight: bold;
+  color: #d20055;
+  padding: 4px;
+  border-radius: 5px;
+  line-height: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.close-btn:hover {
+  background-color: #d20055;
+  color: white;
 }
