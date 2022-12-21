@@ -75,13 +75,21 @@ const AuthContextProvider = (props) => {
         message: data.message ?? _UnknownErrorMessage,
       };
 
+    const loginResult = await loginHandler(formData.userid, formData.password);
+    if (!loginResult.success) {
+      return {
+        success: false,
+        message: loginResult.message ?? _UnknownErrorMessage,
+      };
+    }
+
     return {
       success: true,
     };
   };
 
   const forgotPasswordHandler = async (email) => {
-    const data = forgotPasswordRepo(email);
+    const data = await forgotPasswordRepo(email);
 
     if (data == null || !data.isSuccess)
       return {

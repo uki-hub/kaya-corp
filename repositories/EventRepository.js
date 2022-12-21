@@ -19,9 +19,7 @@ const getEventInitializeDataRepo = async (eventId) => {
 };
 
 const sendPembayaranEventRepo = async (payload) => {
-  const _payload = JSON.stringify({
-    ...payload,
-  });
+  const _payload = JSON.stringify(payload);
 
   var response = await fetch(
     "https://api.bantengseries.com//api/ticket/save.php",
@@ -30,7 +28,6 @@ const sendPembayaranEventRepo = async (payload) => {
       body: _payload,
     }
   );
-
 
   const data = await response.json();
 

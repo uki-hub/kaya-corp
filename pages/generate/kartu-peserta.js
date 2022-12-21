@@ -134,8 +134,6 @@ export async function getServerSideProps({ req }) {
       props: {},
     };
 
-  console.log(data.fields.data);
-
   return {
     props: {
       data: JSON.parse(data.fields.data),

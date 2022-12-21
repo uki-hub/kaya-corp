@@ -52,10 +52,13 @@ export default function Register() {
       fullname: fullNameRef.current.value,
     });
 
-    setSubmitted(false);
+    if (!success) {
+      setSubmitted(false);
+      setWarning(message);
+      return;
+    }    
 
-    if (success) router.push("/login");
-    else setWarning(message);
+    router.push("/");
   };
 
   return (
@@ -93,7 +96,7 @@ export default function Register() {
         />
         {warning && <label className="warning">{warning}</label>}
         <div className={"btn col"} onClick={registerHandler}>
-          Daftar  
+          Daftar
         </div>
         <div className={"row m-0 " + classes["other-options"]}>
           <label onClick={alreadyHaveAnAccountHandler}>Sudah Punya Akun?</label>

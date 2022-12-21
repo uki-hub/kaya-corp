@@ -19,7 +19,7 @@ export default function ForgotPassword() {
   const goBackToLoginHandler = () => router.push("/login");
 
   const validate = () => {
-    if (format.isEmail(emailRef.current.value)) {
+    if (!format.isEmail(emailRef.current.value)) {
       setWarning("Email tidak valid");
       return false;
     }
