@@ -7,6 +7,7 @@ import classes from "../styles/pages/mtransaction.module.css";
 import LabelTextForm from "../components/ui/LabelTextForm";
 import useFormat from "../hooks/useFormat";
 import formidable from "formidable";
+import LinkTextForm from "../components/UI/LinkTextForm";
 
 const MtransactionDetail = ({ authData, data }) => {
   const auth = useContext(AuthContext);
@@ -23,24 +24,31 @@ const MtransactionDetail = ({ authData, data }) => {
   return (
     <div className={classes.background}>
       <LandingHeader />
-      <div style={{ marginTop: "70px", paddingBottom: "30px", padding: "0 15px" }}>
+      <div
+        style={{ marginTop: "70px", paddingBottom: "30px", padding: "0 15px" }}
+      >
         <div className={classes.form}>
           <LabelForm45
-            label="Transaction No"
+            label="Nomor Transaks"
             text={data.transNo}
             labelWidth="50%"
           />
+          <LabelForm45 label="Jumlah Peserta" text={data.pax} labelWidth="50%" />
           <LabelForm45
-            label="Status Payment"
+            label="Status Pembayaran"
             text={data.stsPayment}
             labelWidth="50%"
           />
           <LabelForm45
-            label="Transaction Date"
+            label="Tanggal Transaksi"
             text={data.transDate}
             labelWidth="50%"
           />
-          <LabelForm45 label="Pax" text={data.pax} labelWidth="50%" />
+          <LinkTextForm
+            label="Link Pembayaran"
+            link={data.stsPayment == "PAID" ? "-" : data.paymentLink}
+            labelWidth="15%"
+          />
           <LabelForm45
             label="Total harga"
             text={format.toThousandRupiah(data.amount)}

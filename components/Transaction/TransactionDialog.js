@@ -2,6 +2,7 @@ import Dialog from "@mui/material/Dialog";
 import classes from "./TransactionDialog.module.css";
 import useFormat from "../../hooks/useFormat";
 import LabelTextForm from "../ui/LabelTextForm";
+import LinkTextForm from "../UI/LinkTextForm";
 
 const TransactionDialog = ({ data, open, onCloseHandler }) => {
   const format = useFormat();
@@ -27,25 +28,34 @@ const TransactionDialog = ({ data, open, onCloseHandler }) => {
         <label className={classes["dialog-label"]}>Transaction Details</label>
         <div>
           <LabelTextForm
-            label="Transaction No"
+            label="Nomor Transaksi"
             text={data.transNo}
-            labelWidth="10%"
+            labelWidth="15%"
           />
           <LabelTextForm
-            label="Status Payment"
+            label="Jumlah Peserta"
+            text={data.pax}
+            labelWidth="15%"
+          />
+          <LabelTextForm
+            label="Status Pembayaran"
             text={data.stsPayment}
-            labelWidth="10%"
+            labelWidth="15%"
           />
           <LabelTextForm
-            label="Transaction Date"
+            label="Tanggal Transaksi"
             text={data.transDate}
-            labelWidth="10%"
+            labelWidth="15%"
           />
-          <LabelTextForm label="Pax" text={data.pax} labelWidth="10%" />
+          <LinkTextForm
+            label="Link Pembayaran"
+            link={data.stsPayment == "PAID" ? "-" : data.paymentLink}
+            labelWidth="15%"
+          />
           <LabelTextForm
             label="Total Harga"
             text={format.toThousandRupiah(data.amount)}
-            labelWidth="10%"
+            labelWidth="15%"
           />
           <div
             style={{
