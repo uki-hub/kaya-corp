@@ -10,7 +10,7 @@ const TransactionDialog = ({ data, open, onCloseHandler }) => {
     <LabelTextForm
       label={label}
       text={text}
-      labelWidth="35%"
+      labelWidth="40%"
       //   style={{
       //     padding: "0 10px",
       //     backgroundColor: isOdd ?  "#cfcfcf" : "#DCDCDC",
@@ -19,7 +19,7 @@ const TransactionDialog = ({ data, open, onCloseHandler }) => {
   );
 
   return (
-    <Dialog fullWidth maxWidth="xl" open={open} onClose={onCloseHandler}>
+    <Dialog fullWidth maxWidth open={open} onClose={onCloseHandler}>
       <div className={classes["close-btn"]} onClick={onCloseHandler}>
         Close
       </div>

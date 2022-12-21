@@ -48,45 +48,44 @@ export default function Transaction({ authData, invoices }) {
             onCloseHandler={detailsCloseHandler}
           />
         )}
-        <div className="container">
-          <div className={"container " + classes.form}>
-            <div className="row m-0">
-              <label>Daftar Transaksi</label>
-            </div>
-            <div className={classes["transaction-list"]}>
-              {invoices.map((t, i) => {
-                return (
-                  <div
-                    key={i}
-                    className={classes["transaction-row"]}
-                    onClick={() => detailsOpenHandler(i)}
-                  >
-                    <div className={classes["transaction-header"]}>
-                      <label className={classes["transaction-no"]}>
-                        {t.transNo}
+        <div className={classes.form}>
+          <div className="row m-0">
+            <label>Daftar Transaksi</label>
+          </div>
+          <div className={classes["transaction-list"]}>
+            {invoices.map((t, i) => {
+              return (
+                <div
+                  key={i}
+                  className={classes["transaction-row"]}
+                  onClick={() => detailsOpenHandler(i)}
+                >
+                  <div className={classes["transaction-header"]}>
+                    <label className={`${classes["transaction-no"]} ${isMobile && classes["transaction-no-mobile"]}`}>
+                      {t.transNo}
+                    </label>
+
+                    {!isMobile && (
+                      <label className={classes["transaction-amount"]}>
+                        {format.toThousandRupiah(t.amount)}
                       </label>
-                      {!isMobile && (
-                        <label className={classes["transaction-amount"]}>
-                          {format.toThousandRupiah(t.amount)}
-                        </label>
-                      )}
-                      <label
-                        className={classes["transaction-sts"]}
-                        style={{
-                          backgroundColor:
-                            t.stsPayment == "PAID" ? "#00FF00	" : "#FF0000",
-                        }}
-                      >
-                        {t.stsPayment}
-                      </label>
-                      <label className={classes["transaction-date"]}>
-                        {isMobile ? format.yyyyMMdd(t.transDate) : t.transDate}
-                      </label>
-                    </div>
+                    )}
+                    <label
+                      className={classes["transaction-sts"]}
+                      style={{
+                        backgroundColor:
+                          t.stsPayment == "PAID" ? "#00FF00	" : "#FF0000",
+                      }}
+                    >
+                      {t.stsPayment}
+                    </label>
+                    <label className={classes["transaction-date"]}>
+                      {isMobile ? format.yyyyMMdd(t.transDate) : t.transDate}
+                    </label>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
