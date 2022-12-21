@@ -1,4 +1,4 @@
-const LabelForm = ({
+const LabelTextForm = ({
   label,
   text,
   labelWidth,
@@ -44,4 +44,4 @@ const LabelForm = ({
   );
 };
 
-export default LabelForm;
+export default LabelTextForm;

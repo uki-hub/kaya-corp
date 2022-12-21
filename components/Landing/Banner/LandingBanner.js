@@ -4,10 +4,10 @@ import useScreenInfo from "../../../hooks/useScreenInfo";
 
 export default function LandingBanner() {
   const eventCtx = useContext(EventContext);
-  const { isMobile } = useScreenInfo();
+  const isMobile = useScreenInfo().isMobile;
 
   const img = require(`/events/${eventCtx.eventID}/background/${
-    "mobile_main_background" 
+    isMobile ? "mobile_main_background" : "main_background"
   }.jpg`);
 
   return (

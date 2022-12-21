@@ -4,7 +4,7 @@ import LandingHeader from "../components/Landing/Header/LandingHeader";
 import AuthContext from "../contexts/AuthContext";
 import AuthDataParser from "../lib/AuthDataParser";
 import classes from "../styles/pages/mtransaction.module.css";
-import LabelForm from "../components/ui/LabelForm";
+import LabelTextForm from "../components/ui/LabelTextForm";
 import useFormat from "../hooks/useFormat";
 import formidable from "formidable";
 
@@ -13,7 +13,7 @@ const MtransactionDetail = ({ authData, data }) => {
   const format = useFormat();
 
   const LabelForm45 = ({ label, text }) => (
-    <LabelForm label={label} text={text} isOdd={true} labelWidth="45%" />
+    <LabelTextForm label={label} text={text} isOdd={true} labelWidth="45%" />
   );
 
   useEffect(() => {

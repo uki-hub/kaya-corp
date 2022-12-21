@@ -32,7 +32,7 @@ export default function Register() {
       return false;
     }
 
-    if (format.isEmail(emailRef.current.value)) {
+    if (!format.isEmail(emailRef.current.value)) {
       setWarning("Email tidak valid");
       return false;
     }

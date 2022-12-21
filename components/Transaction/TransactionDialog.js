@@ -1,14 +1,13 @@
-import LabelForm from "../UI/LabelForm";
 import Dialog from "@mui/material/Dialog";
 import classes from "./TransactionDialog.module.css";
 import useFormat from "../../hooks/useFormat";
-import { lineHeight } from "@mui/system";
+import LabelTextForm from "../ui/LabelTextForm";
 
 const TransactionDialog = ({ data, open, onCloseHandler }) => {
   const format = useFormat();
 
   const LabelForm30 = ({ label, text, isOdd }) => (
-    <LabelForm
+    <LabelTextForm
       label={label}
       text={text}
       labelWidth="35%"
@@ -27,25 +26,25 @@ const TransactionDialog = ({ data, open, onCloseHandler }) => {
       <div className={classes["transaction-dialog"]}>
         <label className={classes["dialog-label"]}>Transaction Details</label>
         <div>
-          <LabelForm
+          <LabelTextForm
             label="Transaction No"
             text={data.transNo}
             labelWidth="10%"
           />
-          <LabelForm
+          <LabelTextForm
             label="Status Payment"
             text={data.stsPayment}
             labelWidth="10%"
           />
-          <LabelForm
+          <LabelTextForm
             label="Transaction Date"
             text={data.transDate}
             labelWidth="10%"
           />
-          <LabelForm label="Pax" text={data.pax} labelWidth="10%" />
-          <LabelForm
+          <LabelTextForm label="Pax" text={data.pax} labelWidth="10%" />
+          <LabelTextForm
             label="Total Harga"
-            text={format.toThousandRupiah(data.pax)}
+            text={format.toThousandRupiah(data.amount)}
             labelWidth="10%"
           />
           <div
