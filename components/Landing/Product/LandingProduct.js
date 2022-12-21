@@ -6,7 +6,7 @@ import img_pricing from "/public/assets/images/shap/pricing_memphis1.png";
 
 export default function LandingProduct() {
   const eventCtx = useContext(EventContext);
-
+  
   const img_product1 = require(`/events/${eventCtx.eventID}/product/sepatu.jpg`);
   const img_product2 = require(`/events/${eventCtx.eventID}/product/sepeda.jpg`);
 

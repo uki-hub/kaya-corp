@@ -1,7 +1,7 @@
 const useFormat = () => {
   return {
-    toThousandRupiah: (e) => {
-      if (!e) return null;
+    toThousandRupiah: (e, ifEmpty) => {
+      if (!e) return ifEmpty ?? null;
 
       return `Rp. ${e.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.00`;
     },

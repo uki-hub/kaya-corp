@@ -97,7 +97,8 @@ export default function LandingForm(props) {
         </label>
         <label className="form-total-harga-label-amount">
           {format.toThousandRupiah(
-            calculatePrice(eventCtx.eventData, pesertaCtx.listPeserta)
+            calculatePrice(eventCtx.eventData, pesertaCtx.listPeserta),
+            "-"
           )}
         </label>
         <div id="ticket-forms" className="row m-0">
