@@ -17,6 +17,7 @@ const PesertaContext = React.createContext({
   onKurangPeserta: () => {},
   onHapusPeserta: (indexPeserta) => {},
   onUpdatePeserta: (indexPeserta, data) => {},
+  onLoadPeserta: (data) => {},
 });
 
 export const PesertaContextProvider = (props) => {
@@ -60,6 +61,8 @@ export const PesertaContextProvider = (props) => {
     setListPeserta(updatedList);
   };
 
+  const loadPesertaHandler = (data) => setListPeserta(data);
+
   return (
     <PesertaContext.Provider
       value={{
@@ -68,6 +71,7 @@ export const PesertaContextProvider = (props) => {
         onKurangPeserta: kurangPesertaHandlelr,
         onHapusPeserta: hapusPesertaHandler,
         onUpdatePeserta: updateDataPeserta,
+        onLoadPeserta: loadPesertaHandler,
       }}
     >
       {props.children}

@@ -12,6 +12,7 @@ import AuthContext from "../../../contexts/AuthContext";
 import { useRouter } from "next/router";
 import useFormat from "../../../hooks/useFormat";
 import { calculatePrice } from "../../../contexts/_EventContext";
+import StorageService from "../../../services/StorageService";
 
 export default function LandingForm(props) {
   const [errorForm, setErrorForm] = useState({
@@ -50,7 +51,10 @@ export default function LandingForm(props) {
 
     const invalidForm = eventCtx.onValidateDataPeserta(listPeserta);
 
-    if (!authCtx.isSigned()) return router.push("/login");
+    if (!authCtx.isSigned()) {
+      eventCtx.onSimpanKeranjang(listPeserta);
+      return router.push("/login");
+    }
 
     if (!invalidForm) {
       eventCtx.onBayar(listPeserta);
@@ -59,14 +63,19 @@ export default function LandingForm(props) {
     }
   };
 
+  useEffect(() => {
+    const loadedData = StorageService.keranjang();
+    if (loadedData) {
+      pesertaCtx.onLoadPeserta(loadedData);
+      StorageService.keranjang(null, { remove: true });
+      setTimeout(() => {
+        DaScroll("ticket-forms");
+      }, 100);
+    }
+  }, []);
+
   return (
-    <section
-      id="ts-speakers"
-      className="ts-speakers"
-      style={{
-        backgroundImage: "url(/assets/images/speakers/speaker_bg.png)",
-      }}
-    >
+    <section id="ts-speakers" className="ts-speakers">
       <div id="ticket-form" className="container">
         <h1>Form Registration</h1>
         <br />
@@ -83,7 +92,9 @@ export default function LandingForm(props) {
             errorForm={errorForm.invalidIndexPeserta == i && errorForm}
           />
         ))}
-        <label className="form-total-harga-label">Total Harga&nbsp;:&nbsp;</label>
+        <label className="form-total-harga-label">
+          Total Harga&nbsp;:&nbsp;
+        </label>
         <label className="form-total-harga-label-amount">
           {format.toThousandRupiah(
             calculatePrice(eventCtx.eventData, pesertaCtx.listPeserta)

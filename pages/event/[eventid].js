@@ -26,7 +26,7 @@ export default function EventPage({ authData, eventID, initData }) {
   useEffect(() => {
     setIsLoaded(true);
     if (authData) auth.onSetAuthData(authData);
-  }, [isLoaded, submitted]);
+  }, [isLoaded, submitted, auth, authData]);
 
   if (!initData) window.location.href = "/event/brr";
 

@@ -2,6 +2,7 @@ import Router from "next/router";
 
 import React, { useContext, useState } from "react";
 import { sendPembayaranEventRepo } from "../repositories/EventRepository";
+import StorageService from "../services/StorageService";
 import AuthContext from "./AuthContext";
 import { buildPayload, validateDataPeserta } from "./_EventContext";
 
@@ -10,6 +11,7 @@ const EventContext = React.createContext({
   eventData: null,
   onBayar: () => {},
   onValidateDataPeserta: (listPeserta) => {},
+  onSimpanKeranjang: (listPeserta) => {},
 });
 
 export const EventContextProvider = ({
@@ -28,11 +30,13 @@ export const EventContextProvider = ({
 
     const payload = buildPayload(auth.authData, eventData, listDataPeserta);
 
-    console.log(payload);
-    // const data = await sendPembayaranEventRepo(payload);
+    const data = await sendPembayaranEventRepo(payload);
 
     window.location = data.redirect_url;
   };
+
+  const simpanKeranjangHandler = (listPeserta) =>
+    StorageService.keranjang(listPeserta);
 
   return (
     <EventContext.Provider
@@ -41,6 +45,7 @@ export const EventContextProvider = ({
         eventData: eventData,
         onBayar: bayarHandler,
         onValidateDataPeserta: validateDataPesertaHandler,
+        onSimpanKeranjang: simpanKeranjangHandler,
       }}
     >
       {children}
