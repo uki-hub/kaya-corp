@@ -20,7 +20,7 @@ export default function ForgotPassword() {
 
   const validate = () => {
     if (format.isEmail(emailRef.current.value)) {
-      setWarning("Invalid email");
+      setWarning("Email tidak valid");
       return false;
     }
 
@@ -44,7 +44,7 @@ export default function ForgotPassword() {
       {submitted && <LandingBackdrop />}
 
       <div className={classes.form}>
-        <label className={classes["form-title"]}>Forgot Password</label>
+        <label className={classes["form-title"]}>Lupa Password</label>
         <FormTextField
           ref={emailRef}
           type="email"
@@ -57,7 +57,7 @@ export default function ForgotPassword() {
           Send Email
         </div>
         <div className={"row m-0 " + classes["other-options"]}>
-          <label onClick={goBackToLoginHandler}>Go back to Login</label>
+          <label onClick={goBackToLoginHandler}>Kembali ke Login</label>
         </div>
       </div>
     </div>

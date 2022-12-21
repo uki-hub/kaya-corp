@@ -28,12 +28,12 @@ export default function Register() {
       emailRef.current.value == "" ||
       fullNameRef.current.value == ""
     ) {
-      setWarning("Please fill all the fields");
+      setWarning("Tolong isi semua data");
       return false;
     }
 
     if (format.isEmail(emailRef.current.value)) {
-      setWarning("Invalid email");
+      setWarning("Email tidak valid");
       return false;
     }
 
@@ -62,7 +62,7 @@ export default function Register() {
     <div className={classes.background}>
       {submitted && <LandingBackdrop />}
       <div className={classes.form}>
-        <label className={classes["form-title"]}>Register</label>
+        <label className={classes["form-title"]}>Daftar</label>
         <FormTextField
           ref={useridRef}
           type="text"
@@ -93,7 +93,7 @@ export default function Register() {
         />
         {warning && <label className="warning">{warning}</label>}
         <div className={"btn col"} onClick={registerHandler}>
-          Register
+          Daftar  
         </div>
         <div className={"row m-0 " + classes["other-options"]}>
           <label onClick={alreadyHaveAnAccountHandler}>Sudah Punya Akun?</label>

@@ -25,12 +25,12 @@ export default function Profile({ authData }) {
       newPasswordRef.current.value == "" ||
       confirmPasswordRef.current.value == ""
     ) {
-      setWarning("Please fill all the fields");
+      setWarning("Tolong isi semua data");
       return;
     }
 
     if (newPasswordRef.current.value != confirmPasswordRef.current.value) {
-      setWarning("Please make sure confirm password is same with new password");
+      setWarning("Pastikan password baru sama");
       return;
     }
 
@@ -80,32 +80,32 @@ export default function Profile({ authData }) {
         />
         <div className={classes["change-password-form"]}>
           <label className={classes["change-password-label"]}>
-            Change Password
+            Ubah Password
           </label>
           <FormTextField
             ref={oldPasswordRef}
             type="password"
-            label="Old Password"
+            label="Password Lama"
             initializeValue={""}
             error={false}
           />
           <FormTextField
             ref={newPasswordRef}
             type="password"
-            label="New Password"
+            label="Password Baru"
             initializeValue={""}
             error={false}
           />
           <FormTextField
             ref={confirmPasswordRef}
             type="password"
-            label="Confirm New Password"
+            label="Konfirmasi Password Baru"
             initializeValue={""}
             error={false}
           />
           {warning && <label className="waning">{warning}</label>}
           <div className={"btn col m-0 p-0"} onClick={changePasswordHandler}>
-            Change Password
+            Ubah Password
           </div>
         </div>
       </div>

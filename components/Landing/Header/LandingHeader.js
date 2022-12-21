@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 
 import {
+  HomeRounded as HomeIcon,
   ShoppingBasket as ShoppingBasketIcon,
   AccountCircle as AccountCircleIcon,
 } from "@mui/icons-material";
@@ -44,18 +45,7 @@ export default function LandingHeader(props) {
         onClose={closeMenuHandler}
       >
         <div className="bottom-sheet-menu">
-          <div
-            style={{
-              display: "flex",
-              height: "100%",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "space-around",
-              backgroundColor: "#eee",
-              borderTopLeftRadius: "30px",
-              borderTopRightRadius: "30px",
-            }}
-          >
+          <div className="bottom-sheet-content">
             <label
               style={{
                 marginTop: "20px",
@@ -103,7 +93,8 @@ export default function LandingHeader(props) {
         </div>
       </BottomSheet>
       <div className="items">
-        <label
+        <HomeIcon className="item home" onClick={homeHandler} />
+        {/* <label
           onClick={homeHandler}
           style={{
             fontSize: "18px",
@@ -115,7 +106,7 @@ export default function LandingHeader(props) {
           }}
         >
           Home
-        </label>
+        </label> */}
         {/* <ShoppingBasketIcon className="item cart" /> */}
         {!auth.isSigned() && (
           <>

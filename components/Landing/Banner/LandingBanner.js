@@ -1,10 +1,14 @@
 import { useContext } from "react";
 import EventContext from "../../../contexts/EventContext";
+import useScreenInfo from "../../../hooks/useScreenInfo";
 
 export default function LandingBanner() {
   const eventCtx = useContext(EventContext);
+  const { isMobile } = useScreenInfo();
 
-  const img = require(`/events/${eventCtx.eventID}/background/main_background.jpg`);
+  const img = require(`/events/${eventCtx.eventID}/background/${
+    "mobile_main_background" 
+  }.jpg`);
 
   return (
     <section className="hero-area">
@@ -17,7 +21,7 @@ export default function LandingBanner() {
           backgroundSize: "cover",
           height: "100vh",
           width: "100%",
-          backgroundPosition: "center -25px"
+          backgroundPosition: "center -25px",
         }}
       >
         <div className="buy-ticket">

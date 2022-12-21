@@ -6,6 +6,7 @@ import AuthContext from "../contexts/AuthContext";
 import LandingBackdrop from "../components/Landing/Backdrop/LandingBackdrop";
 import { useRouter } from "next/router";
 import AuthDataParser from "../lib/AuthDataParser";
+import Image from "next/image";
 
 export default function Login() {
   const [submitted, setSubmitted] = useState(false);
@@ -20,7 +21,7 @@ export default function Login() {
 
   const validate = () => {
     if (usernameRef.current.value == "" || passwordRef.current.value == "") {
-      setWarning("Please fill all the fields");
+      setWarning("Tolong isi semua data");
       return false;
     }
 
@@ -32,15 +33,15 @@ export default function Login() {
 
     setSubmitted(true);
 
-    const isSuccess = await auth.onLogin(
+    const result = await auth.onLogin(
       usernameRef.current.value,
       passwordRef.current.value
     );
 
     setSubmitted(false);
 
-    if (isSuccess) router.push("/");
-    else setWarning("Username tidak terdaftar !!");
+    if (result.success) router.push("/");
+    else setWarning(result.message);
   };
 
   return (
@@ -48,9 +49,10 @@ export default function Login() {
       {submitted && <LandingBackdrop />}
       <div className={classes.form}>
         <div className={classes.logo}>
-          <img
+          <Image
             src="/assets/images/logo/login-logo.png"
-            width={200}
+            alt="logo"
+            width={250}
             height={200}
           />
         </div>
@@ -74,9 +76,9 @@ export default function Login() {
           Login
         </div>
         <div className={"row m-0 " + classes["other-options"]}>
-          <label onClick={registerHandler}>Register</label>
+          <label onClick={registerHandler}>Daftar</label>
           <div className="col" />
-          <label onClick={forgotPasswordHandler}>Forgot Password</label>
+          <label onClick={forgotPasswordHandler}>Lupa Password</label>
         </div>
       </div>
     </div>

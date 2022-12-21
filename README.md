@@ -6,7 +6,7 @@
 - ~~add tanggal waktu di kartu peserta~~
 - ~~rapihin page register~~
 - ~~validatsi page register~~
-- add enter event di form login
+- ~~add enter event di form login~~
 - ~~rapihin menu options buat desktop~~
 - ~~hide daftar peserta di transaction details jika belum paid~~
 - ~~tambah close di form modal~~
