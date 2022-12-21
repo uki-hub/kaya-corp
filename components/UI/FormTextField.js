@@ -23,6 +23,7 @@ const FormTextField = React.forwardRef(function _(
         textFieldRef?.current?.focus();
         setIsError(true);
       },
+      clear: () => setValue(""),
     };
   });
 
@@ -51,7 +52,7 @@ const FormTextField = React.forwardRef(function _(
           error={isError}
           onChange={textFieldChangeHandler}
           onKeyPress={(e) => {
-            if (e.key === "Enter") onEnter();
+            if (e.key === "Enter" && onEnter) onEnter();
           }}
         />
       </div>

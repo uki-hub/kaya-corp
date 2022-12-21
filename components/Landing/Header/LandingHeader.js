@@ -12,7 +12,7 @@ import useScreenInfo from "../../../hooks/useScreenInfo";
 import { Dialog, Slide } from "@mui/material";
 import BottomSheet from "../../UI/BottomSheet";
 
-export default function LandingHeader(props) {
+export default function LandingHeader({ onlyHome }) {
   const [open, setOpen] = useState(false);
   const auth = useContext(AuthContext);
   const router = useRouter();
@@ -37,6 +37,15 @@ export default function LandingHeader(props) {
   const openMenuHandler = () => setOpen(true);
 
   const closeMenuHandler = () => setOpen(false);
+
+  if (onlyHome)
+    return (
+      <header className="landing-header">
+        <div className="items">
+          <HomeIcon className="item home" onClick={homeHandler} />
+        </div>
+      </header>
+    );
 
   return (
     <header className="landing-header">

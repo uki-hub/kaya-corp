@@ -7,9 +7,13 @@ import { useRouter } from "next/router";
 import AuthDataParser from "../lib/AuthDataParser";
 import classes from "../styles/pages/forgot-password.module.css";
 import useFormat from "../hooks/useFormat";
+import { Dialog } from "@mui/material";
+import DialogMessage from "../components/UI/DialogMessage";
+import LandingHeader from "../components/Landing/Header/LandingHeader";
 
 export default function ForgotPassword() {
   const [warning, setWarning] = useState();
+  const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const auth = useContext(AuthContext);
   const router = useRouter();
@@ -19,6 +23,11 @@ export default function ForgotPassword() {
   const goBackToLoginHandler = () => router.push("/login");
 
   const validate = () => {
+    if(emailRef.current.value == "") {
+      setWarning("Tolong isi email");
+      return false;
+    }
+
     if (!format.isEmail(emailRef.current.value)) {
       setWarning("Email tidak valid");
       return false;
@@ -36,13 +45,17 @@ export default function ForgotPassword() {
 
     setSubmitted(false);
 
-    if (!result.success) setWarning(result.message);
+    if (!result.success) return setWarning(result.message);
+
+    setOpen(true);
+    setTimeout(() => setOpen(false), 1250);
   };
 
   return (
     <div className={classes.background}>
+      <DialogMessage open={open} message={"Email berhasil dikirim"} />
       {submitted && <LandingBackdrop />}
-
+      <LandingHeader onlyHome={true} />
       <div className={classes.form}>
         <label className={classes["form-title"]}>Lupa Password</label>
         <FormTextField

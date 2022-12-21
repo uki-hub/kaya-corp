@@ -7,6 +7,7 @@ import LandingBackdrop from "../components/Landing/Backdrop/LandingBackdrop";
 import { useRouter } from "next/router";
 import AuthDataParser from "../lib/AuthDataParser";
 import Image from "next/image";
+import LandingHeader from "../components/Landing/Header/LandingHeader";
 
 export default function Login() {
   const [submitted, setSubmitted] = useState(false);
@@ -47,6 +48,7 @@ export default function Login() {
   return (
     <div className={classes.background}>
       {submitted && <LandingBackdrop />}
+      <LandingHeader onlyHome={true} />
       <div className={classes.form}>
         <div className={classes.logo}>
           <Image

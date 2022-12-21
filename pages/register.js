@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import AuthDataParser from "../lib/AuthDataParser";
 import classes from "../styles/pages/register.module.css";
 import useFormat from "../hooks/useFormat";
+import LandingHeader from "../components/Landing/Header/LandingHeader";
 
 export default function Register() {
   const [warning, setWarning] = useState();
@@ -56,7 +57,7 @@ export default function Register() {
       setSubmitted(false);
       setWarning(message);
       return;
-    }    
+    }
 
     router.push("/");
   };
@@ -64,6 +65,7 @@ export default function Register() {
   return (
     <div className={classes.background}>
       {submitted && <LandingBackdrop />}
+      <LandingHeader onlyHome={true} />
       <div className={classes.form}>
         <label className={classes["form-title"]}>Daftar</label>
         <FormTextField

@@ -9,9 +9,11 @@ import LabelTextForm from "../components/UI/LabelTextForm";
 import LandingHeader from "../components/Landing/Header/LandingHeader";
 import { changePasswordRepo } from "../repositories/UserRepository";
 import useScreenInfo from "../hooks/useScreenInfo";
+import DialogMessage from "../components/UI/DialogMessage";
 
 export default function Profile({ authData }) {
   const [submitted, setSubmitted] = useState(false);
+  const [open, setOpen] = useState(false);
   const auth = useContext(AuthContext);
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
@@ -46,11 +48,15 @@ export default function Profile({ authData }) {
       newpassword: confirmPasswordRef.current.value,
     });
 
-    if (result.isSuccess) {
-      console.log("celebrate");
-    } else {
+    if (!result.isSuccess)
       setWarning(result.message ?? "Terjadi kesalahan server. (coba lagi)");
-    }
+
+    oldPasswordRef.current.clear();
+    newPasswordRef.current.clear();
+    confirmPasswordRef.current.clear();
+
+    setOpen(true);
+    setTimeout(() => setOpen(false), 1250);
   };
 
   useEffect(() => {
@@ -59,6 +65,7 @@ export default function Profile({ authData }) {
 
   return (
     <div className={classes.background}>
+      <DialogMessage open={open} message={"Berhasil Mengubah Password"} />
       {submitted && <LandingBackdrop />}
       <LandingHeader />
       <div className={classes.form}>
