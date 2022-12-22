@@ -57,7 +57,7 @@ const MtransactionDetail = ({ authData, data }) => {
               label="Link Pembayaran"
               alias="Klik untuk bayar"
               link={data.paymentLink}
-              labelWidth="15%"
+              labelWidth="45%"
             />
           )}
           <LabelForm45
