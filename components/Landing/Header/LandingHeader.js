@@ -96,7 +96,7 @@ export default function LandingHeader({ onlyHome }) {
               }}
               onClick={logoutHandler}
             >
-              Logout
+              Keluar
             </label>
           </div>
         </div>
