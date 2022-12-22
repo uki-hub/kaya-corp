@@ -22,7 +22,7 @@ const MKartuPeserta = ({ data }) => {
       />
       {data.map((d, i) => {
         return (
-          <div key={i} style={{ ...style, top: `${i * 1280}px` }}>
+          <div key={i} style={{ ...style, top: `${i * 1280 + (i != 0 ? 10 : 0)}px` }}>
             <label
               style={{
                 position: "absolute",
